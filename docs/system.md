@@ -1,7 +1,7 @@
 # system - System Information Module
 
 **Module:** `core/system`  
-**Version:** 0.3.0  
+**Version:** 0.3.1  
 **Type:** Pure Functions
 
 ## Overview
@@ -115,4 +115,4 @@ try {
 ---
 
 **Source:** [`src/core/system.ts`](../src/core/system.ts)  
-**Since:** 0.3.0
+**Since:** 0.3.1
