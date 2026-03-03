@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "partitionIndex": 0,
+  "totalPartitions": 1,
+  "filesHash": "e934b573",
+  "partitionLabels": [
+    "test, test/utils, test/core, src, src/utils, src/core, package-lock.json, package.json, tsconfig.esm.json, tsconfig.json, eslint.config.js, jest.config.js, cdn-delivery.sh, scripts"
+  ],
+  "updatedAt": "2026-03-03T02:10:19.709Z"
+}

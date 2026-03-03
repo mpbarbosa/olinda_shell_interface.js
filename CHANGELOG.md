@@ -11,7 +11,7 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 
 ---
 
-## [0.1.0] — 2026-03-03
+## [0.2.0] — 2026-03-03
 
 ### Added
 
@@ -24,7 +24,7 @@ Versioning follows [Semantic Versioning](https://semver.org/).
     - `ShellError` — base error class for all library errors
     - `ExecutionError` — thrown on non-zero exit codes, carries `exitCode`, `stdout`, `stderr`
 - `src/index.ts` — public barrel export
-- `package.json` — v0.1.0, build/test/lint/cdn scripts, `engines: node>=18, npm>=9`
+- `package.json` — v0.2.0, build/test/lint/cdn scripts, `engines: node>=18, npm>=9`
 - `tsconfig.json` — CJS build → `dist/`
 - `tsconfig.esm.json` — ESM build → `dist/esm/`
 - `jest.config.js` — ts-jest, 80% coverage thresholds
