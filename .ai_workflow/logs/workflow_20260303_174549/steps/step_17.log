@@ -1,0 +1,12 @@
+[2026-03-03T20:48:33.246Z] 
+→ Starting: Workflow Summary
+[2026-03-03T20:48:33.246Z] ════════════════════════════════════════════════════════════
+[2026-03-03T20:48:33.246Z] 🔷  Step 17: Workflow Summary
+[2026-03-03T20:48:33.246Z] ════════════════════════════════════════════════════════════
+[2026-03-03T20:48:33.246Z] Generating workflow summary report...
+[2026-03-03T20:48:33.248Z] Summary report written to: .ai_workflow/summaries/workflow_20260303_174549/workflow_summary.md
+[2026-03-03T20:48:33.248Z] ✓ Workflow summary generated successfully
+[2026-03-03T20:48:33.248Z] ✓ Step step_17 completed in 2ms
+[2026-03-03T20:48:33.248Z] [DEBUG] [Performance] step_17: 2ms
+[2026-03-03T20:48:33.248Z] [DEBUG] Recorded outcome for step_17: success
+[2026-03-03T20:48:33.248Z] ✓ Completed: Workflow Summary (0s)
