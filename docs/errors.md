@@ -1,7 +1,7 @@
 # errors - Custom Error Classes
 
-**Module:** `utils/errors`  
-**Version:** 0.2.0  
+**Module:** `utils/errors`
+**Version:** 0.2.0
 **Type:** Classes
 
 ## Overview

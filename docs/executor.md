@@ -1,7 +1,7 @@
 # executor - Command Execution Module
 
-**Module:** `core/executor`  
-**Version:** 1.0.0  
+**Module:** `core/executor`
+**Version:** 1.0.0
 **Type:** Async Functions
 
 ## Overview
@@ -20,10 +20,10 @@ Execute command and return output.
 
 - `command` (string) - Shell command
 - `options` (object) - Optional config:
-  - `cwd`: Working directory
-  - `env`: Environment variables
-  - `timeout`: Max execution time (default: 300000ms)
-  - `shell`: Use shell (default: true)
+    - `cwd`: Working directory
+    - `env`: Environment variables
+    - `timeout`: Max execution time (default: 300000ms)
+    - `shell`: Use shell (default: true)
 
 **Returns:** Promise<`{stdout, stderr, exitCode}`>
 
@@ -53,10 +53,10 @@ Execute with streaming output.
 
 - `command` (string)
 - `options` (object):
-  - `cwd`: Working directory
-  - `env`: Environment variables
-  - `onStdout`: Callback for stdout data
-  - `onStderr`: Callback for stderr data
+    - `cwd`: Working directory
+    - `env`: Environment variables
+    - `onStdout`: Callback for stdout data
+    - `onStderr`: Callback for stderr data
 
 **Returns:** Promise<`number`> - Exit code
 
@@ -217,5 +217,5 @@ await execute('slow-command', { timeout: 600000 }); // 10 min
 
 ---
 
-**Last Updated:** 2026-02-01  
+**Last Updated:** 2026-02-01
 **Part of:** AI Workflow Automation v1.0.0

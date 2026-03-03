@@ -52,13 +52,24 @@ olinda_shell_interface.js/
 
 ## Module Responsibilities
 
-### `olinda_utils.js` — `colors` module
+### `olinda_utils.js` — `colors` and `logger` modules
 
-ANSI color codes and terminal color support detection are provided by the [`olinda_utils.js`](https://github.com/mpbarbosa/olinda_utils.js) dependency and re-exported from this package's public API:
+ANSI color codes, color support detection, and structured logging are provided by the
+[`olinda_utils.js`](https://github.com/mpbarbosa/olinda_utils.js) dependency and
+re-exported from this package's public API:
+
+**Colors:**
 
 - **`colors`** — `const` object of all ANSI escape sequences (styles, foreground, bright foreground).
 - **`supportsColor()`** — returns `true` when stdout is a TTY, `TERM` is not `'dumb'`, and `NO_COLOR` is unset.
 - **`colorize(text, color)`** — wraps text in an ANSI code + reset; falls back to plain text when unsupported.
+
+**Logger:**
+
+- **`Logger`** — class with configurable `quiet`, `verbose`, `prefix` options and methods: `debug`, `info`, `success`, `warn`, `error`, `step`, `setLogFile`, `closeLogFile`, `openStepLogFile`, `closeStepLogFile`, `reopenLogFiles`.
+- **`logger`** — default singleton `Logger` instance.
+- **`LogLevel`** — constants: `DEBUG`, `INFO`, `SUCCESS`, `WARN`, `ERROR`.
+- **`stripAnsi(str)`** — remove ANSI escape codes from a string.
 
 ### `src/core/executor.ts`
 
@@ -87,7 +98,8 @@ Custom error hierarchy:
 ```
 Error
 └── ShellError          ← base for all library errors
-    └── ExecutionError  ← non-zero exit code; carries exitCode, stdout, stderr
+    ├── ExecutionError  ← non-zero exit code; carries exitCode, stdout, stderr
+    └── SystemError     ← system-level failure (e.g. package manager detection)
 ```
 
 Both classes call `Object.setPrototypeOf(this, new.target.prototype)` so

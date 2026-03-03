@@ -1,7 +1,7 @@
 # logger - Logging Module
 
-**Module:** `core/logger`  
-**Version:** 1.0.0  
+**Module:** `core/logger`
+**Version:** 1.0.0
 **Type:** Class-based with singleton instance
 
 ## Overview
@@ -167,6 +167,89 @@ Log error message (never suppressed).
 logger.error('Failed to read file');
 // Output: ✗ [Workflow] Failed to read file
 ```
+
+---
+
+### `step(title)`
+
+Log a visually prominent step header banner. Always written to file if one is open.
+
+**Parameters:**
+
+| Name    | Type     | Description           |
+| ------- | -------- | --------------------- |
+| `title` | `string` | Step title to display |
+
+**Example:**
+
+```javascript
+logger.step('Step 1: Build');
+// Output:
+// ════════════════════════════════════════════════════════════
+// 🔷  Step 1: Build
+// ════════════════════════════════════════════════════════════
+```
+
+---
+
+### `setLogFile(filePath)`
+
+Configure file logging. Creates the directory if needed, then opens an append stream.
+All subsequent log calls are written to the file (without ANSI codes) in addition to the console.
+
+**Parameters:**
+
+| Name       | Type     | Description                      |
+| ---------- | -------- | -------------------------------- |
+| `filePath` | `string` | Absolute path to the log file    |
+
+**Example:**
+
+```javascript
+logger.setLogFile('/var/log/my-app/run.log');
+logger.info('This goes to console AND the file');
+```
+
+---
+
+### `closeLogFile()`
+
+Close the main log file stream. Call at the end of a workflow run.
+
+```typescript
+closeLogFile(): Promise<void>
+```
+
+---
+
+### `openStepLogFile(filePath)`
+
+Open a secondary per-step log file. All log lines are written to both the main
+workflow log and this step log until `closeStepLogFile()` is called.
+
+**Parameters:**
+
+| Name       | Type     | Description                           |
+| ---------- | -------- | ------------------------------------- |
+| `filePath` | `string` | Absolute path to the step log file    |
+
+---
+
+### `closeStepLogFile()`
+
+Close the per-step log file stream.
+
+```typescript
+closeStepLogFile(): Promise<void>
+```
+
+---
+
+### `reopenLogFiles()`
+
+Reopen both log streams at their current paths (append mode). Call this after operations
+that atomically replace log files on disk (e.g. `git stash`, `git pull --rebase`) to
+ensure subsequent writes go to the current filesystem-visible files.
 
 ---
 
@@ -401,11 +484,11 @@ function processFiles(files, options) {
 ## Implementation Notes
 
 - **Console API:** Uses `console.log()`, `console.warn()`, and `console.error()`
+- **File output:** Optional — call `setLogFile(path)` to write plain-text logs to a file in addition to console output
 - **Immutable instances:** Logger state is set at construction and doesn't change
-- **Thread-safe:** All operations are synchronous
-- **No file output:** Logs only to console (use shell redirection for files)
+- **Thread-safe:** All operations are synchronous except `closeLogFile()` / `closeStepLogFile()`
 
 ---
 
-**Last Updated:** 2026-03-03  
+**Last Updated:** 2026-03-03
 **Part of:** AI Workflow Automation v1.0.0
