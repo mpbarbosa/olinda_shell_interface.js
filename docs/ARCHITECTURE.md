@@ -14,12 +14,19 @@ publish required.
 olinda_shell_interface.js/
 ├── src/
 │   ├── core/
-│   │   └── executor.ts       # execute / executeStream / executeSudo
+│   │   ├── colors.ts         # ANSI color codes and color support detection
+│   │   ├── executor.ts       # execute / executeStream / executeSudo
+│   │   ├── system.ts         # OS detection, package manager detection
+│   │   └── version.ts        # Semantic version parsing and comparison
 │   ├── utils/
 │   │   └── errors.ts         # ShellError, ExecutionError
 │   └── index.ts              # Public barrel export
 ├── test/
 │   ├── core/                 # Unit tests for src/core/
+│   │   ├── colors.test.ts
+│   │   ├── executor.test.ts
+│   │   ├── system.test.ts
+│   │   └── version.test.ts
 │   ├── utils/                # Unit tests for src/utils/
 │   ├── integration/          # Integration tests
 │   ├── benchmarks/           # Performance benchmarks (excluded from coverage)
@@ -27,7 +34,8 @@ olinda_shell_interface.js/
 │   └── index.test.ts         # Smoke tests for the public export surface
 ├── docs/
 │   ├── API.md                # Public API reference
-│   └── ARCHITECTURE.md       # This file
+│   ├── ARCHITECTURE.md       # This file
+│   └── logger.md             # Logger module usage guide (colors/logging patterns)
 ├── dist/
 │   ├── src/                  # CJS compiled output (tracked for CDN)
 │   └── types/                # TypeScript declaration files
@@ -46,6 +54,14 @@ olinda_shell_interface.js/
 
 ## Module Responsibilities
 
+### `src/core/colors.ts`
+
+Provides ANSI color codes and terminal color support detection:
+
+- **`colors`** — `const` object of all ANSI escape sequences (styles, foreground, bright foreground).
+- **`supportsColor()`** — returns `true` when stdout is a TTY, `TERM` is not `'dumb'`, and `NO_COLOR` is unset.
+- **`colorize(text, color)`** — wraps text in an ANSI code + reset; falls back to plain text when unsupported.
+
 ### `src/core/executor.ts`
 
 Wraps Node.js `child_process` (`exec`, `spawn`) to provide three execution modes:
@@ -56,6 +72,15 @@ Wraps Node.js `child_process` (`exec`, `spawn`) to provide three execution modes
 
 All functions are `async` / Promise-based. On non-zero exit, `execute` and
 `executeSudo` throw `ExecutionError`. `executeStream` rejects with `ExecutionError`.
+
+### `src/core/version.ts`
+
+Semantic version parsing and comparison (semver-compatible):
+
+- **`parseVersion(version)`** — parses a version string into `{ major, minor, patch, prerelease, build }`.
+- **`compareVersions(v1, v2)`** — returns negative/zero/positive (like `Array.sort` comparator).
+- **`isGreaterThan / isLessThan / isEqual`** — boolean predicates.
+- **`getLatestVersion(versions)`** — returns the highest version from an array.
 
 ### `src/utils/errors.ts`
 
