@@ -4,7 +4,7 @@
  * @module index
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getLatestVersion = exports.isEqual = exports.isLessThan = exports.isGreaterThan = exports.compareVersions = exports.parseVersion = exports.colorize = exports.supportsColor = exports.colors = exports.SystemError = exports.ExecutionError = exports.ShellError = exports.getSystemInfo = exports.commandExists = exports.detectPackageManager = exports.detectOS = exports.PackageManager = exports.OS = exports.executeSudo = exports.executeStream = exports.execute = void 0;
+exports.getLatestVersion = exports.isEqual = exports.isLessThan = exports.isGreaterThan = exports.compareVersions = exports.parseVersion = exports.stripAnsi = exports.LogLevel = exports.logger = exports.Logger = exports.colorize = exports.supportsColor = exports.colors = exports.SystemError = exports.ExecutionError = exports.ShellError = exports.getSystemInfo = exports.commandExists = exports.detectPackageManager = exports.detectOS = exports.PackageManager = exports.OS = exports.executeSudo = exports.executeStream = exports.execute = void 0;
 var executor_js_1 = require("./core/executor.js");
 Object.defineProperty(exports, "execute", { enumerable: true, get: function () { return executor_js_1.execute; } });
 Object.defineProperty(exports, "executeStream", { enumerable: true, get: function () { return executor_js_1.executeStream; } });
@@ -24,6 +24,11 @@ var olinda_utils_js_1 = require("olinda_utils.js");
 Object.defineProperty(exports, "colors", { enumerable: true, get: function () { return olinda_utils_js_1.colors; } });
 Object.defineProperty(exports, "supportsColor", { enumerable: true, get: function () { return olinda_utils_js_1.supportsColor; } });
 Object.defineProperty(exports, "colorize", { enumerable: true, get: function () { return olinda_utils_js_1.colorize; } });
+var olinda_utils_js_2 = require("olinda_utils.js");
+Object.defineProperty(exports, "Logger", { enumerable: true, get: function () { return olinda_utils_js_2.Logger; } });
+Object.defineProperty(exports, "logger", { enumerable: true, get: function () { return olinda_utils_js_2.logger; } });
+Object.defineProperty(exports, "LogLevel", { enumerable: true, get: function () { return olinda_utils_js_2.LogLevel; } });
+Object.defineProperty(exports, "stripAnsi", { enumerable: true, get: function () { return olinda_utils_js_2.stripAnsi; } });
 var version_js_1 = require("./core/version.js");
 Object.defineProperty(exports, "parseVersion", { enumerable: true, get: function () { return version_js_1.parseVersion; } });
 Object.defineProperty(exports, "compareVersions", { enumerable: true, get: function () { return version_js_1.compareVersions; } });
