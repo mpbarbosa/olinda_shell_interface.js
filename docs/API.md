@@ -1,11 +1,11 @@
 # API Reference — olinda_shell_interface.js
 
-Public API for `olinda_shell_interface.js` v0.1.0.
+Public API for `olinda_shell_interface.js` v0.2.0.
 
 CDN entry point:
 
 ```text
-https://cdn.jsdelivr.net/gh/mpbarbosa/olinda_shell_interface.js@0.1.0/dist/src/index.js
+https://cdn.jsdelivr.net/gh/mpbarbosa/olinda_shell_interface.js@0.2.0/dist/src/index.js
 ```
 
 ---
@@ -184,7 +184,7 @@ try {
 **Script tag (CJS):**
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/mpbarbosa/olinda_shell_interface.js@0.1.0/dist/src/index.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/mpbarbosa/olinda_shell_interface.js@0.2.0/dist/src/index.js"></script>
 ```
 
 **ES Module:**
@@ -192,6 +192,6 @@ try {
 ```html
 <script type="module">
     import { execute, ExecutionError } from
-        'https://cdn.jsdelivr.net/gh/mpbarbosa/olinda_shell_interface.js@0.1.0/dist/src/index.js';
+        'https://cdn.jsdelivr.net/gh/mpbarbosa/olinda_shell_interface.js@0.2.0/dist/src/index.js';
 </script>
 ```
