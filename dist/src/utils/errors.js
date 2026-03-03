@@ -8,7 +8,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ExecutionError = exports.ShellError = void 0;
 /**
  * Base error class for all olinda errors.
- * @since 0.1.0
+ * @since 0.2.0
  * @example
  * throw new ShellError('ShellError: something went wrong');
  */
@@ -27,7 +27,7 @@ class ShellError extends Error {
 exports.ShellError = ShellError;
 /**
  * Thrown when a shell command exits with a non-zero status.
- * @since 0.1.0
+ * @since 0.2.0
  * @example
  * throw new ExecutionError('ExecutionError: command failed', 1, '', 'permission denied');
  */

@@ -33,7 +33,7 @@ export interface ExecuteResult {
  * @param options - Execution options.
  * @returns Resolved with stdout, stderr and exitCode on success.
  * @throws {@link ExecutionError} when the command exits with a non-zero code.
- * @since 0.1.0
+ * @since 0.2.0
  * @example
  * const { stdout } = await execute('ls -la');
  */
@@ -44,7 +44,7 @@ export declare function execute(command: string, options?: ExecuteOptions): Prom
  * @param options - Stream options including optional stdout/stderr callbacks.
  * @returns Resolves with the exit code when the process ends.
  * @throws {@link ExecutionError} when the process exits with a non-zero code or fails to spawn.
- * @since 0.1.0
+ * @since 0.2.0
  * @example
  * await executeStream('ping -c 3 localhost', { onStdout: console.log });
  */
@@ -55,7 +55,7 @@ export declare function executeStream(command: string, options?: StreamOptions):
  * @param options - Execution options.
  * @returns Resolved with stdout, stderr and exitCode on success.
  * @throws {@link ExecutionError} when the command exits with a non-zero code.
- * @since 0.1.0
+ * @since 0.2.0
  * @example
  * const result = await executeSudo('systemctl restart nginx');
  */

@@ -5,7 +5,7 @@
  */
 /**
  * Base error class for all olinda errors.
- * @since 0.1.0
+ * @since 0.2.0
  * @example
  * throw new ShellError('ShellError: something went wrong');
  */
@@ -19,7 +19,7 @@ export declare class ShellError extends Error {
 }
 /**
  * Thrown when a shell command exits with a non-zero status.
- * @since 0.1.0
+ * @since 0.2.0
  * @example
  * throw new ExecutionError('ExecutionError: command failed', 1, '', 'permission denied');
  */
