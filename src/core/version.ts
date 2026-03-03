@@ -76,6 +76,12 @@ export function compareVersions(version1: string, version2: string): number {
 
 /**
  * Returns `true` when `version1` is strictly greater than `version2`.
+ * @param version1 - First version string.
+ * @param version2 - Second version string.
+ * @returns `true` when `version1 > version2`.
+ * @since 0.4.2
+ * @example
+ * isGreaterThan('2.0.0', '1.9.9'); // true
  */
 export function isGreaterThan(version1: string, version2: string): boolean {
 	return compareVersions(version1, version2) > 0;
@@ -83,6 +89,12 @@ export function isGreaterThan(version1: string, version2: string): boolean {
 
 /**
  * Returns `true` when `version1` is strictly less than `version2`.
+ * @param version1 - First version string.
+ * @param version2 - Second version string.
+ * @returns `true` when `version1 < version2`.
+ * @since 0.4.2
+ * @example
+ * isLessThan('1.0.0', '2.0.0'); // true
  */
 export function isLessThan(version1: string, version2: string): boolean {
 	return compareVersions(version1, version2) < 0;
@@ -90,6 +102,12 @@ export function isLessThan(version1: string, version2: string): boolean {
 
 /**
  * Returns `true` when both versions are semantically equal.
+ * @param version1 - First version string.
+ * @param version2 - Second version string.
+ * @returns `true` when `version1 === version2` semantically.
+ * @since 0.4.2
+ * @example
+ * isEqual('v1.0.0', '1.0.0'); // true
  */
 export function isEqual(version1: string, version2: string): boolean {
 	return compareVersions(version1, version2) === 0;
@@ -97,7 +115,7 @@ export function isEqual(version1: string, version2: string): boolean {
 
 /**
  * Return the highest version from an array of version strings.
- * @param versions - Non-empty array of version strings.
+ * @param versions - Array of version strings (returns `null` for empty array).
  * @returns The latest version string, or `null` when the array is empty.
  */
 export function getLatestVersion(versions: string[]): string | null {
