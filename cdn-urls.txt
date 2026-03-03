@@ -1,9 +1,9 @@
-jsDelivr CDN URLs for mpbarbosa/olinda_shell_interface.js v0.4.3
-Generated: Tue Mar  3 00:36:58 -03 2026
+jsDelivr CDN URLs for mpbarbosa/olinda_shell_interface.js v0.4.4
+Generated: Tue Mar  3 17:49:31 -03 2026
 =============================================================================
 
 PRODUCTION (Recommended - Specific Version):
-https://cdn.jsdelivr.net/gh/mpbarbosa/olinda_shell_interface.js@0.4.3/dist/src/index.js
+https://cdn.jsdelivr.net/gh/mpbarbosa/olinda_shell_interface.js@0.4.4/dist/src/index.js
 
 DEVELOPMENT (Latest from branch):
 https://cdn.jsdelivr.net/gh/mpbarbosa/olinda_shell_interface.js@main/dist/src/index.js
@@ -12,14 +12,14 @@ VERSION RANGE (Auto-update patches):
 https://cdn.jsdelivr.net/gh/mpbarbosa/olinda_shell_interface.js@0.1/dist/src/index.js
 
 HTML USAGE:
-<script src="https://cdn.jsdelivr.net/gh/mpbarbosa/olinda_shell_interface.js@0.4.3/dist/src/index.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/mpbarbosa/olinda_shell_interface.js@0.4.4/dist/src/index.js"></script>
 
 ES MODULE:
 <script type="module">
-  import { execute, ExecutionError } from 'https://cdn.jsdelivr.net/gh/mpbarbosa/olinda_shell_interface.js@0.4.3/dist/src/index.js';
+  import { execute, ExecutionError } from 'https://cdn.jsdelivr.net/gh/mpbarbosa/olinda_shell_interface.js@0.4.4/dist/src/index.js';
 </script>
 
 PACKAGE INFO API:
-https://data.jsdelivr.com/v1/package/gh/mpbarbosa/olinda_shell_interface.js@0.4.3
+https://data.jsdelivr.com/v1/package/gh/mpbarbosa/olinda_shell_interface.js@0.4.4
 
 =============================================================================

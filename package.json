@@ -1,6 +1,6 @@
 {
   "name": "olinda_shell_interface.js",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "description": "Public JavaScript library to interface Linux shell commands",
   "main": "dist/src/index.js",
   "exports": {

@@ -2,7 +2,7 @@
  * Semantic Version Module
  * @module core/version
  * @description Semantic version parsing and comparison utilities (semver-compatible).
- * @since 0.4.3
+ * @since 0.4.4
  */
 
 /** Parsed components of a semantic version string. */
@@ -79,7 +79,7 @@ export function compareVersions(version1: string, version2: string): number {
  * @param version1 - First version string.
  * @param version2 - Second version string.
  * @returns `true` when `version1 > version2`.
- * @since 0.4.3
+ * @since 0.4.4
  * @example
  * isGreaterThan('2.0.0', '1.9.9'); // true
  */
@@ -92,7 +92,7 @@ export function isGreaterThan(version1: string, version2: string): boolean {
  * @param version1 - First version string.
  * @param version2 - Second version string.
  * @returns `true` when `version1 < version2`.
- * @since 0.4.3
+ * @since 0.4.4
  * @example
  * isLessThan('1.0.0', '2.0.0'); // true
  */
@@ -105,7 +105,7 @@ export function isLessThan(version1: string, version2: string): boolean {
  * @param version1 - First version string.
  * @param version2 - Second version string.
  * @returns `true` when `version1 === version2` semantically.
- * @since 0.4.3
+ * @since 0.4.4
  * @example
  * isEqual('v1.0.0', '1.0.0'); // true
  */
