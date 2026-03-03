@@ -51,3 +51,23 @@ export class ExecutionError extends ShellError {
 		this.name = 'ExecutionError';
 	}
 }
+
+/**
+ * Thrown when a system-level operation fails (e.g. package manager detection).
+ * @since 0.3.0
+ * @example
+ * throw new SystemError('SystemError: failed to detect package manager — EPERM');
+ */
+export class SystemError extends ShellError {
+	/** @readonly */
+	name = 'SystemError';
+
+	/**
+	 * @param message - Human-readable error description.
+	 */
+	constructor(message: string) {
+		super(message);
+		Object.setPrototypeOf(this, new.target.prototype);
+		this.name = 'SystemError';
+	}
+}

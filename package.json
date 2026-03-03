@@ -1,11 +1,12 @@
 {
   "name": "olinda_shell_interface.js",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Public JavaScript library to interface Linux shell commands",
   "main": "dist/src/index.js",
   "exports": {
     ".": "./dist/src/index.js",
     "./core/executor": "./dist/src/core/executor.js",
+    "./core/system": "./dist/src/core/system.js",
     "./utils/errors": "./dist/src/utils/errors.js"
   },
   "scripts": {
@@ -31,7 +32,9 @@
     "linux",
     "command",
     "executor",
-    "cli"
+    "cli",
+    "system",
+    "os-detection"
   ],
   "author": "Marcelo Pereira Barbosa",
   "license": "MIT",
