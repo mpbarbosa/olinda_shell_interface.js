@@ -69,43 +69,27 @@ describe('execute', () => {
 		});
 
 		it('thrown error message contains the command', async () => {
-			try {
-				await execute('exit 1');
-			} catch (e) {
-				expect((e as ExecutionError).message).toContain('exit 1');
-			}
+			await expect(execute('exit 1')).rejects.toMatchObject({
+				message: expect.stringContaining('exit 1'),
+			});
 		});
 
 		it('thrown error carries captured stdout', async () => {
-			try {
-				await execute('echo out; exit 1');
-			} catch (e) {
-				expect((e as ExecutionError).stdout).toBe('out');
-			}
+			await expect(execute('echo out; exit 1')).rejects.toMatchObject({ stdout: 'out' });
 		});
 
 		it('thrown error carries captured stderr', async () => {
-			try {
-				await execute('echo err >&2; exit 1');
-			} catch (e) {
-				expect((e as ExecutionError).stderr).toBe('err');
-			}
+			await expect(execute('echo err >&2; exit 1')).rejects.toMatchObject({ stderr: 'err' });
 		});
 
 		it('thrown error has a numeric exitCode', async () => {
-			try {
-				await execute('exit 2');
-			} catch (e) {
-				expect(typeof (e as ExecutionError).exitCode).toBe('number');
-			}
+			await expect(execute('exit 2')).rejects.toMatchObject({
+				exitCode: expect.any(Number),
+			});
 		});
 
 		it('thrown error name is ExecutionError', async () => {
-			try {
-				await execute('exit 1');
-			} catch (e) {
-				expect((e as ExecutionError).name).toBe('ExecutionError');
-			}
+			await expect(execute('exit 1')).rejects.toMatchObject({ name: 'ExecutionError' });
 		});
 
 		it('rejects for an unknown command', async () => {
@@ -179,19 +163,15 @@ describe('executeStream', () => {
 		});
 
 		it('rejected error message contains exit code', async () => {
-			try {
-				await executeStream('exit 3', { onStdout: () => {} });
-			} catch (e) {
-				expect((e as ExecutionError).message).toContain('3');
-			}
+			await expect(executeStream('exit 3', { onStdout: () => {} })).rejects.toMatchObject({
+				message: expect.stringContaining('3'),
+			});
 		});
 
 		it('rejected error name is ExecutionError', async () => {
-			try {
-				await executeStream('exit 1', { onStdout: () => {} });
-			} catch (e) {
-				expect((e as ExecutionError).name).toBe('ExecutionError');
-			}
+			await expect(executeStream('exit 1', { onStdout: () => {} })).rejects.toMatchObject({
+				name: 'ExecutionError',
+			});
 		});
 
 		it('rejects with ExecutionError on non-zero exit (non-zero close event)', async () => {

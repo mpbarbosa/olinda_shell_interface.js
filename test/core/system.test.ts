@@ -35,6 +35,8 @@ describe('PackageManager', () => {
 // ─── detectOS ─────────────────────────────────────────────────────────────────
 
 describe('detectOS', () => {
+	afterEach(() => jest.restoreAllMocks());
+
 	it('returns a known OS constant', () => {
 		const result = detectOS();
 		expect(Object.values(OS)).toContain(result);
@@ -43,25 +45,21 @@ describe('detectOS', () => {
 	it('returns OS.LINUX when platform is linux', () => {
 		jest.spyOn(os, 'platform').mockReturnValue('linux');
 		expect(detectOS()).toBe(OS.LINUX);
-		jest.restoreAllMocks();
 	});
 
 	it('returns OS.MACOS when platform is darwin', () => {
 		jest.spyOn(os, 'platform').mockReturnValue('darwin');
 		expect(detectOS()).toBe(OS.MACOS);
-		jest.restoreAllMocks();
 	});
 
 	it('returns OS.WINDOWS when platform is win32', () => {
 		jest.spyOn(os, 'platform').mockReturnValue('win32');
 		expect(detectOS()).toBe(OS.WINDOWS);
-		jest.restoreAllMocks();
 	});
 
 	it('returns OS.UNKNOWN for an unrecognized platform', () => {
 		jest.spyOn(os, 'platform').mockReturnValue('freebsd' as NodeJS.Platform);
 		expect(detectOS()).toBe(OS.UNKNOWN);
-		jest.restoreAllMocks();
 	});
 });
 
@@ -84,6 +82,8 @@ describe('commandExists', () => {
 // ─── detectPackageManager ─────────────────────────────────────────────────────
 
 describe('detectPackageManager', () => {
+	afterEach(() => jest.restoreAllMocks());
+
 	it('returns a known PackageManager constant', () => {
 		const result = detectPackageManager();
 		expect(Object.values(PackageManager)).toContain(result);
@@ -92,7 +92,6 @@ describe('detectPackageManager', () => {
 	it('returns UNKNOWN for an unrecognized OS', () => {
 		jest.spyOn(os, 'platform').mockReturnValue('freebsd' as NodeJS.Platform);
 		expect(detectPackageManager()).toBe(PackageManager.UNKNOWN);
-		jest.restoreAllMocks();
 	});
 
 	it('returns BREW on macOS when brew exists', () => {
@@ -100,7 +99,6 @@ describe('detectPackageManager', () => {
 		// commandExists will check 'brew' — on Linux CI this will be false, so we check the value is a valid constant
 		const result = detectPackageManager();
 		expect(Object.values(PackageManager)).toContain(result);
-		jest.restoreAllMocks();
 	});
 });
 
