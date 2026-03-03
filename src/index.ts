@@ -14,6 +14,9 @@ export { ShellError, ExecutionError, SystemError } from './utils/errors.js';
 export { colors, supportsColor, colorize } from 'olinda_utils.js';
 export type { ColorName } from 'olinda_utils.js';
 
+export { Logger, logger, LogLevel, stripAnsi } from 'olinda_utils.js';
+export type { LoggerOptions, LogLevelValue } from 'olinda_utils.js';
+
 export {
 	parseVersion,
 	compareVersions,

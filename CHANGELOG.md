@@ -11,6 +11,37 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [0.4.2] — 2026-03-03
+
+### Added
+
+- `src/core/version.ts` — semantic version parsing and comparison module
+    - `parseVersion(version)` — parses a version string into `{ major, minor, patch, prerelease, build }`
+    - `compareVersions(v1, v2)` — returns negative/zero/positive (like `Array.sort` comparator)
+    - `isGreaterThan / isLessThan / isEqual` — boolean version predicates
+    - `getLatestVersion(versions)` — returns the highest version from an array
+    - `ParsedVersion` TypeScript interface
+- `src/index.ts` — re-exports `Logger`, `logger`, `LogLevel`, `stripAnsi`, `LoggerOptions`, `LogLevelValue` from `olinda_utils.js`
+- `test/index.test.ts` — smoke tests for system, version, Logger, and error exports
+
+---
+
+## [0.3.1] — 2026-03-03
+
+### Added
+
+- `src/core/system.ts` — OS detection and system information module
+    - `detectOS()` — detect current OS, returns `OsValue`
+    - `detectPackageManager()` — detect system package manager, returns `PackageManagerValue`
+    - `commandExists(command)` — check if a command is on `PATH`
+    - `getSystemInfo()` — returns platform, os, arch, release, hostname, cpus, memory, packageManager
+    - `OS`, `PackageManager` constants
+    - `OsValue`, `PackageManagerValue`, `SystemInfo` TypeScript types
+- `src/utils/errors.ts` — added `SystemError` class (extends `ShellError`)
+- `docs/system.md` — system module API reference
+
+---
+
 ## [0.2.0] — 2026-03-03
 
 ### Added

@@ -2,7 +2,7 @@
  * Semantic Version Module
  * @module core/version
  * @description Semantic version parsing and comparison utilities (semver-compatible).
- * @since 0.4.1
+ * @since 0.4.2
  */
 
 /** Parsed components of a semantic version string. */
