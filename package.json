@@ -10,6 +10,7 @@
     "./utils/errors": "./dist/src/utils/errors.js"
   },
   "scripts": {
+    "prepare": "npm run build",
     "build": "tsc --project tsconfig.json",
     "build:esm": "tsc --project tsconfig.esm.json",
     "test": "jest --coverage --testPathPattern='test/(core|integration|utils|index)' --passWithNoTests",
