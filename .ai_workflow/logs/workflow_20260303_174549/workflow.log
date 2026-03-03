@@ -747,3 +747,57 @@ Files
 [2026-03-03T20:48:33.308Z] Changes: 9 files
 [2026-03-03T20:48:33.308Z] Inferred commit type: feat(implementation)
 [2026-03-03T20:48:33.308Z] Staging all changes...
+[2026-03-03T20:48:33.327Z] [DEBUG] Force-staged .ai_workflow/ artifacts
+[2026-03-03T20:48:33.327Z] Changes staged successfully
+[2026-03-03T20:48:33.327Z] Generating commit message...
+[2026-03-03T20:48:34.548Z] ✓ GitHub Copilot SDK initialized successfully
+[2026-03-03T20:48:36.798Z] Available Copilot models (13): claude-sonnet-4.5, claude-haiku-4.5, claude-opus-4.5, claude-sonnet-4, gemini-3-pro-preview, gpt-5.2-codex, gpt-5.2, gpt-5.1-codex-max, gpt-5.1-codex, gpt-5.1, gpt-5.1-codex-mini, gpt-5-mini, gpt-4.1
+[2026-03-03T20:48:36.847Z] [DEBUG] AI cache initialized: .ai_workflow/.ai_cache
+[2026-03-03T20:48:36.868Z] [DEBUG] Cache miss: 10ec4367...
+[2026-03-03T20:48:36.868Z] [DEBUG] Request Options: {"model":"gpt-4.1","temperature":0.7,"maxTokens":4000,"stream":false,"persona":"git_specialist","cache":true}
+[2026-03-03T20:48:36.868Z] [DEBUG] Persona: git_specialist
+[2026-03-03T20:48:36.868Z] [DEBUG] Model: gpt-4.1
+[2026-03-03T20:48:36.868Z] [AI] SDK call starting — persona: git_specialist, model: gpt-4.1, prompt_chars: 7783
+[2026-03-03T20:48:36.868Z] [DEBUG] Executing AI request (attempt 1/3)
+[2026-03-03T20:48:36.868Z] [DEBUG] AiHelper._sendRequest called
+[2026-03-03T20:48:36.868Z] [Copilot SDK] Calling sendMessage — model: gpt-4.1, prompt_length: 7783 chars
+[2026-03-03T20:48:36.868Z] [DEBUG] Sending prompt...
+[2026-03-03T20:48:41.005Z] [Copilot SDK] sendAndWait returned — model: gpt-4.1
+[2026-03-03T20:48:41.006Z] [AI] SDK call completed — persona: git_specialist, model: gpt-4.1, response_chars: 530, latency: 4138ms
+[2026-03-03T20:48:41.006Z] ✓ AI request completed successfully
+[2026-03-03T20:48:41.007Z] [DEBUG] Prompt logged to: 2026-03-03T20-48-41-006Z_0001_git_specialist.md
+[2026-03-03T20:48:41.011Z] [DEBUG] Response cached: 10ec4367...
+[2026-03-03T20:48:41.011Z] AI commit message generated
+[2026-03-03T20:48:41.012Z] Creating commit...
+[2026-03-03T20:48:41.029Z] Changes committed successfully
+[2026-03-03T20:48:41.036Z] Tagged release: v0.4.3
+[2026-03-03T20:48:43.242Z] Pushed tag v0.4.3 to remote
+[2026-03-03T20:48:43.243Z] Pushing to origin/main...
+[2026-03-03T20:48:47.230Z] Successfully pushed to remote
+[2026-03-03T20:48:47.232Z] ✓ Step step_12 completed in 13945ms
+[2026-03-03T20:48:47.232Z] [DEBUG] [Performance] step_12: 13.9s
+[2026-03-03T20:48:47.232Z] ⚠ [WARNING] Operation 'step_12' took 13.9s (memory: 24.25MB)
+[2026-03-03T20:48:47.232Z] [DEBUG] Recorded outcome for step_12: success
+[2026-03-03T20:48:47.232Z] ✓ Completed: Git Finalization (14s)
+[2026-03-03T20:48:47.233Z] ✓ Workflow completed in 177599ms
+[2026-03-03T20:48:47.233Z] Results: 24/24 steps succeeded
+[2026-03-03T20:48:47.234Z] Checkpoint saved: workflow_1772570749620-1772570927233
+[2026-03-03T20:48:47.608Z] 
+Generating workflow summary...
+[2026-03-03T20:48:47.608Z] ════════════════════════════════════════════════════════════
+[2026-03-03T20:48:47.608Z] 🔷  Step 17: Workflow Summary
+[2026-03-03T20:48:47.608Z] ════════════════════════════════════════════════════════════
+[2026-03-03T20:48:47.608Z] Generating workflow summary report...
+[2026-03-03T20:48:47.608Z] ⚠ Could not read metrics file: ENOENT: no such file or directory, open '/home/mpb/Documents/GitHub/olinda_shell_interface.js/.ai_workflow/metrics/current_run.json'
+[2026-03-03T20:48:47.609Z] Summary report written to: /home/mpb/Documents/GitHub/olinda_shell_interface.js/.ai_workflow/summaries/workflow_20260303_174549/workflow_summary.md
+[2026-03-03T20:48:47.609Z] ✓ Workflow summary generated successfully
+[2026-03-03T20:48:47.610Z] [DEBUG] [Performance] workflow_total: 2m 58s
+[2026-03-03T20:48:47.610Z] [DEBUG] [Performance] Total workflow: 2m 58s
+[2026-03-03T20:48:47.610Z] 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[2026-03-03T20:48:47.610Z] ✓ Workflow completed successfully
+[2026-03-03T20:48:47.610Z] Duration: 178s
+[2026-03-03T20:48:47.610Z] Steps: 24/24 succeeded
+[2026-03-03T20:48:47.610Z] ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[2026-03-03T20:48:47.611Z] [DEBUG] [CommitHistory] Saved hash=43b44646b89a41f9d85c3df29158deb17d788c96 runId=workflow_1772570749620
