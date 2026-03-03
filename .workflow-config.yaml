@@ -1,0 +1,66 @@
+project:
+  name: olinda_shell_interface.js
+  type: nodejs-library
+  kind: nodejs_automation  # shell command execution library for Linux
+  version: '0.1.0'  # keep in sync with package.json
+  description: Public TypeScript library for interfacing with Linux shell commands
+
+tech_stack:
+  primary_language: typescript
+  build_system: tsc           # tsc compiles src/**/*.ts → dist/
+  test_framework: jest
+  test_runner: ts-jest        # TypeScript test runner
+  test_command: npm test
+  lint_command: npm run lint
+
+structure:
+  source_dirs:
+    - src
+  test_dirs:
+    - test
+  docs_dirs:
+    - docs
+
+workflow:
+  stages:
+    quick:
+      enabled: true
+      steps:
+        - step_00  # pre-analysis / environment scan
+        - step_01  # documentation analysis
+        - step_02  # consistency analysis
+    medium:
+      enabled: true
+      steps:
+        - step_00  # pre-analysis / environment scan
+        - step_01  # documentation analysis
+        - step_02  # consistency analysis
+        - step_03  # script reference analysis
+        - step_04  # config validation
+        - step_05  # directory structure validation
+    full:
+      enabled: true
+      steps:
+        - step_00  # pre-analysis / environment scan
+        - step_01  # documentation analysis
+        - step_02  # consistency analysis
+        - step_03  # script reference analysis
+        - step_04  # config validation
+        - step_05  # directory structure validation
+        - step_06  # integration tests
+        - step_07  # coverage report generation
+        - step_08  # release readiness check
+        - step_0f  # artifact commit: versions and commits all workflow outputs to the repo
+
+validation:
+  documentation:
+    required: true
+    min_coverage: 80  # 80% of public API surface must be documented
+  testing:
+    required: true
+    min_coverage: 80  # 80% line coverage threshold; enforced by jest --coverage
+
+deploy:
+  enabled: true
+  script: "scripts/deploy.sh"
+  description: "Build TypeScript, commit artifacts, tag release, push, and generate jsDelivr CDN URLs"
