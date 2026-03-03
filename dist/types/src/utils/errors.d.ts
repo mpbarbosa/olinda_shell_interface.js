@@ -37,3 +37,17 @@ export declare class ExecutionError extends ShellError {
      */
     constructor(message: string, exitCode?: number, stdout?: string, stderr?: string);
 }
+/**
+ * Thrown when a system-level operation fails (e.g. package manager detection).
+ * @since 0.3.0
+ * @example
+ * throw new SystemError('SystemError: failed to detect package manager — EPERM');
+ */
+export declare class SystemError extends ShellError {
+    /** @readonly */
+    name: string;
+    /**
+     * @param message - Human-readable error description.
+     */
+    constructor(message: string);
+}

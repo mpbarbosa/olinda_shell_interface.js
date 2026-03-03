@@ -5,7 +5,7 @@
  * @description Custom error types for the olinda_shell_interface.js library.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ExecutionError = exports.ShellError = void 0;
+exports.SystemError = exports.ExecutionError = exports.ShellError = void 0;
 /**
  * Base error class for all olinda errors.
  * @since 0.2.0
@@ -50,3 +50,22 @@ class ExecutionError extends ShellError {
     }
 }
 exports.ExecutionError = ExecutionError;
+/**
+ * Thrown when a system-level operation fails (e.g. package manager detection).
+ * @since 0.3.0
+ * @example
+ * throw new SystemError('SystemError: failed to detect package manager — EPERM');
+ */
+class SystemError extends ShellError {
+    /**
+     * @param message - Human-readable error description.
+     */
+    constructor(message) {
+        super(message);
+        /** @readonly */
+        this.name = 'SystemError';
+        Object.setPrototypeOf(this, new.target.prototype);
+        this.name = 'SystemError';
+    }
+}
+exports.SystemError = SystemError;
