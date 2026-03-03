@@ -10,3 +10,16 @@ export { OS, PackageManager, detectOS, detectPackageManager, commandExists, getS
 export type { OsValue, PackageManagerValue, SystemInfo } from './core/system.js';
 
 export { ShellError, ExecutionError, SystemError } from './utils/errors.js';
+
+export { colors, supportsColor, colorize } from './core/colors.js';
+export type { ColorName } from './core/colors.js';
+
+export {
+	parseVersion,
+	compareVersions,
+	isGreaterThan,
+	isLessThan,
+	isEqual,
+	getLatestVersion,
+} from './core/version.js';
+export type { ParsedVersion } from './core/version.js';

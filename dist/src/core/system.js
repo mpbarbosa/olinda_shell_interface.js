@@ -3,7 +3,7 @@
  * System Information Module
  * @module core/system
  * @description OS detection, package manager identification, and system information utilities.
- * @since 0.3.0
+ * @since 0.3.1
  */
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
@@ -38,7 +38,7 @@ exports.PackageManager = {
 /**
  * Detect the current operating system.
  * @returns OS constant.
- * @since 0.3.0
+ * @since 0.3.1
  * @example
  * const currentOs = detectOS();
  * if (currentOs === OS.LINUX) console.log('Running on Linux');
@@ -57,7 +57,7 @@ function detectOS() {
  * Check if a command exists on PATH.
  * @param command - Command name to check.
  * @returns `true` if the command is found on PATH.
- * @since 0.3.0
+ * @since 0.3.1
  * @example
  * if (commandExists('git')) console.log('git is available');
  */
@@ -93,7 +93,7 @@ function detectWindowsPackageManager() {
  * Detect the system package manager.
  * @returns PackageManager constant.
  * @throws {@link SystemError} if detection fails unexpectedly.
- * @since 0.3.0
+ * @since 0.3.1
  * @example
  * const pm = detectPackageManager();
  * console.log(`Package manager: ${pm}`);
@@ -115,7 +115,7 @@ function detectPackageManager() {
 /**
  * Get comprehensive system information.
  * @returns Object containing platform, os, arch, release, hostname, cpus, memory, packageManager.
- * @since 0.3.0
+ * @since 0.3.1
  * @example
  * const info = getSystemInfo();
  * console.log(`OS: ${info.os}, CPUs: ${info.cpus}`);

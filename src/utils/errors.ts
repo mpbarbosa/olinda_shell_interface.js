@@ -54,7 +54,7 @@ export class ExecutionError extends ShellError {
 
 /**
  * Thrown when a system-level operation fails (e.g. package manager detection).
- * @since 0.3.0
+ * @since 0.3.1
  * @example
  * throw new SystemError('SystemError: failed to detect package manager — EPERM');
  */
