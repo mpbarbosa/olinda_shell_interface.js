@@ -11,8 +11,8 @@ export type { OsValue, PackageManagerValue, SystemInfo } from './core/system.js'
 
 export { ShellError, ExecutionError, SystemError } from './utils/errors.js';
 
-export { colors, supportsColor, colorize } from './core/colors.js';
-export type { ColorName } from './core/colors.js';
+export { colors, supportsColor, colorize } from 'olinda_utils.js';
+export type { ColorName } from 'olinda_utils.js';
 
 export {
 	parseVersion,

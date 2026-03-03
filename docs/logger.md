@@ -309,7 +309,7 @@ function processFiles(files, options) {
 - **Warn:** Yellow (caution)
 - **Error:** Red (critical)
 
-**Note:** Colors automatically disabled when terminal doesn't support them (see [colors](./colors.md) module).
+**Note:** Colors automatically disabled when terminal doesn't support them (see [colors](https://github.com/mpbarbosa/olinda_utils.js/blob/main/docs/colors.md) module in `olinda_utils.js`).
 
 ---
 
@@ -349,7 +349,7 @@ function processFiles(files, options) {
 
 ## Related Modules
 
-- **[colors](./colors.md)** (in `olinda_shell_interface.js`) - Provides ANSI color codes and color support detection
+- **[colors](https://github.com/mpbarbosa/olinda_utils.js/blob/main/docs/colors.md)** (in `olinda_utils.js`) - Provides ANSI color codes and color support detection
 - **[errors](./errors.md)** - Custom error types often logged with `logger.error()`
 
 ---

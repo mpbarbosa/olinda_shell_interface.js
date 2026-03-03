@@ -14,7 +14,6 @@ publish required.
 olinda_shell_interface.js/
 ├── src/
 │   ├── core/
-│   │   ├── colors.ts         # ANSI color codes and color support detection
 │   │   ├── executor.ts       # execute / executeStream / executeSudo
 │   │   ├── system.ts         # OS detection, package manager detection
 │   │   └── version.ts        # Semantic version parsing and comparison
@@ -23,7 +22,6 @@ olinda_shell_interface.js/
 │   └── index.ts              # Public barrel export
 ├── test/
 │   ├── core/                 # Unit tests for src/core/
-│   │   ├── colors.test.ts
 │   │   ├── executor.test.ts
 │   │   ├── system.test.ts
 │   │   └── version.test.ts
@@ -54,9 +52,9 @@ olinda_shell_interface.js/
 
 ## Module Responsibilities
 
-### `src/core/colors.ts`
+### `olinda_utils.js` — `colors` module
 
-Provides ANSI color codes and terminal color support detection:
+ANSI color codes and terminal color support detection are provided by the [`olinda_utils.js`](https://github.com/mpbarbosa/olinda_utils.js) dependency and re-exported from this package's public API:
 
 - **`colors`** — `const` object of all ANSI escape sequences (styles, foreground, bright foreground).
 - **`supportsColor()`** — returns `true` when stdout is a TTY, `TERM` is not `'dumb'`, and `NO_COLOR` is unset.

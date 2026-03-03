@@ -1,4 +1,4 @@
-import { execute, executeStream, executeSudo, ShellError, ExecutionError } from '../src/index';
+import { execute, executeStream, executeSudo, ShellError, ExecutionError, colors, supportsColor, colorize } from '../src/index';
 
 describe('Public API surface', () => {
 	it('exports execute', () => expect(typeof execute).toBe('function'));
@@ -6,6 +6,9 @@ describe('Public API surface', () => {
 	it('exports executeSudo', () => expect(typeof executeSudo).toBe('function'));
 	it('exports ShellError', () => expect(typeof ShellError).toBe('function'));
 	it('exports ExecutionError', () => expect(typeof ExecutionError).toBe('function'));
+	it('exports colors', () => expect(typeof colors).toBe('object'));
+	it('exports supportsColor', () => expect(typeof supportsColor).toBe('function'));
+	it('exports colorize', () => expect(typeof colorize).toBe('function'));
 });
 
 describe('execute', () => {

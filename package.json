@@ -63,5 +63,8 @@
     "markdownlint-cli": "^0.47.0",
     "ts-jest": "^29.1.0",
     "typescript": "^5.4.0"
+  },
+  "dependencies": {
+    "olinda_utils.js": "file:../olinda_utils.js"
   }
 }
