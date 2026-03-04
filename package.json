@@ -1,6 +1,6 @@
 {
   "name": "olinda_shell_interface.js",
-  "version": "0.4.4",
+  "version": "0.4.5",
   "description": "Public JavaScript library to interface Linux shell commands",
   "main": "dist/src/index.js",
   "exports": {
@@ -12,7 +12,6 @@
     "./utils/errors": "./dist/src/utils/errors.js"
   },
   "scripts": {
-    "prepare": "npm run build",
     "build": "tsc --project tsconfig.json",
     "build:esm": "tsc --project tsconfig.esm.json",
     "test": "jest --coverage --testPathPattern='test/(core|integration|utils|index)' --passWithNoTests",
@@ -22,12 +21,15 @@
     "test:watch": "jest --watch --testPathPattern='test/(core|integration|utils|index)'",
     "test:coverage": "jest --coverage --testPathPattern='test/(core|integration|utils|index)'",
     "test:verbose": "jest --verbose --testPathPattern='test/(core|integration|utils|index)'",
+    "test:flaky": "for i in 1 2 3; do npm test -- --forceExit --randomize || exit 1; done",
+    "test:all": "npm run test:coverage && npm run bench",
     "bench": "jest --testPathPattern='test/benchmarks' --verbose --passWithNoTests",
     "validate": "tsc --noEmit",
     "lint": "eslint 'src/**/*.ts'",
     "lint:fix": "eslint 'src/**/*.ts' --fix",
-    "lint:md": "markdownlint '**/*.md' --ignore node_modules --ignore dist",
-    "lint:md:fix": "markdownlint '**/*.md' --ignore node_modules --ignore dist --fix",
+    "lint:md": "markdownlint --config .markdownlint.json \"**/*.md\" --ignore node_modules --ignore dist",
+    "lint:md:fix": "markdownlint --fix --config .markdownlint.json \"**/*.md\" --ignore node_modules --ignore dist",
+    "docs:generate": "typedoc",
     "cdn": "npm run build && bash cdn-delivery.sh"
   },
   "keywords": [
@@ -53,18 +55,24 @@
     "type": "git",
     "url": "https://github.com/mpbarbosa/olinda_shell_interface.js.git"
   },
+  "overrides": {
+    "markdownlint-cli": {
+      "minimatch": "^10.2.3"
+    }
+  },
   "devDependencies": {
     "@types/jest": "^29.5.0",
     "@types/node": "^20.0.0",
     "@typescript-eslint/eslint-plugin": "^8.56.1",
     "@typescript-eslint/parser": "^8.56.1",
-    "eslint": "^8.57.0",
+    "eslint": "^10.0.2",
     "jest": "^29.7.0",
     "markdownlint-cli": "^0.47.0",
     "ts-jest": "^29.1.0",
+    "typedoc": "^0.28.17",
     "typescript": "^5.4.0"
   },
   "dependencies": {
-    "olinda_utils.js": "file:../olinda_utils.js"
+    "olinda_utils.js": "github:mpbarbosa/olinda_utils.js#v0.3.8"
   }
 }
