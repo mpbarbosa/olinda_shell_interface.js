@@ -1,11 +1,11 @@
 # API Reference — olinda_shell_interface.js
 
-Public API for `olinda_shell_interface.js` v0.4.4.
+Public API for `olinda_shell_interface.js` v0.4.5.
 
 CDN entry point:
 
 ```text
-https://cdn.jsdelivr.net/gh/mpbarbosa/olinda_shell_interface.js@0.4.4/dist/src/index.js
+https://cdn.jsdelivr.net/gh/mpbarbosa/olinda_shell_interface.js@0.4.5/dist/src/index.js
 ```
 
 ---
@@ -359,7 +359,7 @@ Remove ANSI escape codes from a string (useful for plain-text log files).
 **Script tag (CJS):**
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/mpbarbosa/olinda_shell_interface.js@0.4.4/dist/src/index.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/mpbarbosa/olinda_shell_interface.js@0.4.5/dist/src/index.js"></script>
 ```
 
 **ES Module:**
@@ -367,6 +367,6 @@ Remove ANSI escape codes from a string (useful for plain-text log files).
 ```html
 <script type="module">
     import { execute, ExecutionError } from
-        'https://cdn.jsdelivr.net/gh/mpbarbosa/olinda_shell_interface.js@0.4.4/dist/src/index.js';
+        'https://cdn.jsdelivr.net/gh/mpbarbosa/olinda_shell_interface.js@0.4.5/dist/src/index.js';
 </script>
 ```
