@@ -4,7 +4,7 @@
  * @module index
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getLatestVersion = exports.isEqual = exports.isLessThan = exports.isGreaterThan = exports.compareVersions = exports.parseVersion = exports.stripAnsi = exports.LogLevel = exports.logger = exports.Logger = exports.colorize = exports.supportsColor = exports.colors = exports.SystemError = exports.ExecutionError = exports.ShellError = exports.getSystemInfo = exports.commandExists = exports.detectPackageManager = exports.detectOS = exports.PackageManager = exports.OS = exports.executeSudo = exports.executeStream = exports.execute = void 0;
+exports.FileOperations = exports.calculateRelativePath = exports.buildFileMetadata = exports.sortByModificationTime = exports.filterByPattern = exports.filterByExtension = exports.validatePath = exports.FileSystemError = exports.JqWrapper = exports.buildJqCommand = exports.validateArgjsonPairs = exports.parseJqArguments = exports.sanitizeArgjsonValue = exports.validateJson = exports.JqExecutionError = exports.getLatestVersion = exports.isEqual = exports.isLessThan = exports.isGreaterThan = exports.compareVersions = exports.parseVersion = exports.stripAnsi = exports.LogLevel = exports.logger = exports.Logger = exports.colorize = exports.supportsColor = exports.colors = exports.SystemError = exports.ExecutionError = exports.ShellError = exports.getSystemInfo = exports.commandExists = exports.detectPackageManager = exports.detectOS = exports.PackageManager = exports.OS = exports.executeSudo = exports.executeStream = exports.execute = void 0;
 var executor_js_1 = require("./core/executor.js");
 Object.defineProperty(exports, "execute", { enumerable: true, get: function () { return executor_js_1.execute; } });
 Object.defineProperty(exports, "executeStream", { enumerable: true, get: function () { return executor_js_1.executeStream; } });
@@ -36,3 +36,21 @@ Object.defineProperty(exports, "isGreaterThan", { enumerable: true, get: functio
 Object.defineProperty(exports, "isLessThan", { enumerable: true, get: function () { return version_js_1.isLessThan; } });
 Object.defineProperty(exports, "isEqual", { enumerable: true, get: function () { return version_js_1.isEqual; } });
 Object.defineProperty(exports, "getLatestVersion", { enumerable: true, get: function () { return version_js_1.getLatestVersion; } });
+var jq_wrapper_js_1 = require("./core/jq_wrapper.js");
+Object.defineProperty(exports, "JqExecutionError", { enumerable: true, get: function () { return jq_wrapper_js_1.JqExecutionError; } });
+Object.defineProperty(exports, "validateJson", { enumerable: true, get: function () { return jq_wrapper_js_1.validateJson; } });
+Object.defineProperty(exports, "sanitizeArgjsonValue", { enumerable: true, get: function () { return jq_wrapper_js_1.sanitizeArgjsonValue; } });
+Object.defineProperty(exports, "parseJqArguments", { enumerable: true, get: function () { return jq_wrapper_js_1.parseJqArguments; } });
+Object.defineProperty(exports, "validateArgjsonPairs", { enumerable: true, get: function () { return jq_wrapper_js_1.validateArgjsonPairs; } });
+Object.defineProperty(exports, "buildJqCommand", { enumerable: true, get: function () { return jq_wrapper_js_1.buildJqCommand; } });
+Object.defineProperty(exports, "JqWrapper", { enumerable: true, get: function () { return jq_wrapper_js_1.JqWrapper; } });
+var errors_js_2 = require("./utils/errors.js");
+Object.defineProperty(exports, "FileSystemError", { enumerable: true, get: function () { return errors_js_2.FileSystemError; } });
+var file_operations_js_1 = require("./core/file_operations.js");
+Object.defineProperty(exports, "validatePath", { enumerable: true, get: function () { return file_operations_js_1.validatePath; } });
+Object.defineProperty(exports, "filterByExtension", { enumerable: true, get: function () { return file_operations_js_1.filterByExtension; } });
+Object.defineProperty(exports, "filterByPattern", { enumerable: true, get: function () { return file_operations_js_1.filterByPattern; } });
+Object.defineProperty(exports, "sortByModificationTime", { enumerable: true, get: function () { return file_operations_js_1.sortByModificationTime; } });
+Object.defineProperty(exports, "buildFileMetadata", { enumerable: true, get: function () { return file_operations_js_1.buildFileMetadata; } });
+Object.defineProperty(exports, "calculateRelativePath", { enumerable: true, get: function () { return file_operations_js_1.calculateRelativePath; } });
+Object.defineProperty(exports, "FileOperations", { enumerable: true, get: function () { return file_operations_js_1.FileOperations; } });

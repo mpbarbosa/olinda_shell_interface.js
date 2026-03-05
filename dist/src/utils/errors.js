@@ -5,7 +5,7 @@
  * @description Custom error types for the olinda_shell_interface.js library.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SystemError = exports.ExecutionError = exports.ShellError = void 0;
+exports.FileSystemError = exports.SystemError = exports.ExecutionError = exports.ShellError = void 0;
 /**
  * Base error class for all olinda errors.
  * @since 0.2.0
@@ -69,3 +69,26 @@ class SystemError extends ShellError {
     }
 }
 exports.SystemError = SystemError;
+/**
+ * Thrown when a file system operation fails (read, write, copy, move, delete, etc.).
+ * @since 0.5.0
+ * @example
+ * throw new FileSystemError('Failed to read file: ENOENT', { path: '/tmp/missing.txt' });
+ */
+class FileSystemError extends ShellError {
+    /**
+     * @param message - Human-readable description.
+     * @param details - Optional structured details about the failure.
+     */
+    constructor(message, details = {}) {
+        super(message);
+        /** @readonly */
+        this.name = 'FileSystemError';
+        Object.setPrototypeOf(this, new.target.prototype);
+        this.name = 'FileSystemError';
+        this.path = details.path ?? null;
+        this.destination = details.destination ?? null;
+        this.originalError = details.originalError ?? null;
+    }
+}
+exports.FileSystemError = FileSystemError;

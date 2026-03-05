@@ -36,9 +36,9 @@ async function execute(command, options = {}) {
     }
     catch (err) {
         const error = err;
-        const exitCode = (error.code && typeof error.code === 'number') ? error.code : 1;
-        const stdout = error.stdout ? error.stdout.toString().trim() : '';
-        const stderr = error.stderr ? error.stderr.toString().trim() : '';
+        const exitCode = typeof error.code === 'number' ? error.code : 1;
+        const stdout = typeof error.stdout === 'string' ? error.stdout.trim() : '';
+        const stderr = typeof error.stderr === 'string' ? error.stderr.trim() : '';
         throw new errors_js_1.ExecutionError(`ExecutionError: ${command}`, exitCode, stdout, stderr);
     }
 }
@@ -69,7 +69,11 @@ function executeStream(command, options = {}) {
         else {
             child.stderr.pipe(process.stderr);
         }
+        let settled = false;
         child.on('close', (code) => {
+            if (settled)
+                return;
+            settled = true;
             const exitCode = code ?? 1;
             if (exitCode === 0) {
                 resolve(exitCode);
@@ -79,6 +83,9 @@ function executeStream(command, options = {}) {
             }
         });
         child.on('error', (error) => {
+            if (settled)
+                return;
+            settled = true;
             reject(new errors_js_1.ExecutionError(`ExecutionError: failed to spawn — ${error.message}`));
         });
     });

@@ -109,7 +109,8 @@ function detectPackageManager() {
         }
     }
     catch (error) {
-        throw new errors_js_1.SystemError(`SystemError: failed to detect package manager — ${error.message}`);
+        const msg = error instanceof Error ? error.message : String(error);
+        throw new errors_js_1.SystemError(`SystemError: failed to detect package manager — ${msg}`);
     }
 }
 /**
