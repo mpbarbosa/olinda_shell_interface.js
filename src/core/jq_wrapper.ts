@@ -84,36 +84,34 @@ export function validateJson(jsonString: string): boolean {
  * sanitizeArgjsonValue('invalid', 0)   // 0
  * sanitizeArgjsonValue({foo: 'bar'})   // {foo: 'bar'}
  */
+/** @internal Coerce a trimmed string to a JSON-safe primitive. */
+function sanitizeStringValue(trimmed: string, defaultValue: unknown): unknown {
+	if (trimmed === 'true') return true;
+	if (trimmed === 'false') return false;
+	if (trimmed === 'null') return null;
+	if (trimmed === '') return defaultValue;
+
+	const num = Number(trimmed);
+	if (!isNaN(num) && isFinite(num)) return num;
+
+	try {
+		return JSON.parse(trimmed);
+	} catch {
+		return defaultValue;
+	}
+}
+
 export function sanitizeArgjsonValue(value: unknown, defaultValue: unknown = 0): unknown {
-	// Handle null/undefined
 	if (value === null) return null;
 	if (value === undefined) return defaultValue;
-
-	// Handle booleans
 	if (typeof value === 'boolean') return value;
 
-	// Handle numbers
 	if (typeof value === 'number') {
 		return isNaN(value) || !isFinite(value) ? defaultValue : value;
 	}
 
-	// Handle strings
 	if (typeof value === 'string') {
-		const trimmed = value.trim();
-
-		if (trimmed === 'true') return true;
-		if (trimmed === 'false') return false;
-		if (trimmed === 'null') return null;
-		if (trimmed === '') return defaultValue;
-
-		const num = Number(trimmed);
-		if (!isNaN(num) && isFinite(num)) return num;
-
-		try {
-			return JSON.parse(trimmed);
-		} catch {
-			return defaultValue;
-		}
+		return sanitizeStringValue(value.trim(), defaultValue);
 	}
 
 	// Handle objects/arrays - deep-clone and validate
