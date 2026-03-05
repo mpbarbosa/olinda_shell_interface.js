@@ -1,11 +1,11 @@
 {
   "version": 1,
-  "partitionIndex": 1,
+  "partitionIndex": 0,
   "totalPartitions": 2,
   "filesHash": "9db0564e",
   "partitionLabels": [
     "test, test/utils",
     "test/core"
   ],
-  "updatedAt": "2026-03-05T02:27:08.819Z"
+  "updatedAt": "2026-03-05T15:02:32.065Z"
 }

@@ -33,7 +33,12 @@ olinda_shell_interface.js/
 ├── docs/
 │   ├── API.md                # Public API reference
 │   ├── ARCHITECTURE.md       # This file
-│   └── logger.md             # Logger module usage guide (colors/logging patterns)
+│   ├── errors.md             # Error hierarchy reference
+│   ├── executor.md           # Executor module reference
+│   ├── file_operations.md    # File operations reference
+│   ├── jq_wrapper.md         # jq wrapper reference
+│   ├── logger.md             # Logger module usage guide (colors/logging patterns)
+│   └── system.md             # System module reference
 ├── dist/
 │   ├── src/                  # CJS compiled output (tracked for CDN)
 │   └── types/                # TypeScript declaration files
