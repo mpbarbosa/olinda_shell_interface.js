@@ -5,8 +5,7 @@ describe('ShellError', () => {
     const err = new ShellError('ShellError: something went wrong');
     expect(err).toBeInstanceOf(ShellError);
     expect(err).toBeInstanceOf(Error);
-    expect(err.name).toBe('ShellError');
-    expect(err.message).toBe('ShellError: something went wrong');
+    expect(err).toMatchObject({ name: 'ShellError', message: 'ShellError: something went wrong' });
   });
 
   it('should preserve stack trace', () => {
@@ -32,11 +31,13 @@ describe('ExecutionError', () => {
     expect(err).toBeInstanceOf(ExecutionError);
     expect(err).toBeInstanceOf(ShellError);
     expect(err).toBeInstanceOf(Error);
-    expect(err.name).toBe('ExecutionError');
-    expect(err.message).toBe('ExecutionError: command failed');
-    expect(err.exitCode).toBe(2);
-    expect(err.stdout).toBe('output');
-    expect(err.stderr).toBe('error');
+    expect(err).toMatchObject({
+      name: 'ExecutionError',
+      message: 'ExecutionError: command failed',
+      exitCode: 2,
+      stdout: 'output',
+      stderr: 'error',
+    });
   });
 
   it('should default exitCode, stdout, and stderr if not provided', () => {

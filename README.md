@@ -3,6 +3,14 @@
 Public JavaScript library to interface Linux shell commands, delivered via
 **jsDelivr CDN from GitHub**.
 
+## Prerequisites
+
+- **Node.js** ≥ 18 (tested on 18, 20, 22; use `.nvmrc` with `nvm use`)
+- **npm** ≥ 9
+
+Dependency updates are automated via Dependabot (weekly, Monday). Run
+`npm audit` and `npm outdated` periodically to check for security issues.
+
 ## Scripts
 
 ### `cdn-delivery.sh`
@@ -40,7 +48,7 @@ bash scripts/deploy.sh
 **Steps executed:**
 
 1. `npm run build` — compile TypeScript
-2. `git add dist/` — stage compiled output
+2. `git add dist/ cdn-delivery.sh` — stage compiled output
 3. `git commit` — commit artifacts
 4. `git tag v{version}` — version tag (skipped if tag already exists)
 5. `git push --tags` — push to GitHub (jsDelivr picks up the tag)

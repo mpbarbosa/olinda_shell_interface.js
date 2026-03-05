@@ -62,12 +62,8 @@ describe('execute', () => {
 		await expect(execute('exit 42')).rejects.toBeInstanceOf(ExecutionError);
 	});
 
-	it('ExecutionError has stdout/stderr on failure', async () => {
-		try {
-			await execute('echo out; echo err >&2; exit 1');
-		} catch (e) {
-			expect(e).toBeInstanceOf(ExecutionError);
-		}
+	it('should reject with ExecutionError carrying stdout/stderr on failure', async () => {
+		await expect(execute('echo out; echo err >&2; exit 1')).rejects.toThrow(ExecutionError);
 	});
 });
 
@@ -93,32 +89,34 @@ describe('executeStream', () => {
 });
 
 describe('executeSudo', () => {
-	it('is callable (delegates to execute)', () => {
+	it('should delegate to execute when not root', () => {
 		// executeSudo prepends sudo when not root; just verify it is a function.
 		expect(typeof executeSudo).toBe('function');
 	});
 });
 
 describe('ShellError', () => {
-	it('is an instance of Error', () => {
+	it('should have correct properties', () => {
 		const err = new ShellError('ShellError: test');
-		expect(err).toBeInstanceOf(Error);
 		expect(err).toBeInstanceOf(ShellError);
-		expect(err.name).toBe('ShellError');
-		expect(err.message).toBe('ShellError: test');
+		expect(err).toBeInstanceOf(Error);
+		expect(err).toMatchObject({ name: 'ShellError', message: 'ShellError: test' });
 	});
 });
 
 describe('ExecutionError', () => {
-	it('is an instance of ShellError and Error', () => {
+	it('should have correct properties', () => {
 		const err = new ExecutionError('ExecutionError: test', 1, 'out', 'err');
-		expect(err).toBeInstanceOf(Error);
-		expect(err).toBeInstanceOf(ShellError);
 		expect(err).toBeInstanceOf(ExecutionError);
-		expect(err.exitCode).toBe(1);
-		expect(err.stdout).toBe('out');
-		expect(err.stderr).toBe('err');
-		expect(err.name).toBe('ExecutionError');
+		expect(err).toBeInstanceOf(ShellError);
+		expect(err).toBeInstanceOf(Error);
+		expect(err).toMatchObject({
+			name: 'ExecutionError',
+			message: 'ExecutionError: test',
+			exitCode: 1,
+			stdout: 'out',
+			stderr: 'err',
+		});
 	});
 
 	it('uses defaults when optional args omitted', () => {
@@ -130,13 +128,12 @@ describe('ExecutionError', () => {
 });
 
 describe('SystemError', () => {
-	it('is an instance of ShellError and Error', () => {
+	it('should have correct properties', () => {
 		const err = new SystemError('SystemError: test');
-		expect(err).toBeInstanceOf(Error);
-		expect(err).toBeInstanceOf(ShellError);
 		expect(err).toBeInstanceOf(SystemError);
-		expect(err.name).toBe('SystemError');
-		expect(err.message).toBe('SystemError: test');
+		expect(err).toBeInstanceOf(ShellError);
+		expect(err).toBeInstanceOf(Error);
+		expect(err).toMatchObject({ name: 'SystemError', message: 'SystemError: test' });
 	});
 });
 

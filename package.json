@@ -1,6 +1,6 @@
 {
   "name": "olinda_shell_interface.js",
-  "version": "0.4.6",
+  "version": "0.4.7",
   "description": "Public JavaScript library to interface Linux shell commands",
   "main": "dist/src/index.js",
   "exports": {
@@ -57,6 +57,11 @@
     "type": "git",
     "url": "https://github.com/mpbarbosa/olinda_shell_interface.js.git"
   },
+  "files": [
+    "dist/",
+    "src/",
+    "README.md"
+  ],
   "overrides": {
     "markdownlint-cli": {
       "minimatch": "^10.2.3"
