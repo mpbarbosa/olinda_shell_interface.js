@@ -40,6 +40,31 @@
       "score": 100,
       "issueCount": 0,
       "lastAnalyzed": "2026-03-05T15:03:52.145Z"
+    },
+    "src/core/executor.ts": {
+      "score": 100,
+      "issueCount": 0,
+      "lastAnalyzed": "2026-03-05T17:24:31.984Z"
+    },
+    "src/core/file_operations.ts": {
+      "score": 100,
+      "issueCount": 0,
+      "lastAnalyzed": "2026-03-05T17:24:31.984Z"
+    },
+    "src/core/jq_wrapper.ts": {
+      "score": 100,
+      "issueCount": 0,
+      "lastAnalyzed": "2026-03-05T17:24:31.984Z"
+    },
+    "src/core/system.ts": {
+      "score": 100,
+      "issueCount": 0,
+      "lastAnalyzed": "2026-03-05T17:24:31.984Z"
+    },
+    "src/core/version.ts": {
+      "score": 100,
+      "issueCount": 0,
+      "lastAnalyzed": "2026-03-05T17:24:31.984Z"
     }
   }
 }
