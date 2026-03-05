@@ -71,3 +71,44 @@ export class SystemError extends ShellError {
 		this.name = 'SystemError';
 	}
 }
+
+/** Details supplied to {@link FileSystemError}. */
+export interface FileSystemErrorDetails {
+/** The file or directory path involved in the failure. */
+path?: string;
+/** Destination path (for copy/move operations). */
+destination?: string;
+/** Underlying Node.js error, if any. */
+originalError?: Error;
+}
+
+/**
+ * Thrown when a file system operation fails (read, write, copy, move, delete, etc.).
+ * @since 0.5.0
+ * @example
+ * throw new FileSystemError('Failed to read file: ENOENT', { path: '/tmp/missing.txt' });
+ */
+export class FileSystemError extends ShellError {
+/** @readonly */
+name = 'FileSystemError';
+
+/** The file or directory path involved in the failure. */
+readonly path: string | null;
+/** Destination path for copy/move operations. */
+readonly destination: string | null;
+/** Underlying Node.js error, if any. */
+readonly originalError: Error | null;
+
+/**
+ * @param message - Human-readable description.
+ * @param details - Optional structured details about the failure.
+ */
+constructor(message: string, details: FileSystemErrorDetails = {}) {
+super(message);
+Object.setPrototypeOf(this, new.target.prototype);
+this.name = 'FileSystemError';
+this.path = details.path ?? null;
+this.destination = details.destination ?? null;
+this.originalError = details.originalError ?? null;
+}
+}

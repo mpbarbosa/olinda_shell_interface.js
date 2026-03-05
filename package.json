@@ -1,6 +1,6 @@
 {
   "name": "olinda_shell_interface.js",
-  "version": "0.4.5",
+  "version": "0.4.6",
   "description": "Public JavaScript library to interface Linux shell commands",
   "main": "dist/src/index.js",
   "exports": {
@@ -9,7 +9,9 @@
     "./core/system": "./dist/src/core/system.js",
     "./core/colors": "./dist/src/core/colors.js",
     "./core/version": "./dist/src/core/version.js",
-    "./utils/errors": "./dist/src/utils/errors.js"
+    "./core/jq_wrapper": "./dist/src/core/jq_wrapper.js",
+    "./utils/errors": "./dist/src/utils/errors.js",
+    "./core/file_operations": "./dist/src/core/file_operations.js"
   },
   "scripts": {
     "build": "tsc --project tsconfig.json",

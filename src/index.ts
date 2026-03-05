@@ -26,3 +26,42 @@ export {
 	getLatestVersion,
 } from './core/version.js';
 export type { ParsedVersion } from './core/version.js';
+
+export {
+	JqExecutionError,
+	validateJson,
+	sanitizeArgjsonValue,
+	parseJqArguments,
+	validateArgjsonPairs,
+	buildJqCommand,
+	JqWrapper,
+} from './core/jq_wrapper.js';
+export type {
+	ArgjsonPair,
+	ParsedJqArguments,
+	ArgjsonValidationResult,
+	JqWrapperOptions,
+	JqExecuteOptions,
+} from './core/jq_wrapper.js';
+
+export { FileSystemError } from './utils/errors.js';
+export type { FileSystemErrorDetails } from './utils/errors.js';
+
+export {
+	validatePath,
+	filterByExtension,
+	filterByPattern,
+	sortByModificationTime,
+	buildFileMetadata,
+	calculateRelativePath,
+	FileOperations,
+} from './core/file_operations.js';
+export type {
+	PathValidation,
+	FileMetadata,
+	StatLike,
+	FileEntry,
+	ListOptions,
+	GlobOptions,
+	FileOperationsOptions,
+} from './core/file_operations.js';

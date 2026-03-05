@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "fileScores": {
+    "test/core/file_operations.test.ts": {
+      "score": 100,
+      "issueCount": 0,
+      "lastAnalyzed": "2026-03-05T02:27:47.630Z"
+    },
+    "test/core/jq_wrapper.test.ts": {
+      "score": 100,
+      "issueCount": 0,
+      "lastAnalyzed": "2026-03-05T02:27:47.630Z"
+    },
+    "test/core/executor.test.ts": {
+      "score": 100,
+      "issueCount": 0,
+      "lastAnalyzed": "2026-03-05T02:27:47.630Z"
+    },
+    "test/core/system.test.ts": {
+      "score": 100,
+      "issueCount": 0,
+      "lastAnalyzed": "2026-03-05T02:27:47.630Z"
+    },
+    "test/core/version.test.ts": {
+      "score": 100,
+      "issueCount": 0,
+      "lastAnalyzed": "2026-03-05T02:27:47.630Z"
+    }
+  }
+}

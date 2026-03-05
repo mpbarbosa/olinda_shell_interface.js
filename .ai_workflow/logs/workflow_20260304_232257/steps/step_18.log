@@ -1,0 +1,26 @@
+[2026-03-05T02:28:07.210Z] 
+→ Starting: Debugging Analysis
+[2026-03-05T02:28:07.210Z] ════════════════════════════════════════════════════════════
+[2026-03-05T02:28:07.210Z] 🔷  Step 18: Debugging Analysis
+[2026-03-05T02:28:07.210Z] ════════════════════════════════════════════════════════════
+[2026-03-05T02:28:07.213Z] Analyzing 9 source file(s) for debugging patterns
+[2026-03-05T02:28:07.213Z] Selected debugger persona: async_flow_debugger_prompt
+[2026-03-05T02:28:09.543Z] ✓ GitHub Copilot SDK initialized successfully
+[2026-03-05T02:28:09.543Z] Available Copilot models (13): claude-sonnet-4.5, claude-haiku-4.5, claude-opus-4.5, claude-sonnet-4, gemini-3-pro-preview, gpt-5.2-codex, gpt-5.2, gpt-5.1-codex-max, gpt-5.1-codex, gpt-5.1, gpt-5.1-codex-mini, gpt-5-mini, gpt-4.1
+[2026-03-05T02:28:09.559Z] [DEBUG] AI cache initialized: .ai_workflow/.ai_cache
+[2026-03-05T02:28:09.564Z] [DEBUG] Cache miss: 59943369...
+[2026-03-05T02:28:09.565Z] [DEBUG] Request Options: {"model":"claude-haiku-4.5","temperature":0.7,"maxTokens":4000,"stream":false,"persona":"code_quality_analyst","cache":true}
+[2026-03-05T02:28:09.565Z] [DEBUG] Persona: code_quality_analyst
+[2026-03-05T02:28:09.565Z] [DEBUG] Model: claude-haiku-4.5
+[2026-03-05T02:28:09.565Z] [AI] SDK call starting — persona: code_quality_analyst, model: claude-haiku-4.5, prompt_chars: 28933
+[2026-03-05T02:28:09.565Z] [DEBUG] Executing AI request (attempt 1/3)
+[2026-03-05T02:28:18.654Z] [AI] SDK call completed — persona: code_quality_analyst, model: claude-haiku-4.5, response_chars: 2496, latency: 9089ms
+[2026-03-05T02:28:18.654Z] ✓ AI request completed successfully
+[2026-03-05T02:28:18.655Z] [DEBUG] Prompt logged to: 2026-03-05T02-28-18-654Z_0001_code_quality_analyst.md
+[2026-03-05T02:28:18.659Z] [DEBUG] Response cached: 59943369...
+[2026-03-05T02:28:18.660Z] ✓ Step 18 completed - debugging analysis report generated
+[2026-03-05T02:28:18.660Z] ✓ Step step_18 completed in 11450ms
+[2026-03-05T02:28:18.660Z] [DEBUG] [Performance] step_18: 11.4s
+[2026-03-05T02:28:18.660Z] ⚠ [WARNING] Operation 'step_18' took 11.4s (memory: 22.37MB)
+[2026-03-05T02:28:18.660Z] [DEBUG] Recorded outcome for step_18: success
+[2026-03-05T02:28:18.660Z] ✓ Completed: Debugging Analysis (11s)

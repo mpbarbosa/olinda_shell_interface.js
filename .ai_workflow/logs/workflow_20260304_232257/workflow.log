@@ -1,0 +1,716 @@
+[2026-03-05T02:22:57.369Z] ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[2026-03-05T02:22:57.370Z]   AI Workflow Automation - Starting
+[2026-03-05T02:22:57.370Z] ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[2026-03-05T02:22:57.370Z] Stage: full
+[2026-03-05T02:22:57.370Z] Mode: interactive
+[2026-03-05T02:22:57.370Z] Detecting workflow profile based on changes...
+[2026-03-05T02:22:57.379Z] Detected profile: infrastructure
+[2026-03-05T02:22:57.379Z]   Changed files: 69 (docs: 35, code: 0, tests: 0, infra: 1, other: 33)
+[2026-03-05T02:22:57.379Z] Profile: infrastructure
+[2026-03-05T02:22:57.379Z] Performing health checks...
+[2026-03-05T02:22:57.379Z] ✓ All health checks passed
+[2026-03-05T02:22:57.382Z] Registering workflow steps...
+[2026-03-05T02:22:57.383Z] [DEBUG] Registered step: step_00
+[2026-03-05T02:22:57.383Z] [DEBUG] Registered step: step_0b
+[2026-03-05T02:22:57.383Z] [DEBUG] Registered step: step_01
+[2026-03-05T02:22:57.383Z] [DEBUG] Registered step: step_02
+[2026-03-05T02:22:57.383Z] [DEBUG] Registered step: step_02_5
+[2026-03-05T02:22:57.383Z] [DEBUG] Registered step: step_03
+[2026-03-05T02:22:57.383Z] [DEBUG] Registered step: step_04
+[2026-03-05T02:22:57.383Z] [DEBUG] Registered step: step_05
+[2026-03-05T02:22:57.383Z] [DEBUG] Registered step: step_06
+[2026-03-05T02:22:57.383Z] [DEBUG] Registered step: step_07
+[2026-03-05T02:22:57.383Z] [DEBUG] Registered step: step_08
+[2026-03-05T02:22:57.383Z] [DEBUG] Registered step: step_09
+[2026-03-05T02:22:57.383Z] [DEBUG] Registered step: step_10
+[2026-03-05T02:22:57.383Z] [DEBUG] Registered step: step_11
+[2026-03-05T02:22:57.383Z] [DEBUG] Registered step: step_11_5
+[2026-03-05T02:22:57.383Z] [DEBUG] Registered step: step_11_6
+[2026-03-05T02:22:57.383Z] [DEBUG] Registered step: step_13
+[2026-03-05T02:22:57.383Z] [DEBUG] Registered step: step_14
+[2026-03-05T02:22:57.383Z] [DEBUG] Registered step: step_15
+[2026-03-05T02:22:57.383Z] [DEBUG] Registered step: step_16
+[2026-03-05T02:22:57.383Z] [DEBUG] Registered step: step_18
+[2026-03-05T02:22:57.383Z] [DEBUG] Registered step: step_19
+[2026-03-05T02:22:57.383Z] [DEBUG] Registered step: step_17
+[2026-03-05T02:22:57.384Z] [DEBUG] Registered step: step_0f
+[2026-03-05T02:22:57.384Z] [DEBUG] Registered step: step_12
+[2026-03-05T02:22:57.384Z] ✓ Registered 25 workflow steps
+[2026-03-05T02:22:57.384Z] Executing 25 steps for stage: full
+[2026-03-05T02:22:57.384Z] [DEBUG] [CommitHistory] Loaded history; lastRunCommit=51572faca5f3133e939398bdcc2d0050a8abb262
+[2026-03-05T02:22:57.413Z] [CommitHistory] 8 file(s) changed since last run (51572fa)
+[2026-03-05T02:22:57.417Z] Full optimization: Analyzing changes...
+[2026-03-05T02:22:57.418Z] Docs-only analysis: NO (29.41% docs, 0% faster)
+[2026-03-05T02:22:57.418Z] Code optimization: backend (0 steps skipped)
+[2026-03-05T02:22:57.419Z] Full optimization: Selected strategy 'standard' (confidence: 30%)
+[2026-03-05T02:22:57.419Z] 
+Starting workflow execution...
+
+[2026-03-05T02:22:57.428Z] [DEBUG] No model file found, starting fresh
+[2026-03-05T02:22:57.428Z] ML Optimizer initialized
+[2026-03-05T02:22:57.428Z] Loading workflow configuration...
+[2026-03-05T02:22:57.429Z] ✓ Workflow loaded: AI Workflow Automation v2.0.0
+[2026-03-05T02:22:57.429Z] Execution plan: 25 steps
+[2026-03-05T02:22:57.429Z] Starting workflow execution: AI Workflow Automation
+[2026-03-05T02:22:57.429Z] Executing step: Pre-Analysis (step_00)
+[2026-03-05T02:22:57.429Z] [DEBUG] Prediction for step_00: skip (confidence: 0.95)
+[2026-03-05T02:22:57.429Z] [DEBUG] [MLOptimizer] step_00: predicted skippable (confidence 0.95)
+[2026-03-05T02:22:57.429Z] 
+→ Starting: Pre-Analysis
+[2026-03-05T02:22:57.430Z] ════════════════════════════════════════════════════════════
+[2026-03-05T02:22:57.430Z] 🔷  Step 0: Pre-Analysis - Analyzing Recent Changes
+[2026-03-05T02:22:57.430Z] ════════════════════════════════════════════════════════════
+[2026-03-05T02:22:57.444Z] Commits ahead of remote: 0
+[2026-03-05T02:22:57.444Z] Modified files: 70
+[2026-03-05T02:22:57.449Z] ✓ Project kind from config: nodejs_automation (configured)
+[2026-03-05T02:22:57.455Z] ✓ Pre-analysis complete:
+  • Commits ahead: 0
+  • Modified files: 70
+  • Change scope: full-stack
+  • Documentation: 2 files
+  • Tests: 2 files
+  • Source: 4 files
+  • Config: 2 files
+  • Project kind: nodejs_automation (100% confidence)
+
+[2026-03-05T02:22:57.459Z] ✓ Step step_00 completed in 30ms
+[2026-03-05T02:22:57.459Z] [DEBUG] [Performance] step_00: 30ms
+[2026-03-05T02:22:57.459Z] [DEBUG] Recorded outcome for step_00: success
+[2026-03-05T02:22:57.459Z] ✓ Completed: Pre-Analysis (0s)
+[2026-03-05T02:22:57.459Z] Executing step: Bootstrap Documentation (step_0b)
+[2026-03-05T02:22:57.459Z] [DEBUG] Prediction for step_0b: skip (confidence: 0.95)
+[2026-03-05T02:22:57.459Z] [DEBUG] [MLOptimizer] step_0b: predicted skippable (confidence 0.95)
+[2026-03-05T02:22:57.459Z] 
+→ Starting: Bootstrap Documentation
+[2026-03-05T02:22:57.460Z] [DEBUG] Step0bBootstrapDocs.execute()
+[2026-03-05T02:22:57.460Z] ════════════════════════════════════════════════════════════
+[2026-03-05T02:22:57.460Z] 🔷  Step 0b: Documentation Gap Analysis and Generation
+[2026-03-05T02:22:57.460Z] ════════════════════════════════════════════════════════════
+[2026-03-05T02:22:57.460Z] Phase 1: Gathering project statistics...
+[2026-03-05T02:22:57.460Z] [DEBUG] Gathering project statistics by scanning files...
+[2026-03-05T02:22:57.460Z] [DEBUG] Listing all files in the project directory...
+[2026-03-05T02:22:57.460Z] [DEBUG] Project root: /home/mpb/Documents/GitHub/olinda_shell_interface.js
+[2026-03-05T02:22:57.461Z] [DEBUG] Total files found: 82
+[2026-03-05T02:22:57.461Z] [DEBUG] Converting to relative paths...
+[2026-03-05T02:22:57.462Z] Project has 14 documentation files and 43 source files
+[2026-03-05T02:22:57.462Z] README.md size: 1668 bytes, Has CHANGELOG: true, Has docs/ directory: true
+[2026-03-05T02:22:57.462Z] Phase 2: Evaluating documentation coverage...
+[2026-03-05T02:22:57.462Z] Step 0b: Documentation coverage adequate - no bootstrap needed
+[2026-03-05T02:22:57.462Z] ✓ Step step_0b completed in 3ms
+[2026-03-05T02:22:57.462Z] [DEBUG] [Performance] step_0b: 3ms
+[2026-03-05T02:22:57.462Z] [DEBUG] Recorded outcome for step_0b: success
+[2026-03-05T02:22:57.462Z] ✓ Completed: Bootstrap Documentation (0s)
+[2026-03-05T02:22:57.462Z] Executing step: Documentation Updates (step_01)
+[2026-03-05T02:22:57.462Z] [DEBUG] Prediction for step_01: skip (confidence: 0.95)
+[2026-03-05T02:22:57.462Z] [DEBUG] [MLOptimizer] step_01: predicted skippable (confidence 0.95)
+[2026-03-05T02:22:57.462Z] 
+→ Starting: Documentation Updates
+[2026-03-05T02:22:57.463Z] ════════════════════════════════════════════════════════════
+[2026-03-05T02:22:57.463Z] 🔷  Step 1: AI-Powered Documentation Updates
+[2026-03-05T02:22:57.463Z] ════════════════════════════════════════════════════════════
+[2026-03-05T02:22:57.463Z] Changed files detected: 11 files
+[2026-03-05T02:22:57.463Z] Classification: 2 docs, 4 source, 2 tests
+[2026-03-05T02:22:57.463Z] Checking documentation changes (incremental mode)...
+[2026-03-05T02:22:57.463Z] Step1: No cache found, starting fresh
+[2026-03-05T02:22:57.463Z] [DEBUG] Step1: File no longer exists (skip): docs/file_operations.md
+[2026-03-05T02:22:57.463Z] [DEBUG] Step1: File no longer exists (skip): docs/jq_wrapper.md
+[2026-03-05T02:22:57.463Z] Step1: Detected 0 changed files, 0 unchanged
+[2026-03-05T02:22:57.463Z] ✓ All documentation files unchanged - skipping AI analysis
+[2026-03-05T02:22:57.463Z] ✓ Step step_01 completed in 1ms
+[2026-03-05T02:22:57.463Z] [DEBUG] [Performance] step_01: 1ms
+[2026-03-05T02:22:57.463Z] [DEBUG] Recorded outcome for step_01: success
+[2026-03-05T02:22:57.463Z] ✓ Completed: Documentation Updates (0s)
+[2026-03-05T02:22:57.463Z] Executing step: Configuration Validation (step_04)
+[2026-03-05T02:22:57.463Z] [DEBUG] Prediction for step_04: skip (confidence: 0.95)
+[2026-03-05T02:22:57.463Z] [DEBUG] [MLOptimizer] step_04: predicted skippable (confidence 0.95)
+[2026-03-05T02:22:57.463Z] 
+→ Starting: Configuration Validation
+[2026-03-05T02:22:57.464Z] ════════════════════════════════════════════════════════════
+[2026-03-05T02:22:57.464Z] 🔷  Step 4: Configuration Validation
+[2026-03-05T02:22:57.464Z] ════════════════════════════════════════════════════════════
+[2026-03-05T02:22:57.469Z] Found 2 configuration file(s)
+[2026-03-05T02:22:57.469Z] Syntax validation: 0 error(s)
+[2026-03-05T02:22:57.470Z] Security scan: 0 finding(s)
+[2026-03-05T02:22:57.471Z] Best practices: 1 issue(s)
+[2026-03-05T02:22:59.886Z] ✓ GitHub Copilot SDK initialized successfully
+[2026-03-05T02:22:59.886Z] Available Copilot models (13): claude-sonnet-4.5, claude-haiku-4.5, claude-opus-4.5, claude-sonnet-4, gemini-3-pro-preview, gpt-5.2-codex, gpt-5.2, gpt-5.1-codex-max, gpt-5.1-codex, gpt-5.1, gpt-5.1-codex-mini, gpt-5-mini, gpt-4.1
+[2026-03-05T02:22:59.909Z] Cleaned up 7 expired cache entries
+[2026-03-05T02:22:59.909Z] [DEBUG] AI cache initialized: .ai_workflow/.ai_cache
+[2026-03-05T02:22:59.920Z] [DEBUG] Cache miss: 4bdde275...
+[2026-03-05T02:22:59.920Z] [DEBUG] Request Options: {"model":"claude-haiku-4.5","temperature":0.7,"maxTokens":4000,"stream":false,"persona":"devops_engineer","cache":true,"timeout":120000}
+[2026-03-05T02:22:59.920Z] [DEBUG] Persona: devops_engineer
+[2026-03-05T02:22:59.920Z] [DEBUG] Model: claude-haiku-4.5
+[2026-03-05T02:22:59.920Z] [AI] SDK call starting — persona: devops_engineer, model: claude-haiku-4.5, prompt_chars: 6216
+[2026-03-05T02:22:59.920Z] [DEBUG] Executing AI request (attempt 1/3)
+[2026-03-05T02:24:58.957Z] [AI] SDK call completed — persona: devops_engineer, model: claude-haiku-4.5, response_chars: 834, latency: 119037ms
+[2026-03-05T02:24:58.958Z] ✓ AI request completed successfully
+[2026-03-05T02:24:58.959Z] [DEBUG] Prompt logged to: 2026-03-05T02-24-58-958Z_0001_devops_engineer.md
+[2026-03-05T02:24:58.962Z] [DEBUG] Response cached: 4bdde275...
+[2026-03-05T02:24:58.973Z] [DEBUG] Cache miss: 5a6f18d1...
+[2026-03-05T02:24:58.974Z] [DEBUG] Request Options: {"model":"claude-haiku-4.5","temperature":0.7,"maxTokens":4000,"stream":false,"persona":"code_quality_analyst","cache":true}
+[2026-03-05T02:24:58.974Z] [DEBUG] Persona: code_quality_analyst
+[2026-03-05T02:24:58.974Z] [DEBUG] Model: claude-haiku-4.5
+[2026-03-05T02:24:58.974Z] [AI] SDK call starting — persona: code_quality_analyst, model: claude-haiku-4.5, prompt_chars: 1269
+[2026-03-05T02:24:58.974Z] [DEBUG] Executing AI request (attempt 1/3)
+[2026-03-05T02:25:58.988Z] ⚠ [AI] SDK call failed — persona: code_quality_analyst, model: claude-haiku-4.5, error: Timeout after 60000ms waiting for session.idle
+[2026-03-05T02:25:58.988Z] [AI] Retrying in 1000ms (attempt 2/3)...
+[2026-03-05T02:26:01.258Z] [SDK] Client and session recreated for retry
+[2026-03-05T02:26:01.258Z] [AI] Timeout detected — increasing timeout to 120000ms for retry
+[2026-03-05T02:26:01.258Z] [DEBUG] Executing AI request (attempt 2/3)
+[2026-03-05T02:26:14.125Z] [AI] SDK call completed — persona: code_quality_analyst, model: claude-haiku-4.5, response_chars: 2592, latency: 12867ms
+[2026-03-05T02:26:14.125Z] ✓ AI request completed successfully
+[2026-03-05T02:26:14.127Z] [DEBUG] Prompt logged to: 2026-03-05T02-26-14-126Z_0002_code_quality_analyst.md
+[2026-03-05T02:26:14.133Z] [DEBUG] Response cached: 5a6f18d1...
+[2026-03-05T02:26:14.133Z] ✓ Step 4 completed - no issues found
+[2026-03-05T02:26:14.133Z] ✓ Step step_04 completed in 196670ms
+[2026-03-05T02:26:14.133Z] [DEBUG] [Performance] step_04: 3m 17s
+[2026-03-05T02:26:14.134Z] ✗ [CRITICAL] Operation 'step_04' took 3m 17s (memory: 17.57MB)
+[2026-03-05T02:26:14.134Z] [DEBUG] Recorded outcome for step_04: success
+[2026-03-05T02:26:14.134Z] ✓ Completed: Configuration Validation (197s)
+[2026-03-05T02:26:14.134Z] Executing step: Consistency Analysis (step_02)
+[2026-03-05T02:26:14.134Z] [DEBUG] Prediction for step_02: skip (confidence: 0.95)
+[2026-03-05T02:26:14.134Z] [DEBUG] [MLOptimizer] step_02: predicted skippable (confidence 0.95)
+[2026-03-05T02:26:14.134Z] 
+→ Starting: Consistency Analysis
+[2026-03-05T02:26:14.134Z] ════════════════════════════════════════════════════════════
+[2026-03-05T02:26:14.135Z] 🔷  Step 2: Documentation Consistency Analysis
+[2026-03-05T02:26:14.135Z] ════════════════════════════════════════════════════════════
+[2026-03-05T02:26:14.143Z] Found 11 documentation files
+[2026-03-05T02:26:14.144Z] Expected version: 0.4.5
+[2026-03-05T02:26:14.145Z] Version check: 12 issue(s) found
+[2026-03-05T02:26:14.158Z] Link check: 0 broken link(s) found
+[2026-03-05T02:26:16.562Z] ✓ GitHub Copilot SDK initialized successfully
+[2026-03-05T02:26:16.563Z] Available Copilot models (13): claude-sonnet-4.5, claude-haiku-4.5, claude-opus-4.5, claude-sonnet-4, gemini-3-pro-preview, gpt-5.2-codex, gpt-5.2, gpt-5.1-codex-max, gpt-5.1-codex, gpt-5.1, gpt-5.1-codex-mini, gpt-5-mini, gpt-4.1
+[2026-03-05T02:26:16.576Z] Cleaned up 2 expired cache entries
+[2026-03-05T02:26:16.576Z] [DEBUG] AI cache initialized: .ai_workflow/.ai_cache
+[2026-03-05T02:26:16.587Z] [step_02] Running AI analysis in 1 partition(s) of ≤50 files
+[2026-03-05T02:26:16.587Z] [DEBUG] Cache miss: 28e79899...
+[2026-03-05T02:26:16.588Z] [DEBUG] Request Options: {"model":"gpt-4.1","temperature":0.7,"maxTokens":4000,"stream":false,"persona":"documentation_expert","cache":true}
+[2026-03-05T02:26:16.588Z] [DEBUG] Persona: documentation_expert
+[2026-03-05T02:26:16.588Z] [DEBUG] Model: gpt-4.1
+[2026-03-05T02:26:16.588Z] [AI] SDK call starting — persona: documentation_expert, model: gpt-4.1, prompt_chars: 5281
+[2026-03-05T02:26:16.588Z] [DEBUG] Executing AI request (attempt 1/3)
+[2026-03-05T02:26:32.866Z] [AI] SDK call completed — persona: documentation_expert, model: gpt-4.1, response_chars: 4236, latency: 16278ms
+[2026-03-05T02:26:32.867Z] ✓ AI request completed successfully
+[2026-03-05T02:26:32.868Z] [DEBUG] Prompt logged to: 2026-03-05T02-26-32-867Z_0001_documentation_expert.md
+[2026-03-05T02:26:32.873Z] [DEBUG] Response cached: 28e79899...
+[2026-03-05T02:26:32.873Z] ⚠ Step 2 completed - 12 issue(s) found
+[2026-03-05T02:26:32.873Z] ✓ Step step_02 completed in 18739ms
+[2026-03-05T02:26:32.873Z] [DEBUG] [Performance] step_02: 18.7s
+[2026-03-05T02:26:32.874Z] ⚠ [WARNING] Operation 'step_02' took 18.7s (memory: 17.39MB)
+[2026-03-05T02:26:32.874Z] [DEBUG] Recorded outcome for step_02: success
+[2026-03-05T02:26:32.874Z] ✓ Completed: Consistency Analysis (19s)
+[2026-03-05T02:26:32.874Z] Executing step: Directory Structure (step_05)
+[2026-03-05T02:26:32.874Z] [DEBUG] Prediction for step_05: skip (confidence: 0.95)
+[2026-03-05T02:26:32.874Z] [DEBUG] [MLOptimizer] step_05: predicted skippable (confidence 0.95)
+[2026-03-05T02:26:32.874Z] 
+→ Starting: Directory Structure
+[2026-03-05T02:26:32.874Z] ════════════════════════════════════════════════════════════
+[2026-03-05T02:26:32.874Z] 🔷  Step 5: Directory Structure Validation
+[2026-03-05T02:26:32.874Z] ════════════════════════════════════════════════════════════
+[2026-03-05T02:26:32.875Z] Found 0 misplaced documentation file(s)
+[2026-03-05T02:26:32.926Z] Structure validation: 2 issue(s)
+[2026-03-05T02:26:35.562Z] ✓ GitHub Copilot SDK initialized successfully
+[2026-03-05T02:26:35.562Z] Available Copilot models (13): claude-sonnet-4.5, claude-haiku-4.5, claude-opus-4.5, claude-sonnet-4, gemini-3-pro-preview, gpt-5.2-codex, gpt-5.2, gpt-5.1-codex-max, gpt-5.1-codex, gpt-5.1, gpt-5.1-codex-mini, gpt-5-mini, gpt-4.1
+[2026-03-05T02:26:35.576Z] [DEBUG] AI cache initialized: .ai_workflow/.ai_cache
+[2026-03-05T02:26:35.593Z] [DEBUG] Cache hit: cb948222...
+[2026-03-05T02:26:35.599Z] ⚠ Step 5 completed - 2 issue(s) found
+[2026-03-05T02:26:35.599Z] ✓ Step step_05 completed in 2725ms
+[2026-03-05T02:26:35.599Z] [DEBUG] [Performance] step_05: 2.7s
+[2026-03-05T02:26:35.599Z] [DEBUG] Recorded outcome for step_05: success
+[2026-03-05T02:26:35.599Z] ✓ Completed: Directory Structure (3s)
+[2026-03-05T02:26:35.599Z] Executing step: Documentation Optimization (step_02_5)
+[2026-03-05T02:26:35.600Z] [DEBUG] Prediction for step_02_5: skip (confidence: 0.95)
+[2026-03-05T02:26:35.600Z] [DEBUG] [MLOptimizer] step_02_5: predicted skippable (confidence 0.95)
+[2026-03-05T02:26:35.600Z] 
+→ Starting: Documentation Optimization
+[2026-03-05T02:26:35.600Z] Documentation optimization initialized
+[2026-03-05T02:26:35.600Z] ════════════════════════════════════════════════════════════
+[2026-03-05T02:26:35.600Z] 🔷  Step 2.5: Documentation Optimization
+[2026-03-05T02:26:35.600Z] ════════════════════════════════════════════════════════════
+[2026-03-05T02:26:35.600Z] Phase 1: Heuristics Analysis (8 files)
+[2026-03-05T02:26:35.601Z] Calculating content hashes...
+[2026-03-05T02:26:35.601Z] Found 0 duplicate groups (0 redundant files)
+[2026-03-05T02:26:35.601Z] Analyzing document similarity...
+[2026-03-05T02:26:35.608Z] Found 0 redundant pairs above 80% similarity
+[2026-03-05T02:26:35.608Z] Found 0 exact duplicates, 0 redundant pairs
+[2026-03-05T02:26:35.608Z] Phase 2: Git History Analysis
+[2026-03-05T02:26:35.608Z] Analyzing git history for 8 files...
+[2026-03-05T02:26:35.646Z] Completed git analysis for 8 files
+[2026-03-05T02:26:35.647Z] Found 0 outdated files
+[2026-03-05T02:26:35.647Z] Phase 3: Version Reference Analysis
+[2026-03-05T02:26:35.648Z] Detected version from package.json: 0.4.5
+[2026-03-05T02:26:35.648Z] Analyzing version references in 8 files (current: 0.4.5)...
+[2026-03-05T02:26:35.650Z] Completed version analysis for 8 files
+[2026-03-05T02:26:35.650Z] Version analysis complete (0 total outdated)
+[2026-03-05T02:26:35.650Z] Phase 4: AI Edge Case Analysis (skipped - no AI analyzer)
+[2026-03-05T02:26:35.651Z] Phase 5: Optimization Summary
+[2026-03-05T02:26:35.651Z] 
+📊 Analysis Results:
+───────────────────
+  Total files analyzed: 8
+  Exact duplicates: 0
+  Redundant pairs: 0
+  Outdated files: 0
+  Files to optimize: 0
+
+[2026-03-05T02:26:35.651Z] No optimizations needed
+[2026-03-05T02:26:35.651Z] ✓ Workflow complete (0s)
+[2026-03-05T02:26:35.651Z] ✓ Step step_02_5 completed in 51ms
+[2026-03-05T02:26:35.651Z] [DEBUG] [Performance] step_02_5: 51ms
+[2026-03-05T02:26:35.651Z] [DEBUG] Recorded outcome for step_02_5: success
+[2026-03-05T02:26:35.651Z] ✓ Completed: Documentation Optimization (0s)
+[2026-03-05T02:26:35.651Z] Executing step: Script References (step_03)
+[2026-03-05T02:26:35.651Z] [DEBUG] Prediction for step_03: skip (confidence: 0.95)
+[2026-03-05T02:26:35.651Z] [DEBUG] [MLOptimizer] step_03: predicted skippable (confidence 0.95)
+[2026-03-05T02:26:35.651Z] 
+→ Starting: Script References
+[2026-03-05T02:26:35.652Z] ════════════════════════════════════════════════════════════
+[2026-03-05T02:26:35.652Z] 🔷  Step 3: Script Reference Validation
+[2026-03-05T02:26:35.652Z] ════════════════════════════════════════════════════════════
+[2026-03-05T02:26:35.660Z] Language: bash, patterns: *.sh
+[2026-03-05T02:26:35.663Z] Found 3 script(s)
+[2026-03-05T02:26:35.664Z] References: 4, missing: 1
+[2026-03-05T02:26:35.664Z] Non-executable: 0
+[2026-03-05T02:26:35.664Z] Undocumented: 0
+[2026-03-05T02:26:38.018Z] ✓ GitHub Copilot SDK initialized successfully
+[2026-03-05T02:26:38.018Z] Available Copilot models (13): claude-sonnet-4.5, claude-haiku-4.5, claude-opus-4.5, claude-sonnet-4, gemini-3-pro-preview, gpt-5.2-codex, gpt-5.2, gpt-5.1-codex-max, gpt-5.1-codex, gpt-5.1, gpt-5.1-codex-mini, gpt-5-mini, gpt-4.1
+[2026-03-05T02:26:38.031Z] [DEBUG] AI cache initialized: .ai_workflow/.ai_cache
+[2026-03-05T02:26:38.035Z] [DEBUG] Cache miss: 3469747f...
+[2026-03-05T02:26:38.035Z] [DEBUG] Request Options: {"model":"gpt-4.1","temperature":0.7,"maxTokens":4000,"stream":false,"persona":"devops_engineer","cache":true}
+[2026-03-05T02:26:38.035Z] [DEBUG] Persona: devops_engineer
+[2026-03-05T02:26:38.035Z] [DEBUG] Model: gpt-4.1
+[2026-03-05T02:26:38.035Z] [AI] SDK call starting — persona: devops_engineer, model: gpt-4.1, prompt_chars: 7392
+[2026-03-05T02:26:38.035Z] [DEBUG] Executing AI request (attempt 1/3)
+[2026-03-05T02:26:49.358Z] [AI] SDK call completed — persona: devops_engineer, model: gpt-4.1, response_chars: 4326, latency: 11323ms
+[2026-03-05T02:26:49.359Z] ✓ AI request completed successfully
+[2026-03-05T02:26:49.360Z] [DEBUG] Prompt logged to: 2026-03-05T02-26-49-359Z_0001_devops_engineer.md
+[2026-03-05T02:26:49.364Z] [DEBUG] Response cached: 3469747f...
+[2026-03-05T02:26:49.364Z] ⚠ Step 3 completed - 1 issue(s) found
+[2026-03-05T02:26:49.364Z] ✓ Step step_03 completed in 13713ms
+[2026-03-05T02:26:49.364Z] [DEBUG] [Performance] step_03: 13.7s
+[2026-03-05T02:26:49.364Z] ⚠ [WARNING] Operation 'step_03' took 13.7s (memory: 23.41MB)
+[2026-03-05T02:26:49.364Z] [DEBUG] Recorded outcome for step_03: success
+[2026-03-05T02:26:49.364Z] ✓ Completed: Script References (14s)
+[2026-03-05T02:26:49.364Z] Executing step: Test Review (step_06)
+[2026-03-05T02:26:49.364Z] [DEBUG] Prediction for step_06: skip (confidence: 0.95)
+[2026-03-05T02:26:49.364Z] [DEBUG] [MLOptimizer] step_06: predicted skippable (confidence 0.95)
+[2026-03-05T02:26:49.365Z] 
+→ Starting: Test Review
+[2026-03-05T02:26:49.365Z] ════════════════════════════════════════════════════════════
+[2026-03-05T02:26:49.365Z] 🔷  Step 6: Test Review
+[2026-03-05T02:26:49.365Z] ════════════════════════════════════════════════════════════
+[2026-03-05T02:26:49.371Z] Detected language: typescript
+[2026-03-05T02:26:49.374Z] Found 7 test file(s)
+[2026-03-05T02:26:49.374Z] Unit: 0, Integration: 0, E2E: 0
+[2026-03-05T02:26:49.375Z] ⚠ No coverage reports found
+[2026-03-05T02:26:51.733Z] ✓ GitHub Copilot SDK initialized successfully
+[2026-03-05T02:26:51.733Z] Available Copilot models (13): claude-sonnet-4.5, claude-haiku-4.5, claude-opus-4.5, claude-sonnet-4, gemini-3-pro-preview, gpt-5.2-codex, gpt-5.2, gpt-5.1-codex-max, gpt-5.1-codex, gpt-5.1, gpt-5.1-codex-mini, gpt-5-mini, gpt-4.1
+[2026-03-05T02:26:51.744Z] [DEBUG] AI cache initialized: .ai_workflow/.ai_cache
+[2026-03-05T02:26:51.744Z] [DEBUG] [Step10Partition] File set changed or no cache — resetting partition index to 0
+[2026-03-05T02:26:51.745Z] Reviewing partition 1/2 (2 files): test, test/utils
+[2026-03-05T02:26:51.749Z] [DEBUG] Cache miss: cd84546c...
+[2026-03-05T02:26:51.749Z] [DEBUG] Request Options: {"model":"gpt-4.1","temperature":0.7,"maxTokens":4000,"stream":false,"persona":"test_engineer","cache":true}
+[2026-03-05T02:26:51.749Z] [DEBUG] Persona: test_engineer
+[2026-03-05T02:26:51.749Z] [DEBUG] Model: gpt-4.1
+[2026-03-05T02:26:51.749Z] [AI] SDK call starting — persona: test_engineer, model: gpt-4.1, prompt_chars: 11615
+[2026-03-05T02:26:51.749Z] [DEBUG] Executing AI request (attempt 1/3)
+[2026-03-05T02:27:08.813Z] [AI] SDK call completed — persona: test_engineer, model: gpt-4.1, response_chars: 5818, latency: 17064ms
+[2026-03-05T02:27:08.814Z] ✓ AI request completed successfully
+[2026-03-05T02:27:08.815Z] [DEBUG] Prompt logged to: 2026-03-05T02-27-08-814Z_0001_test_engineer.md
+[2026-03-05T02:27:08.819Z] [DEBUG] Response cached: cd84546c...
+[2026-03-05T02:27:08.820Z] [DEBUG] [Step10Partition] Advanced index 0 → 1/1
+[2026-03-05T02:27:08.820Z] ⚠ Step 6 completed - 2 issue(s) identified
+[2026-03-05T02:27:08.820Z] ✓ Step step_06 completed in 19456ms
+[2026-03-05T02:27:08.820Z] [DEBUG] [Performance] step_06: 19.5s
+[2026-03-05T02:27:08.820Z] ⚠ [WARNING] Operation 'step_06' took 19.5s (memory: 22.95MB)
+[2026-03-05T02:27:08.820Z] [DEBUG] Recorded outcome for step_06: success
+[2026-03-05T02:27:08.820Z] ✓ Completed: Test Review (19s)
+[2026-03-05T02:27:08.820Z] Executing step: Test Generation (step_07)
+[2026-03-05T02:27:08.820Z] [DEBUG] Prediction for step_07: skip (confidence: 0.95)
+[2026-03-05T02:27:08.820Z] [DEBUG] [MLOptimizer] step_07: predicted skippable (confidence 0.95)
+[2026-03-05T02:27:08.820Z] 
+→ Starting: Test Generation
+[2026-03-05T02:27:08.821Z] ════════════════════════════════════════════════════════════
+[2026-03-05T02:27:08.821Z] 🔷  Step 7: Test Generation
+[2026-03-05T02:27:08.821Z] ════════════════════════════════════════════════════════════
+[2026-03-05T02:27:08.829Z] Detected language: typescript
+[2026-03-05T02:27:08.833Z] Found 7 source file(s), 7 test file(s)
+[2026-03-05T02:27:08.833Z] Identified 0 untested file(s)
+[2026-03-05T02:27:08.834Z] Test coverage: 100%
+[2026-03-05T02:27:08.834Z] ✓ Step 7 completed - all files have tests!
+[2026-03-05T02:27:08.834Z] ✓ Step step_07 completed in 14ms
+[2026-03-05T02:27:08.834Z] [DEBUG] [Performance] step_07: 14ms
+[2026-03-05T02:27:08.834Z] [DEBUG] Recorded outcome for step_07: success
+[2026-03-05T02:27:08.834Z] ✓ Completed: Test Generation (0s)
+[2026-03-05T02:27:08.834Z] Executing step: Test Execution (step_08)
+[2026-03-05T02:27:08.834Z] [DEBUG] Prediction for step_08: skip (confidence: 0.95)
+[2026-03-05T02:27:08.834Z] [DEBUG] [MLOptimizer] step_08: predicted skippable (confidence 0.95)
+[2026-03-05T02:27:08.834Z] 
+→ Starting: Test Execution
+[2026-03-05T02:27:08.835Z] ════════════════════════════════════════════════════════════
+[2026-03-05T02:27:08.835Z] 🔷  Step 8: Test Execution
+[2026-03-05T02:27:08.835Z] ════════════════════════════════════════════════════════════
+[2026-03-05T02:27:08.841Z] Detected language: typescript
+[2026-03-05T02:27:08.842Z] Test command: npm test
+[2026-03-05T02:27:08.842Z] [DEBUG] [step_08] Running: npm test (cwd: /home/mpb/Documents/GitHub/olinda_shell_interface.js, timeout: 300000ms)
+[2026-03-05T02:27:08.842Z] [DEBUG] [step_08] Test runner exited 1 — output length: 0 chars
+[2026-03-05T02:27:08.842Z] [DEBUG] [step_08] Output snippet: 
+[2026-03-05T02:27:08.842Z] ⚠ [step_08] Test runner produced no output (possible crash) — retrying with --ci flag
+[2026-03-05T02:27:08.842Z] [DEBUG] [step_08] Running: npm test (cwd: /home/mpb/Documents/GitHub/olinda_shell_interface.js, timeout: 300000ms)
+[2026-03-05T02:27:08.842Z] [DEBUG] [step_08] Test runner exited 1 — output length: 0 chars
+[2026-03-05T02:27:08.842Z] [DEBUG] [step_08] Output snippet: 
+[2026-03-05T02:27:08.842Z] [DEBUG] [step_08] Parsed results — passed: 0, failed: 0, skipped: 0, total: 0, suitesFailed: 0
+[2026-03-05T02:27:08.842Z] Tests: 0 passed, 0 failed, 0 skipped
+[2026-03-05T02:27:08.843Z] [DEBUG] [step_08] noTestsMessageInOutput: false, runnerCrashed: true, noTestsFound: true, anyFailure: false, success: true, exitCode: 1
+[2026-03-05T02:27:11.398Z] ✓ GitHub Copilot SDK initialized successfully
+[2026-03-05T02:27:11.398Z] Available Copilot models (13): claude-sonnet-4.5, claude-haiku-4.5, claude-opus-4.5, claude-sonnet-4, gemini-3-pro-preview, gpt-5.2-codex, gpt-5.2, gpt-5.1-codex-max, gpt-5.1-codex, gpt-5.1, gpt-5.1-codex-mini, gpt-5-mini, gpt-4.1
+[2026-03-05T02:27:11.408Z] [DEBUG] AI cache initialized: .ai_workflow/.ai_cache
+[2026-03-05T02:27:11.411Z] [DEBUG] Cache miss: 08be1b39...
+[2026-03-05T02:27:11.411Z] [DEBUG] Request Options: {"model":"gpt-4.1","temperature":0.7,"maxTokens":4000,"stream":false,"persona":"test_engineer","cache":true}
+[2026-03-05T02:27:11.411Z] [DEBUG] Persona: test_engineer
+[2026-03-05T02:27:11.411Z] [DEBUG] Model: gpt-4.1
+[2026-03-05T02:27:11.411Z] [AI] SDK call starting — persona: test_engineer, model: gpt-4.1, prompt_chars: 3241
+[2026-03-05T02:27:11.411Z] [DEBUG] Executing AI request (attempt 1/3)
+[2026-03-05T02:27:22.360Z] [AI] SDK call completed — persona: test_engineer, model: gpt-4.1, response_chars: 4112, latency: 10949ms
+[2026-03-05T02:27:22.361Z] ✓ AI request completed successfully
+[2026-03-05T02:27:22.361Z] [DEBUG] Prompt logged to: 2026-03-05T02-27-22-361Z_0001_test_engineer.md
+[2026-03-05T02:27:22.364Z] [DEBUG] Response cached: 08be1b39...
+[2026-03-05T02:27:22.367Z] [DEBUG] Cache hit: a30f3a2c...
+[2026-03-05T02:27:22.369Z] ⚠ Step 8 completed - test runner exited with code 1 but produced no output (possible OOM kill or crash before first write). Run `npm test` manually to investigate.
+[2026-03-05T02:27:22.369Z] ✓ Step step_08 completed in 13535ms
+[2026-03-05T02:27:22.370Z] [DEBUG] [Performance] step_08: 13.5s
+[2026-03-05T02:27:22.370Z] ⚠ [WARNING] Operation 'step_08' took 13.5s (memory: 18.04MB)
+[2026-03-05T02:27:22.370Z] [DEBUG] Recorded outcome for step_08: success
+[2026-03-05T02:27:22.370Z] ✓ Completed: Test Execution (14s)
+[2026-03-05T02:27:22.370Z] Executing step: Dependency Analysis (step_09)
+[2026-03-05T02:27:22.370Z] [DEBUG] Prediction for step_09: skip (confidence: 0.95)
+[2026-03-05T02:27:22.370Z] [DEBUG] [MLOptimizer] step_09: predicted skippable (confidence 0.95)
+[2026-03-05T02:27:22.370Z] 
+→ Starting: Dependency Analysis
+[2026-03-05T02:27:22.370Z] ════════════════════════════════════════════════════════════
+[2026-03-05T02:27:22.370Z] 🔷  Step 9: Dependency Validation
+[2026-03-05T02:27:22.370Z] ════════════════════════════════════════════════════════════
+[2026-03-05T02:27:22.376Z] Detected language: typescript
+[2026-03-05T02:27:22.376Z] Found dependency files: package.json, package-lock.json
+[2026-03-05T02:27:22.376Z] Total dependencies: 11
+[2026-03-05T02:27:22.376Z] ✓ No vulnerabilities found
+[2026-03-05T02:27:24.779Z] ✓ GitHub Copilot SDK initialized successfully
+[2026-03-05T02:27:24.779Z] Available Copilot models (13): claude-sonnet-4.5, claude-haiku-4.5, claude-opus-4.5, claude-sonnet-4, gemini-3-pro-preview, gpt-5.2-codex, gpt-5.2, gpt-5.1-codex-max, gpt-5.1-codex, gpt-5.1, gpt-5.1-codex-mini, gpt-5-mini, gpt-4.1
+[2026-03-05T02:27:24.788Z] [DEBUG] AI cache initialized: .ai_workflow/.ai_cache
+[2026-03-05T02:27:24.791Z] [DEBUG] Cache miss: 764962ba...
+[2026-03-05T02:27:24.791Z] [DEBUG] Request Options: {"model":"gpt-4.1","temperature":0.7,"maxTokens":4000,"stream":false,"persona":"dependency_analyst","cache":true}
+[2026-03-05T02:27:24.791Z] [DEBUG] Persona: dependency_analyst
+[2026-03-05T02:27:24.791Z] [DEBUG] Model: gpt-4.1
+[2026-03-05T02:27:24.791Z] [AI] SDK call starting — persona: dependency_analyst, model: gpt-4.1, prompt_chars: 3407
+[2026-03-05T02:27:24.791Z] [DEBUG] Executing AI request (attempt 1/3)
+[2026-03-05T02:27:33.902Z] [AI] SDK call completed — persona: dependency_analyst, model: gpt-4.1, response_chars: 2969, latency: 9110ms
+[2026-03-05T02:27:33.902Z] ✓ AI request completed successfully
+[2026-03-05T02:27:33.903Z] [DEBUG] Prompt logged to: 2026-03-05T02-27-33-902Z_0001_dependency_analyst.md
+[2026-03-05T02:27:33.906Z] [DEBUG] Response cached: 764962ba...
+[2026-03-05T02:27:33.910Z] [DEBUG] Cache hit: 69e85853...
+[2026-03-05T02:27:33.914Z] ✓ Step 9 completed - dependencies validated!
+[2026-03-05T02:27:33.914Z] ✓ Step step_09 completed in 11544ms
+[2026-03-05T02:27:33.914Z] [DEBUG] [Performance] step_09: 11.5s
+[2026-03-05T02:27:33.914Z] ⚠ [WARNING] Operation 'step_09' took 11.5s (memory: 20.76MB)
+[2026-03-05T02:27:33.914Z] [DEBUG] Recorded outcome for step_09: success
+[2026-03-05T02:27:33.914Z] ✓ Completed: Dependency Analysis (12s)
+[2026-03-05T02:27:33.914Z] Executing step: Code Quality (step_10)
+[2026-03-05T02:27:33.914Z] [DEBUG] Prediction for step_10: skip (confidence: 0.95)
+[2026-03-05T02:27:33.914Z] [DEBUG] [MLOptimizer] step_10: predicted skippable (confidence 0.95)
+[2026-03-05T02:27:33.914Z] 
+→ Starting: Code Quality
+[2026-03-05T02:27:33.915Z] ════════════════════════════════════════════════════════════
+[2026-03-05T02:27:33.915Z] 🔷  Step 10: Code Quality Analysis
+[2026-03-05T02:27:33.915Z] ════════════════════════════════════════════════════════════
+[2026-03-05T02:27:33.922Z] Detected languages: typescript, markdown, html, json, javascript, bash, yaml, css
+[2026-03-05T02:27:33.924Z] typescript: 14 source file(s), linter: npm run lint
+[2026-03-05T02:27:33.924Z] [DEBUG] [AnalysisCache] Cache miss: linter_aeb7868a
+[2026-03-05T02:27:33.925Z] [DEBUG] [AnalysisCache] Cached: linter_aeb7868a (67 bytes)
+[2026-03-05T02:27:33.925Z] ✓ typescript: no issues
+[2026-03-05T02:27:33.926Z] json: 5 source file(s), linter: (native JSON.parse)
+[2026-03-05T02:27:33.926Z] [DEBUG] [AnalysisCache] Cache miss: linter_faf45268
+[2026-03-05T02:27:33.928Z] [DEBUG] [AnalysisCache] Cached: linter_faf45268 (51 bytes)
+[2026-03-05T02:27:33.928Z] ✓ json: no issues
+[2026-03-05T02:27:33.930Z] javascript: 2 source file(s), linter: npm run lint
+[2026-03-05T02:27:33.930Z] [DEBUG] [AnalysisCache] Cache miss: linter_4972a663
+[2026-03-05T02:27:33.931Z] [DEBUG] [AnalysisCache] Cached: linter_4972a663 (67 bytes)
+[2026-03-05T02:27:33.931Z] ✓ javascript: no issues
+[2026-03-05T02:27:33.932Z] bash: 3 source file(s), linter: find . -name "*.sh" -not -path "*/node_modules/*" -not -path "*/.git/*" | xargs shellcheck
+[2026-03-05T02:27:33.932Z] [DEBUG] [AnalysisCache] Cache miss: linter_4b0a5334
+[2026-03-05T02:27:33.932Z] [DEBUG] [AnalysisCache] Cached: linter_4b0a5334 (61 bytes)
+[2026-03-05T02:27:33.932Z] ✓ bash: no issues
+[2026-03-05T02:27:33.932Z] Total: 0 issue(s) across 4 language(s)
+[2026-03-05T02:27:36.384Z] ✓ GitHub Copilot SDK initialized successfully
+[2026-03-05T02:27:36.384Z] Available Copilot models (13): claude-sonnet-4.5, claude-haiku-4.5, claude-opus-4.5, claude-sonnet-4, gemini-3-pro-preview, gpt-5.2-codex, gpt-5.2, gpt-5.1-codex-max, gpt-5.1-codex, gpt-5.1, gpt-5.1-codex-mini, gpt-5-mini, gpt-4.1
+[2026-03-05T02:27:36.394Z] [DEBUG] AI cache initialized: .ai_workflow/.ai_cache
+[2026-03-05T02:27:36.394Z] [DEBUG] [Step10Partition] File set changed or no cache — resetting partition index to 0
+[2026-03-05T02:27:36.394Z] Reviewing partition 1/6 (5 files): test/core
+[2026-03-05T02:27:36.398Z] [DEBUG] Cache miss: 07ee4fa9...
+[2026-03-05T02:27:36.398Z] [DEBUG] Request Options: {"model":"gpt-4.1","temperature":0.7,"maxTokens":4000,"stream":false,"persona":"code_quality_analyst","cache":true,"timeout":240000}
+[2026-03-05T02:27:36.398Z] [DEBUG] Persona: code_quality_analyst
+[2026-03-05T02:27:36.398Z] [DEBUG] Model: gpt-4.1
+[2026-03-05T02:27:36.398Z] [AI] SDK call starting — persona: code_quality_analyst, model: gpt-4.1, prompt_chars: 30352
+[2026-03-05T02:27:36.398Z] [DEBUG] Executing AI request (attempt 1/3)
+[2026-03-05T02:27:47.625Z] [AI] SDK call completed — persona: code_quality_analyst, model: gpt-4.1, response_chars: 3996, latency: 11227ms
+[2026-03-05T02:27:47.625Z] ✓ AI request completed successfully
+[2026-03-05T02:27:47.626Z] [DEBUG] Prompt logged to: 2026-03-05T02-27-47-625Z_0001_code_quality_analyst.md
+[2026-03-05T02:27:47.629Z] [DEBUG] Response cached: 07ee4fa9...
+[2026-03-05T02:27:47.630Z] [DEBUG] [Step10Partition] Quality scores updated for 5 file(s)
+[2026-03-05T02:27:47.631Z] [DEBUG] [Step10Partition] Advanced index 0 → 1/5
+[2026-03-05T02:27:47.631Z] ✓ Step 10 completed - code quality validated!
+[2026-03-05T02:27:47.631Z] ✓ Step step_10 completed in 13717ms
+[2026-03-05T02:27:47.631Z] [DEBUG] [Performance] step_10: 13.7s
+[2026-03-05T02:27:47.631Z] ⚠ [WARNING] Operation 'step_10' took 13.7s (memory: 23.75MB)
+[2026-03-05T02:27:47.631Z] [DEBUG] Recorded outcome for step_10: success
+[2026-03-05T02:27:47.631Z] ✓ Completed: Code Quality (14s)
+[2026-03-05T02:27:47.631Z] Executing step: Context Management (step_11)
+[2026-03-05T02:27:47.631Z] [DEBUG] Prediction for step_11: skip (confidence: 0.95)
+[2026-03-05T02:27:47.631Z] [DEBUG] [MLOptimizer] step_11: predicted skippable (confidence 0.95)
+[2026-03-05T02:27:47.631Z] 
+→ Starting: Context Management
+[2026-03-05T02:27:47.632Z] ════════════════════════════════════════════════════════════
+[2026-03-05T02:27:47.632Z] 🔷  Step 11: Context Analysis
+[2026-03-05T02:27:47.632Z] ════════════════════════════════════════════════════════════
+[2026-03-05T02:27:47.632Z] Workflow completion: 100% (13/13)
+[2026-03-05T02:27:47.645Z] Git state: 0 modified, 0 staged
+[2026-03-05T02:27:47.683Z] Change impact: low (score: 0)
+[2026-03-05T02:27:47.683Z] Issues: 0 total, 0 critical
+[2026-03-05T02:27:47.683Z] Workflow duration: 4m 50s
+[2026-03-05T02:27:47.684Z] ✓ Step 11 completed - workflow context analyzed!
+[2026-03-05T02:27:47.684Z] ✓ Step step_11 completed in 53ms
+[2026-03-05T02:27:47.684Z] [DEBUG] [Performance] step_11: 53ms
+[2026-03-05T02:27:47.684Z] [DEBUG] Recorded outcome for step_11: success
+[2026-03-05T02:27:47.684Z] ✓ Completed: Context Management (0s)
+[2026-03-05T02:27:47.684Z] Executing step: AWS LBS Validation (step_11_5)
+[2026-03-05T02:27:47.684Z] [DEBUG] Prediction for step_11_5: skip (confidence: 0.95)
+[2026-03-05T02:27:47.684Z] [DEBUG] [MLOptimizer] step_11_5: predicted skippable (confidence 0.95)
+[2026-03-05T02:27:47.684Z] 
+→ Starting: AWS LBS Validation
+[2026-03-05T02:27:47.685Z] ════════════════════════════════════════════════════════════
+[2026-03-05T02:27:47.685Z] 🔷  Step 11.5: AWS LBS Backend Validation
+[2026-03-05T02:27:47.685Z] ════════════════════════════════════════════════════════════
+[2026-03-05T02:27:47.686Z] Step 11.5 skipped — project kind 'nodejs_automation' is not aws_lbs_backend_setup
+[2026-03-05T02:27:47.686Z] ✓ Step step_11_5 completed in 2ms
+[2026-03-05T02:27:47.686Z] [DEBUG] [Performance] step_11_5: 2ms
+[2026-03-05T02:27:47.686Z] [DEBUG] Recorded outcome for step_11_5: success
+[2026-03-05T02:27:47.686Z] ✓ Completed: AWS LBS Validation (0s)
+[2026-03-05T02:27:47.686Z] Executing step: Markdown Linting (step_13)
+[2026-03-05T02:27:47.686Z] [DEBUG] Prediction for step_13: skip (confidence: 0.95)
+[2026-03-05T02:27:47.686Z] [DEBUG] [MLOptimizer] step_13: predicted skippable (confidence 0.95)
+[2026-03-05T02:27:47.686Z] 
+→ Starting: Markdown Linting
+[2026-03-05T02:27:47.687Z] ════════════════════════════════════════════════════════════
+[2026-03-05T02:27:47.687Z] 🔷  Step 13: Markdown Linting
+[2026-03-05T02:27:47.687Z] ════════════════════════════════════════════════════════════
+[2026-03-05T02:27:47.687Z] Enumerating markdown files...
+[2026-03-05T02:27:47.696Z] Found 12 markdown files
+[2026-03-05T02:27:47.696Z] Checking for mdl (markdownlint)...
+[2026-03-05T02:27:47.792Z] mdl is installed: 0.13.0
+[2026-03-05T02:27:47.793Z] Running mdl on all markdown files...
+[2026-03-05T02:27:47.961Z] ⚠ Found 91 markdown linting violations
+[2026-03-05T02:27:47.961Z] Auto-fixing markdown violations via markdownlint-cli...
+[2026-03-05T02:27:48.347Z] ✅ Auto-fix applied via npm run lint:md:fix
+[2026-03-05T02:27:48.347Z] Running mdl on all markdown files...
+[2026-03-05T02:27:48.516Z] ⚠ Found 91 markdown linting violations
+[2026-03-05T02:27:48.516Z] Auto-fix applied. Remaining violations: 91
+[2026-03-05T02:27:48.516Z] Checking for common markdown anti-patterns...
+[2026-03-05T02:27:48.518Z] No common anti-patterns detected
+[2026-03-05T02:27:50.930Z] ✓ GitHub Copilot SDK initialized successfully
+[2026-03-05T02:27:50.930Z] Available Copilot models (13): claude-sonnet-4.5, claude-haiku-4.5, claude-opus-4.5, claude-sonnet-4, gemini-3-pro-preview, gpt-5.2-codex, gpt-5.2, gpt-5.1-codex-max, gpt-5.1-codex, gpt-5.1, gpt-5.1-codex-mini, gpt-5-mini, gpt-4.1
+[2026-03-05T02:27:50.941Z] [DEBUG] AI cache initialized: .ai_workflow/.ai_cache
+[2026-03-05T02:27:50.950Z] [DEBUG] Cache miss: 6307547c...
+[2026-03-05T02:27:50.950Z] [DEBUG] Request Options: {"model":"gpt-4.1","temperature":0.7,"maxTokens":4000,"stream":false,"persona":"technical_writer","cache":true}
+[2026-03-05T02:27:50.950Z] [DEBUG] Persona: technical_writer
+[2026-03-05T02:27:50.950Z] [DEBUG] Model: gpt-4.1
+[2026-03-05T02:27:50.950Z] [AI] SDK call starting — persona: technical_writer, model: gpt-4.1, prompt_chars: 4627
+[2026-03-05T02:27:50.950Z] [DEBUG] Executing AI request (attempt 1/3)
+[2026-03-05T02:28:00.838Z] [AI] SDK call completed — persona: technical_writer, model: gpt-4.1, response_chars: 3099, latency: 9888ms
+[2026-03-05T02:28:00.839Z] ✓ AI request completed successfully
+[2026-03-05T02:28:00.840Z] [DEBUG] Prompt logged to: 2026-03-05T02-28-00-839Z_0001_technical_writer.md
+[2026-03-05T02:28:00.843Z] [DEBUG] Response cached: 6307547c...
+[2026-03-05T02:28:00.843Z] ✓ Step step_13 completed in 13157ms
+[2026-03-05T02:28:00.843Z] [DEBUG] [Performance] step_13: 13.2s
+[2026-03-05T02:28:00.843Z] ⚠ [WARNING] Operation 'step_13' took 13.2s (memory: 19.02MB)
+[2026-03-05T02:28:00.843Z] [DEBUG] Recorded outcome for step_13: success
+[2026-03-05T02:28:00.843Z] ✓ Completed: Markdown Linting (13s)
+[2026-03-05T02:28:00.843Z] Executing step: AWS Serverless AI Review (step_11_6)
+[2026-03-05T02:28:00.843Z] [DEBUG] Prediction for step_11_6: skip (confidence: 0.95)
+[2026-03-05T02:28:00.843Z] [DEBUG] [MLOptimizer] step_11_6: predicted skippable (confidence 0.95)
+[2026-03-05T02:28:00.843Z] 
+→ Starting: AWS Serverless AI Review
+[2026-03-05T02:28:00.844Z] ════════════════════════════════════════════════════════════
+[2026-03-05T02:28:00.844Z] 🔷  Step 11.6: AWS Serverless AI Review
+[2026-03-05T02:28:00.844Z] ════════════════════════════════════════════════════════════
+[2026-03-05T02:28:00.844Z] Step 11.6 skipped — project kind 'nodejs_automation' is not aws_lbs_backend_setup
+[2026-03-05T02:28:00.844Z] ✓ Step step_11_6 completed in 1ms
+[2026-03-05T02:28:00.844Z] [DEBUG] [Performance] step_11_6: 1ms
+[2026-03-05T02:28:00.844Z] [DEBUG] Recorded outcome for step_11_6: success
+[2026-03-05T02:28:00.844Z] ✓ Completed: AWS Serverless AI Review (0s)
+[2026-03-05T02:28:00.844Z] Executing step: Prompt Engineering (step_14)
+[2026-03-05T02:28:00.844Z] [DEBUG] Prediction for step_14: skip (confidence: 0.95)
+[2026-03-05T02:28:00.844Z] [DEBUG] [MLOptimizer] step_14: predicted skippable (confidence 0.95)
+[2026-03-05T02:28:00.844Z] 
+→ Starting: Prompt Engineering
+[2026-03-05T02:28:00.845Z] ════════════════════════════════════════════════════════════
+[2026-03-05T02:28:00.845Z] 🔷  Step 14: Prompt Engineer Analysis
+[2026-03-05T02:28:00.845Z] ════════════════════════════════════════════════════════════
+[2026-03-05T02:28:00.845Z] Project type: nodejs_automation - analysis skipped
+[2026-03-05T02:28:00.845Z] This step only runs on workflow automation projects
+[2026-03-05T02:28:00.845Z] ✓ Step step_14 completed in 1ms
+[2026-03-05T02:28:00.845Z] [DEBUG] [Performance] step_14: 1ms
+[2026-03-05T02:28:00.845Z] [DEBUG] Recorded outcome for step_14: success
+[2026-03-05T02:28:00.845Z] ✓ Completed: Prompt Engineering (0s)
+[2026-03-05T02:28:00.845Z] Executing step: UX Analysis (step_15)
+[2026-03-05T02:28:00.845Z] [DEBUG] Prediction for step_15: skip (confidence: 0.95)
+[2026-03-05T02:28:00.845Z] [DEBUG] [MLOptimizer] step_15: predicted skippable (confidence 0.95)
+[2026-03-05T02:28:00.845Z] 
+→ Starting: UX Analysis
+[2026-03-05T02:28:00.845Z] ════════════════════════════════════════════════════════════
+[2026-03-05T02:28:00.845Z] 🔷  Step 15: UX Analysis
+[2026-03-05T02:28:00.845Z] ════════════════════════════════════════════════════════════
+[2026-03-05T02:28:00.852Z] Step 15: UX Analysis skipped - project type 'nodejs_automation' has no UI components
+[2026-03-05T02:28:00.853Z] ✓ Step step_15 completed in 8ms
+[2026-03-05T02:28:00.853Z] [DEBUG] [Performance] step_15: 8ms
+[2026-03-05T02:28:00.853Z] [DEBUG] Recorded outcome for step_15: success
+[2026-03-05T02:28:00.853Z] ✓ Completed: UX Analysis (0s)
+[2026-03-05T02:28:00.853Z] Executing step: Version Update (step_16)
+[2026-03-05T02:28:00.853Z] [DEBUG] Prediction for step_16: skip (confidence: 0.95)
+[2026-03-05T02:28:00.853Z] [DEBUG] [MLOptimizer] step_16: predicted skippable (confidence 0.95)
+[2026-03-05T02:28:00.853Z] 
+→ Starting: Version Update
+[2026-03-05T02:28:00.853Z] ════════════════════════════════════════════════════════════
+[2026-03-05T02:28:00.853Z] 🔷  Step 16: Version Update
+[2026-03-05T02:28:00.853Z] ════════════════════════════════════════════════════════════
+[2026-03-05T02:28:00.854Z] Phase 1: Detecting current version...
+[2026-03-05T02:28:00.854Z] ✓ Current version: 0.4.5
+[2026-03-05T02:28:00.854Z] Phase 2: Determining bump type...
+[2026-03-05T02:28:00.854Z] Heuristic bump type: patch
+[2026-03-05T02:28:03.321Z] ✓ GitHub Copilot SDK initialized successfully
+[2026-03-05T02:28:03.321Z] Available Copilot models (13): claude-sonnet-4.5, claude-haiku-4.5, claude-opus-4.5, claude-sonnet-4, gemini-3-pro-preview, gpt-5.2-codex, gpt-5.2, gpt-5.1-codex-max, gpt-5.1-codex, gpt-5.1, gpt-5.1-codex-mini, gpt-5-mini, gpt-4.1
+[2026-03-05T02:28:03.337Z] [DEBUG] AI cache initialized: .ai_workflow/.ai_cache
+[2026-03-05T02:28:03.418Z] [DEBUG] Cache miss: aa5feb8b...
+[2026-03-05T02:28:03.418Z] [DEBUG] Request Options: {"model":"gpt-4.1","temperature":0.7,"maxTokens":4000,"stream":false,"persona":"devops_engineer","cache":true}
+[2026-03-05T02:28:03.418Z] [DEBUG] Persona: devops_engineer
+[2026-03-05T02:28:03.418Z] [DEBUG] Model: gpt-4.1
+[2026-03-05T02:28:03.418Z] [AI] SDK call starting — persona: devops_engineer, model: gpt-4.1, prompt_chars: 4169
+[2026-03-05T02:28:03.418Z] [DEBUG] Executing AI request (attempt 1/3)
+[2026-03-05T02:28:07.183Z] [AI] SDK call completed — persona: devops_engineer, model: gpt-4.1, response_chars: 355, latency: 3765ms
+[2026-03-05T02:28:07.184Z] ✓ AI request completed successfully
+[2026-03-05T02:28:07.185Z] [DEBUG] Prompt logged to: 2026-03-05T02-28-07-184Z_0001_devops_engineer.md
+[2026-03-05T02:28:07.189Z] [DEBUG] Response cached: aa5feb8b...
+[2026-03-05T02:28:07.189Z] AI refined bump type: patch (was: patch, confidence: high)
+[2026-03-05T02:28:07.190Z] [VERSION BUMP] previous: 0.4.5 → next: 0.4.6 (patch)
+[2026-03-05T02:28:07.190Z] ✓ New version: 0.4.5 → 0.4.6
+[2026-03-05T02:28:07.190Z] Phase 3: Updating versions in files...
+[2026-03-05T02:28:07.200Z] Version scan found 22 file(s) referencing 0.4.5
+[2026-03-05T02:28:07.209Z] ✓ Updated 22 files, skipped 13, failed 0
+[2026-03-05T02:28:07.210Z] ✓ Step 16: Version update completed
+[2026-03-05T02:28:07.210Z] ✓ Step step_16 completed in 6357ms
+[2026-03-05T02:28:07.210Z] [DEBUG] [Performance] step_16: 6.4s
+[2026-03-05T02:28:07.210Z] ⚠ [WARNING] Operation 'step_16' took 6.4s (memory: 20.9MB)
+[2026-03-05T02:28:07.210Z] [DEBUG] Recorded outcome for step_16: success
+[2026-03-05T02:28:07.210Z] ✓ Completed: Version Update (6s)
+[2026-03-05T02:28:07.210Z] Executing step: Debugging Analysis (step_18)
+[2026-03-05T02:28:07.210Z] [DEBUG] Prediction for step_18: skip (confidence: 0.95)
+[2026-03-05T02:28:07.210Z] [DEBUG] [MLOptimizer] step_18: predicted skippable (confidence 0.95)
+[2026-03-05T02:28:07.210Z] 
+→ Starting: Debugging Analysis
+[2026-03-05T02:28:07.210Z] ════════════════════════════════════════════════════════════
+[2026-03-05T02:28:07.210Z] 🔷  Step 18: Debugging Analysis
+[2026-03-05T02:28:07.210Z] ════════════════════════════════════════════════════════════
+[2026-03-05T02:28:07.213Z] Analyzing 9 source file(s) for debugging patterns
+[2026-03-05T02:28:07.213Z] Selected debugger persona: async_flow_debugger_prompt
+[2026-03-05T02:28:09.543Z] ✓ GitHub Copilot SDK initialized successfully
+[2026-03-05T02:28:09.543Z] Available Copilot models (13): claude-sonnet-4.5, claude-haiku-4.5, claude-opus-4.5, claude-sonnet-4, gemini-3-pro-preview, gpt-5.2-codex, gpt-5.2, gpt-5.1-codex-max, gpt-5.1-codex, gpt-5.1, gpt-5.1-codex-mini, gpt-5-mini, gpt-4.1
+[2026-03-05T02:28:09.559Z] [DEBUG] AI cache initialized: .ai_workflow/.ai_cache
+[2026-03-05T02:28:09.564Z] [DEBUG] Cache miss: 59943369...
+[2026-03-05T02:28:09.565Z] [DEBUG] Request Options: {"model":"claude-haiku-4.5","temperature":0.7,"maxTokens":4000,"stream":false,"persona":"code_quality_analyst","cache":true}
+[2026-03-05T02:28:09.565Z] [DEBUG] Persona: code_quality_analyst
+[2026-03-05T02:28:09.565Z] [DEBUG] Model: claude-haiku-4.5
+[2026-03-05T02:28:09.565Z] [AI] SDK call starting — persona: code_quality_analyst, model: claude-haiku-4.5, prompt_chars: 28933
+[2026-03-05T02:28:09.565Z] [DEBUG] Executing AI request (attempt 1/3)
+[2026-03-05T02:28:18.654Z] [AI] SDK call completed — persona: code_quality_analyst, model: claude-haiku-4.5, response_chars: 2496, latency: 9089ms
+[2026-03-05T02:28:18.654Z] ✓ AI request completed successfully
+[2026-03-05T02:28:18.655Z] [DEBUG] Prompt logged to: 2026-03-05T02-28-18-654Z_0001_code_quality_analyst.md
+[2026-03-05T02:28:18.659Z] [DEBUG] Response cached: 59943369...
+[2026-03-05T02:28:18.660Z] ✓ Step 18 completed - debugging analysis report generated
+[2026-03-05T02:28:18.660Z] ✓ Step step_18 completed in 11450ms
+[2026-03-05T02:28:18.660Z] [DEBUG] [Performance] step_18: 11.4s
+[2026-03-05T02:28:18.660Z] ⚠ [WARNING] Operation 'step_18' took 11.4s (memory: 22.37MB)
+[2026-03-05T02:28:18.660Z] [DEBUG] Recorded outcome for step_18: success
+[2026-03-05T02:28:18.660Z] ✓ Completed: Debugging Analysis (11s)
+[2026-03-05T02:28:18.660Z] Executing step: TypeScript Review (step_19)
+[2026-03-05T02:28:18.660Z] [DEBUG] Prediction for step_19: skip (confidence: 0.95)
+[2026-03-05T02:28:18.660Z] [DEBUG] [MLOptimizer] step_19: predicted skippable (confidence 0.95)
+[2026-03-05T02:28:18.660Z] 
+→ Starting: TypeScript Review
+[2026-03-05T02:28:18.661Z] ════════════════════════════════════════════════════════════
+[2026-03-05T02:28:18.661Z] 🔷  Step 19: TypeScript Review
+[2026-03-05T02:28:18.661Z] ════════════════════════════════════════════════════════════
+[2026-03-05T02:28:18.663Z] Reviewing 7 TypeScript file(s) with Strider persona
+[2026-03-05T02:28:18.663Z] Issue score: 0 (any=0, ts-ignore=0, missing-return-type=0)
+[2026-03-05T02:28:21.447Z] ✓ GitHub Copilot SDK initialized successfully
+[2026-03-05T02:28:21.447Z] Available Copilot models (13): claude-sonnet-4.5, claude-haiku-4.5, claude-opus-4.5, claude-sonnet-4, gemini-3-pro-preview, gpt-5.2-codex, gpt-5.2, gpt-5.1-codex-max, gpt-5.1-codex, gpt-5.1, gpt-5.1-codex-mini, gpt-5-mini, gpt-4.1
+[2026-03-05T02:28:21.465Z] [DEBUG] AI cache initialized: .ai_workflow/.ai_cache
+[2026-03-05T02:28:21.468Z] [DEBUG] Cache miss: 3a0732d8...
+[2026-03-05T02:28:21.469Z] [DEBUG] Request Options: {"model":"claude-haiku-4.5","temperature":0.7,"maxTokens":4000,"stream":false,"persona":"typescript_reviewer","cache":true}
+[2026-03-05T02:28:21.469Z] [DEBUG] Persona: typescript_reviewer
+[2026-03-05T02:28:21.469Z] [DEBUG] Model: claude-haiku-4.5
+[2026-03-05T02:28:21.469Z] [AI] SDK call starting — persona: typescript_reviewer, model: claude-haiku-4.5, prompt_chars: 37332
+[2026-03-05T02:28:21.469Z] [DEBUG] Executing AI request (attempt 1/3)
+[2026-03-05T02:28:39.440Z] [AI] SDK call completed — persona: typescript_reviewer, model: claude-haiku-4.5, response_chars: 6651, latency: 17971ms
+[2026-03-05T02:28:39.440Z] ✓ AI request completed successfully
+[2026-03-05T02:28:39.441Z] [DEBUG] Prompt logged to: 2026-03-05T02-28-39-441Z_0001_typescript_reviewer.md
+[2026-03-05T02:28:39.443Z] [DEBUG] Response cached: 3a0732d8...
+[2026-03-05T02:28:39.444Z] ✓ Step 19 completed - TypeScript review report generated
+[2026-03-05T02:28:39.444Z] ✓ Step step_19 completed in 20784ms
+[2026-03-05T02:28:39.444Z] [DEBUG] [Performance] step_19: 20.8s
+[2026-03-05T02:28:39.444Z] ⚠ [WARNING] Operation 'step_19' took 20.8s (memory: 17.39MB)
+[2026-03-05T02:28:39.444Z] [DEBUG] Recorded outcome for step_19: success
+[2026-03-05T02:28:39.444Z] ✓ Completed: TypeScript Review (21s)
+[2026-03-05T02:28:39.444Z] Executing step: Workflow Summary (step_17)
+[2026-03-05T02:28:39.444Z] [DEBUG] Prediction for step_17: skip (confidence: 0.95)
+[2026-03-05T02:28:39.444Z] [DEBUG] [MLOptimizer] step_17: predicted skippable (confidence 0.95)
+[2026-03-05T02:28:39.444Z] 
+→ Starting: Workflow Summary
+[2026-03-05T02:28:39.444Z] ════════════════════════════════════════════════════════════
+[2026-03-05T02:28:39.444Z] 🔷  Step 17: Workflow Summary
+[2026-03-05T02:28:39.444Z] ════════════════════════════════════════════════════════════
+[2026-03-05T02:28:39.444Z] Generating workflow summary report...
+[2026-03-05T02:28:39.445Z] Summary report written to: .ai_workflow/summaries/workflow_20260304_232257/workflow_summary.md
+[2026-03-05T02:28:39.445Z] ✓ Workflow summary generated successfully
+[2026-03-05T02:28:39.445Z] ✓ Step step_17 completed in 1ms
+[2026-03-05T02:28:39.445Z] [DEBUG] [Performance] step_17: 1ms
+[2026-03-05T02:28:39.445Z] [DEBUG] Recorded outcome for step_17: success
+[2026-03-05T02:28:39.445Z] ✓ Completed: Workflow Summary (0s)
+[2026-03-05T02:28:39.446Z] Executing step: Commit Artifacts (step_0f)
+[2026-03-05T02:28:39.446Z] [DEBUG] Prediction for step_0f: skip (confidence: 0.95)
+[2026-03-05T02:28:39.446Z] [DEBUG] [MLOptimizer] step_0f: predicted skippable (confidence 0.95)
+[2026-03-05T02:28:39.446Z] 
+→ Starting: Commit Artifacts
+[2026-03-05T02:28:39.446Z] ════════════════════════════════════════════════════════════
+[2026-03-05T02:28:39.446Z] 🔷  Step 0f: Commit Workflow Artifacts
+[2026-03-05T02:28:39.446Z] ════════════════════════════════════════════════════════════
+[2026-03-05T02:28:39.452Z] Found 62 artifact file(s) to commit
+[2026-03-05T02:28:39.457Z] [DEBUG] Staged 62 file(s) (forced)
+[2026-03-05T02:28:39.471Z] Created commit: f4caa28 - chore(workflow): update docs and metrics and logs 
+[2026-03-05T02:28:39.471Z] Auto-committed 62 files: chore(workflow): update docs and metrics and logs and summaries [skip ci]
+[2026-03-05T02:28:39.471Z] Committed 62 artifact file(s)
+[2026-03-05T02:28:39.471Z] ✓ Step step_0f completed in 25ms
+[2026-03-05T02:28:39.471Z] [DEBUG] [Performance] step_0f: 25ms
+[2026-03-05T02:28:39.472Z] [DEBUG] Recorded outcome for step_0f: success
+[2026-03-05T02:28:39.472Z] ✓ Completed: Commit Artifacts (0s)
+[2026-03-05T02:28:39.472Z] Executing step: Git Finalization (step_12)
+[2026-03-05T02:28:39.472Z] [DEBUG] Prediction for step_12: skip (confidence: 0.95)
+[2026-03-05T02:28:39.472Z] [DEBUG] [MLOptimizer] step_12: predicted skippable (confidence 0.95)
+[2026-03-05T02:28:39.472Z] 
+→ Starting: Git Finalization
+[2026-03-05T02:28:39.472Z] ════════════════════════════════════════════════════════════
+[2026-03-05T02:28:39.472Z] 🔷  Step 12: Git Finalization
+[2026-03-05T02:28:39.472Z] ════════════════════════════════════════════════════════════
+[2026-03-05T02:28:39.473Z] Analyzing git repository state...
+[2026-03-05T02:28:39.494Z] Branch: main (ahead: 1, behind: 0)
+[2026-03-05T02:28:39.494Z] Changes: 16 files
+[2026-03-05T02:28:39.494Z] Inferred commit type: feat(implementation+tests)
+[2026-03-05T02:28:39.494Z] Staging all changes...
