@@ -4,7 +4,7 @@
  * @description Execute Linux shell commands with output capture and streaming support.
  */
 
-import { exec, spawn } from 'child_process';
+import { exec, spawn, type ExecException } from 'child_process';
 import { promisify } from 'util';
 import { ExecutionError } from '../utils/errors.js';
 
@@ -66,10 +66,10 @@ export async function execute(command: string, options: ExecuteOptions = {}): Pr
 
 		return { stdout: stdout.trim(), stderr: stderr.trim(), exitCode: 0 };
 	} catch (err: unknown) {
-		const error = err as NodeJS.ErrnoException & { stdout?: string; stderr?: string };
-		const exitCode = (error.code && typeof error.code === 'number') ? error.code : 1;
-		const stdout = error.stdout ? error.stdout.toString().trim() : '';
-		const stderr = error.stderr ? error.stderr.toString().trim() : '';
+		const error = err as ExecException;
+		const exitCode = typeof error.code === 'number' ? error.code : 1;
+		const stdout = typeof error.stdout === 'string' ? error.stdout.trim() : '';
+		const stderr = typeof error.stderr === 'string' ? error.stderr.trim() : '';
 		throw new ExecutionError(`ExecutionError: ${command}`, exitCode, stdout, stderr);
 	}
 }
@@ -103,7 +103,11 @@ export function executeStream(command: string, options: StreamOptions = {}): Pro
 			child.stderr.pipe(process.stderr);
 		}
 
+		let settled = false;
+
 		child.on('close', (code: number | null) => {
+			if (settled) return;
+			settled = true;
 			const exitCode = code ?? 1;
 			if (exitCode === 0) {
 				resolve(exitCode);
@@ -113,6 +117,8 @@ export function executeStream(command: string, options: StreamOptions = {}): Pro
 		});
 
 		child.on('error', (error: Error) => {
+			if (settled) return;
+			settled = true;
 			reject(new ExecutionError(`ExecutionError: failed to spawn — ${error.message}`));
 		});
 	});

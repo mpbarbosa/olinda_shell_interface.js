@@ -263,9 +263,10 @@ export class FileOperations {
 			if (this.verbose) logger.debug(`Reading file: ${filePath}`);
 			return await fs.readFile(filePath, encoding);
 		} catch (error) {
-			throw new FileSystemError(`Failed to read file: ${(error as Error).message}`, {
+			const msg = error instanceof Error ? error.message : String(error);
+			throw new FileSystemError(`Failed to read file: ${msg}`, {
 				path: filePath,
-				originalError: error as Error,
+				originalError: error instanceof Error ? error : undefined,
 			});
 		}
 	}
@@ -298,9 +299,10 @@ export class FileOperations {
 			await fs.writeFile(filePath, content, options);
 			if (this.verbose) logger.success(`File written: ${filePath}`);
 		} catch (error) {
-			throw new FileSystemError(`Failed to write file: ${(error as Error).message}`, {
+			const msg = error instanceof Error ? error.message : String(error);
+			throw new FileSystemError(`Failed to write file: ${msg}`, {
 				path: filePath,
-				originalError: error as Error,
+				originalError: error instanceof Error ? error : undefined,
 			});
 		}
 	}
@@ -337,9 +339,10 @@ export class FileOperations {
 			const stats = await fs.stat(filePath);
 			return buildFileMetadata(filePath, stats);
 		} catch (error) {
-			throw new FileSystemError(`Failed to get file stats: ${(error as Error).message}`, {
+			const msg = error instanceof Error ? error.message : String(error);
+			throw new FileSystemError(`Failed to get file stats: ${msg}`, {
 				path: filePath,
-				originalError: error as Error,
+				originalError: error instanceof Error ? error : undefined,
 			});
 		}
 	}
@@ -367,9 +370,10 @@ export class FileOperations {
 
 			return entries;
 		} catch (error) {
-			throw new FileSystemError(`Failed to list directory: ${(error as Error).message}`, {
+			const msg = error instanceof Error ? error.message : String(error);
+			throw new FileSystemError(`Failed to list directory: ${msg}`, {
 				path: dirPath,
-				originalError: error as Error,
+				originalError: error instanceof Error ? error : undefined,
 			});
 		}
 	}
@@ -418,9 +422,10 @@ export class FileOperations {
 
 			return filtered;
 		} catch (error) {
+			const msg = error instanceof Error ? error.message : String(error);
 			throw new FileSystemError(
-				`Failed to list directory recursively: ${(error as Error).message}`,
-				{ path: dirPath, originalError: error as Error },
+				`Failed to list directory recursively: ${msg}`,
+				{ path: dirPath, originalError: error instanceof Error ? error : undefined },
 			);
 		}
 	}
@@ -448,10 +453,11 @@ export class FileOperations {
 			await fs.copyFile(sourcePath, destPath);
 			if (this.verbose) logger.success(`File copied: ${destPath}`);
 		} catch (error) {
-			throw new FileSystemError(`Failed to copy file: ${(error as Error).message}`, {
+			const msg = error instanceof Error ? error.message : String(error);
+			throw new FileSystemError(`Failed to copy file: ${msg}`, {
 				path: sourcePath,
 				destination: destPath,
-				originalError: error as Error,
+				originalError: error instanceof Error ? error : undefined,
 			});
 		}
 	}
@@ -479,10 +485,11 @@ export class FileOperations {
 			await fs.rename(sourcePath, destPath);
 			if (this.verbose) logger.success(`File moved: ${destPath}`);
 		} catch (error) {
-			throw new FileSystemError(`Failed to move file: ${(error as Error).message}`, {
+			const msg = error instanceof Error ? error.message : String(error);
+			throw new FileSystemError(`Failed to move file: ${msg}`, {
 				path: sourcePath,
 				destination: destPath,
-				originalError: error as Error,
+				originalError: error instanceof Error ? error : undefined,
 			});
 		}
 	}
@@ -508,9 +515,10 @@ export class FileOperations {
 			await fs.unlink(filePath);
 			if (this.verbose) logger.success(`File deleted: ${filePath}`);
 		} catch (error) {
-			throw new FileSystemError(`Failed to delete file: ${(error as Error).message}`, {
+			const msg = error instanceof Error ? error.message : String(error);
+			throw new FileSystemError(`Failed to delete file: ${msg}`, {
 				path: filePath,
-				originalError: error as Error,
+				originalError: error instanceof Error ? error : undefined,
 			});
 		}
 	}
@@ -540,12 +548,11 @@ export class FileOperations {
 			await fs.mkdir(dirPath, options);
 			if (this.verbose) logger.success(`Directory created: ${dirPath}`);
 		} catch (error) {
-			if ((error as NodeJS.ErrnoException).code !== 'EEXIST') {
-				throw new FileSystemError(`Failed to create directory: ${(error as Error).message}`, {
-					path: dirPath,
-					originalError: error as Error,
-				});
-			}
+			if (!(error instanceof Error) || (error as NodeJS.ErrnoException).code === 'EEXIST') return;
+			throw new FileSystemError(`Failed to create directory: ${error.message}`, {
+				path: dirPath,
+				originalError: error,
+			});
 		}
 	}
 
@@ -570,9 +577,10 @@ export class FileOperations {
 			await fs.rm(dirPath, { recursive: true, force: true });
 			if (this.verbose) logger.success(`Directory deleted: ${dirPath}`);
 		} catch (error) {
-			throw new FileSystemError(`Failed to delete directory: ${(error as Error).message}`, {
+			const msg = error instanceof Error ? error.message : String(error);
+			throw new FileSystemError(`Failed to delete directory: ${msg}`, {
 				path: dirPath,
-				originalError: error as Error,
+				originalError: error instanceof Error ? error : undefined,
 			});
 		}
 	}

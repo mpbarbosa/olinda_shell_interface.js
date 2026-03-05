@@ -112,7 +112,8 @@ export function detectPackageManager(): PackageManagerValue {
 			default:         return PackageManager.UNKNOWN;
 		}
 	} catch (error) {
-		throw new SystemError(`SystemError: failed to detect package manager — ${(error as Error).message}`);
+		const msg = error instanceof Error ? error.message : String(error);
+		throw new SystemError(`SystemError: failed to detect package manager — ${msg}`);
 	}
 }
 
