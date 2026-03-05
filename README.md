@@ -73,3 +73,22 @@ echo -e "${GREEN}Success${NC}"
 ```
 
 **Exported variables:** `RED`, `GREEN`, `YELLOW`, `BLUE`, `NC` (reset).
+
+---
+
+## Error Handling
+
+All library errors extend a common base class. The hierarchy is:
+
+```
+Error
+└── ShellError          ← base for all library errors
+    ├── ExecutionError  ← non-zero exit code; carries exitCode, stdout, stderr
+    └── SystemError     ← system-level failure (e.g. package manager detection)
+```
+
+Error messages follow the format `"ClassName: human-readable description"`.
+All custom classes call `Object.setPrototypeOf(this, new.target.prototype)` so
+`instanceof` checks work correctly across compilation boundaries.
+
+See [`docs/errors.md`](docs/errors.md) for the full API reference.

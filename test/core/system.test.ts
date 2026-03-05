@@ -74,7 +74,7 @@ describe('commandExists', () => {
 		expect(commandExists('__no_such_cmd_xyz__')).toBe(false);
 	});
 
-	it('returns a boolean', () => {
+	it('returns a boolean indicating command existence', () => {
 		expect(typeof commandExists('node')).toBe('boolean');
 	});
 });

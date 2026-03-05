@@ -87,6 +87,54 @@ and GitHub Actions. Review the changelog before merging major-version bumps.
 Run `npm audit --audit-level=high` before releasing. All `high` and `critical`
 vulnerabilities must be resolved. CI enforces this gate on every push.
 
+## Shell Scripts
+
+Three automation scripts live at the repo root and under `scripts/`. All use `#!/usr/bin/env bash` and are already executable.
+
+### `cdn-delivery.sh`
+
+Generates jsDelivr CDN URL variants and writes `cdn-urls.txt`.
+
+```bash
+npm run cdn           # recommended (builds first)
+bash cdn-delivery.sh  # direct (requires a prior build)
+```
+
+**Prerequisites:** Node.js, Git. **Exit codes:** `0` success; non-zero on failure.
+
+**Contributing:** If you change `package.json` version or the CDN URL scheme, update the URL templates inside this script accordingly. Verify output with `bash cdn-delivery.sh` and inspect `cdn-urls.txt`.
+
+### `scripts/deploy.sh`
+
+Full deployment pipeline: build → commit → tag → push → CDN URLs.
+
+```bash
+bash scripts/deploy.sh
+```
+
+**Prerequisites:** Node.js, Git with push access. **Exit codes:** `0` success; non-zero on any step failure.
+
+**Contributing:** Keep the step order (build → commit → tag → push → cdn) intact. Add new steps at the end. Document any new exit conditions in the script header and in `docs/API.md`.
+
+### `scripts/colors.sh`
+
+Shared ANSI colour definitions. Sourced by other scripts — do not execute directly.
+
+```bash
+source "$(dirname "${BASH_SOURCE[0]}")/colors.sh"
+echo -e "${GREEN}Success${NC}"
+```
+
+**Contributing:** Add new colour variables here if needed. Keep the variable names uppercase. Update the "Exported variables" lists in `README.md` and `docs/API.md`.
+
+### Shell script coding standards
+
+- Shebang must be `#!/usr/bin/env bash`
+- Scripts must be executable: `chmod +x <script>`
+- Use `set -euo pipefail` at the top for safety
+- Source `scripts/colors.sh` for coloured output instead of hardcoding ANSI codes
+- Document all exit codes in the script header comment
+
 ## Testing Strategy
 
 - **Unit tests** in `test/core/` and `test/utils/` — fast, no I/O
