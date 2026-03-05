@@ -695,3 +695,73 @@ Starting workflow execution...
 [2026-03-05T17:25:00.525Z] Changes: 9 files
 [2026-03-05T17:25:00.525Z] Inferred commit type: feat(implementation)
 [2026-03-05T17:25:00.525Z] Staging all changes...
+[2026-03-05T17:25:00.541Z] [DEBUG] Force-staged .ai_workflow/ artifacts
+[2026-03-05T17:25:00.541Z] Changes staged successfully
+[2026-03-05T17:25:00.541Z] Generating commit message...
+[2026-03-05T17:25:03.393Z] ✓ GitHub Copilot SDK initialized successfully
+[2026-03-05T17:25:03.393Z] Available Copilot models (13): claude-sonnet-4.5, claude-haiku-4.5, claude-opus-4.5, claude-sonnet-4, gemini-3-pro-preview, gpt-5.2-codex, gpt-5.2, gpt-5.1-codex-max, gpt-5.1-codex, gpt-5.1, gpt-5.1-codex-mini, gpt-5-mini, gpt-4.1
+[2026-03-05T17:25:03.401Z] [DEBUG] AI cache initialized: .ai_workflow/.ai_cache
+[2026-03-05T17:25:03.420Z] [DEBUG] Cache miss: a017256e...
+[2026-03-05T17:25:03.421Z] [DEBUG] Request Options: {"model":"gpt-4.1","temperature":0.7,"maxTokens":4000,"stream":false,"persona":"git_specialist","cache":true}
+[2026-03-05T17:25:03.421Z] [DEBUG] Persona: git_specialist
+[2026-03-05T17:25:03.421Z] [DEBUG] Model: gpt-4.1
+[2026-03-05T17:25:03.421Z] [AI] SDK call starting — persona: git_specialist, model: gpt-4.1, prompt_chars: 7943
+[2026-03-05T17:25:03.421Z] [DEBUG] Executing AI request (attempt 1/3)
+[2026-03-05T17:25:07.995Z] [AI] SDK call completed — persona: git_specialist, model: gpt-4.1, response_chars: 489, latency: 4574ms
+[2026-03-05T17:25:07.995Z] ✓ AI request completed successfully
+[2026-03-05T17:25:07.997Z] [DEBUG] Prompt logged to: 2026-03-05T17-25-07-996Z_0001_git_specialist.md
+[2026-03-05T17:25:08.002Z] [DEBUG] Response cached: a017256e...
+[2026-03-05T17:25:08.002Z] AI commit message generated
+[2026-03-05T17:25:08.003Z] Creating commit...
+[2026-03-05T17:25:08.019Z] Changes committed successfully
+[2026-03-05T17:25:08.024Z] Tagged release: v0.4.9
+[2026-03-05T17:25:10.553Z] Pushed tag v0.4.9 to remote
+[2026-03-05T17:25:10.554Z] Pushing to origin/main...
+[2026-03-05T17:25:14.747Z] Successfully pushed to remote
+[2026-03-05T17:25:14.749Z] ✓ Step step_12 completed in 14243ms
+[2026-03-05T17:25:14.749Z] [DEBUG] [Performance] step_12: 14.2s
+[2026-03-05T17:25:14.749Z] ⚠ [WARNING] Operation 'step_12' took 14.2s (memory: 23.48MB)
+[2026-03-05T17:25:14.749Z] [DEBUG] Recorded outcome for step_12: success
+[2026-03-05T17:25:14.749Z] ✓ Completed: Git Finalization (14s)
+[2026-03-05T17:25:14.749Z] ✓ Workflow completed in 169362ms
+[2026-03-05T17:25:14.749Z] Results: 25/25 steps succeeded
+[2026-03-05T17:25:14.751Z] Checkpoint saved: workflow_1772731345375-1772731514750
+[2026-03-05T17:25:15.128Z] Checkpoint deleted: workflow_1772126224938-1772126494833
+[2026-03-05T17:25:15.128Z] Checkpoint deleted: workflow_1772125752890-1772126028629
+[2026-03-05T17:25:15.128Z] Checkpoint deleted: workflow_1772125469308-1772125619676
+[2026-03-05T17:25:15.128Z] Checkpoint deleted: workflow_1772122924780-1772123212637
+[2026-03-05T17:25:15.128Z] Checkpoint deleted: workflow_1772122462868-1772122696282
+[2026-03-05T17:25:15.129Z] Checkpoint deleted: workflow_1772120334236-1772120729903
+[2026-03-05T17:25:15.129Z] Checkpoint deleted: workflow_1772119851513-1772119897322
+[2026-03-05T17:25:15.129Z] Checkpoint deleted: workflow_1772118313330-1772118980448
+[2026-03-05T17:25:15.129Z] Checkpoint deleted: workflow_1772117383331-1772117662302
+[2026-03-05T17:25:15.130Z] Checkpoint deleted: workflow_1772117012388-1772117131526
+[2026-03-05T17:25:15.130Z] Checkpoint deleted: workflow_1772115958124-1772115999217
+[2026-03-05T17:25:15.130Z] Checkpoint deleted: workflow_1772115438099-1772115785467
+[2026-03-05T17:25:15.130Z] Checkpoint deleted: workflow_1772114368260-1772114729420
+[2026-03-05T17:25:15.131Z] Checkpoint deleted: workflow_1772078606966-1772078765556
+[2026-03-05T17:25:15.131Z] Checkpoint deleted: workflow_1772077442339-1772077628535
+[2026-03-05T17:25:15.132Z] Checkpoint deleted: workflow_1772077232454-1772077332391
+[2026-03-05T17:25:15.132Z] Checkpoint deleted: workflow_1772075975768-1772076541745
+[2026-03-05T17:25:15.132Z] Checkpoint deleted: workflow_1772075757440-1772075849761
+[2026-03-05T17:25:15.132Z] Checkpoint deleted: workflow_1772075315105-1772075608243
+[2026-03-05T17:25:15.132Z] Checkpoint deleted: workflow_1772073699940-1772073842060
+[2026-03-05T17:25:15.132Z] Cleaned up 20 old checkpoints
+[2026-03-05T17:25:15.132Z] 
+Generating workflow summary...
+[2026-03-05T17:25:15.132Z] ════════════════════════════════════════════════════════════
+[2026-03-05T17:25:15.132Z] 🔷  Step 17: Workflow Summary
+[2026-03-05T17:25:15.132Z] ════════════════════════════════════════════════════════════
+[2026-03-05T17:25:15.132Z] Generating workflow summary report...
+[2026-03-05T17:25:15.133Z] Summary report written to: /home/mpb/Documents/GitHub/olinda_shell_interface.js/.ai_workflow/summaries/workflow_20260305_142225/workflow_summary.md
+[2026-03-05T17:25:15.133Z] ✓ Workflow summary generated successfully
+[2026-03-05T17:25:15.133Z] [DEBUG] [Performance] workflow_total: 2m 50s
+[2026-03-05T17:25:15.133Z] [DEBUG] [Performance] Total workflow: 2m 50s
+[2026-03-05T17:25:15.133Z] 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[2026-03-05T17:25:15.133Z] ✓ Workflow completed successfully
+[2026-03-05T17:25:15.133Z] Duration: 170s
+[2026-03-05T17:25:15.133Z] Steps: 25/25 succeeded
+[2026-03-05T17:25:15.133Z] ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[2026-03-05T17:25:15.133Z] [DEBUG] [CommitHistory] Saved hash=40e8974183b7f417fce6a55e0305e2a048166c73 runId=workflow_1772731345375
