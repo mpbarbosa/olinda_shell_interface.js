@@ -1,11 +1,11 @@
 # API Reference — olinda_shell_interface.js
 
-Public API for `olinda_shell_interface.js` v0.4.7.
+Public API for `olinda_shell_interface.js` v0.4.8.
 
 CDN entry point:
 
 ```text
-https://cdn.jsdelivr.net/gh/mpbarbosa/olinda_shell_interface.js@0.4.7/dist/src/index.js
+https://cdn.jsdelivr.net/gh/mpbarbosa/olinda_shell_interface.js@0.4.8/dist/src/index.js
 ```
 
 ---
@@ -354,12 +354,76 @@ Remove ANSI escape codes from a string (useful for plain-text log files).
 
 ---
 
+## Shell Scripts
+
+### `cdn-delivery.sh`
+
+Generates all jsDelivr CDN URL variants for the current package version and writes them to `cdn-urls.txt`. Also tests CDN availability with `curl`.
+
+- **Shebang:** `#!/usr/bin/env bash`
+- **Executable:** yes (`chmod +x` already set)
+- **Prerequisites:** Node.js (reads `package.json`), Git (reads HEAD commit and branch)
+- **Output:** Prints URL variants to stdout; writes `cdn-urls.txt`
+- **Exit codes:** `0` success; non-zero on missing dependencies or build failure
+- **Invocation:**
+
+```bash
+npm run cdn         # recommended: builds first, then runs cdn-delivery.sh
+bash cdn-delivery.sh  # direct (requires a prior build)
+```
+
+- **Troubleshooting:** If URLs are not served by jsDelivr, verify that the version tag has been pushed to GitHub (`git push --tags`) and allow up to 60 s for CDN propagation.
+
+---
+
+### `scripts/deploy.sh`
+
+Full deployment pipeline: build TypeScript → commit `dist/` artifacts → create version tag → push to GitHub → generate CDN URLs.
+
+- **Shebang:** `#!/usr/bin/env bash`
+- **Executable:** yes (`chmod +x` already set)
+- **Prerequisites:** Node.js, Git, write access to the remote repository
+- **Exit codes:** `0` success; non-zero on build failure, git error, or missing version
+- **Steps executed:**
+
+  1. `npm run build` — compile TypeScript
+  2. `git add dist/ cdn-delivery.sh` — stage compiled output
+  3. `git commit` — commit artifacts
+  4. `git tag v{version}` — version tag (skipped if tag already exists)
+  5. `git push --tags` — push to GitHub (jsDelivr picks up the tag)
+  6. `npm run cdn` — generate `cdn-urls.txt`
+
+- **Invocation:**
+
+```bash
+bash scripts/deploy.sh
+```
+
+- **Troubleshooting:** If the tag already exists the tagging step is skipped silently. To re-release the same version, delete the existing tag with `git tag -d v{version} && git push origin :refs/tags/v{version}` before re-running.
+
+---
+
+### `scripts/colors.sh`
+
+Shared ANSI colour definitions sourced by other shell scripts. Not intended to be executed directly.
+
+- **Shebang:** `#!/usr/bin/env bash`
+- **Exported variables:** `RED`, `GREEN`, `YELLOW`, `BLUE`, `NC` (reset)
+- **Usage in other scripts:**
+
+```bash
+source "$(dirname "${BASH_SOURCE[0]}")/colors.sh"
+echo -e "${GREEN}Success${NC}"
+```
+
+---
+
 ## CDN Usage
 
 **Script tag (CJS):**
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/mpbarbosa/olinda_shell_interface.js@0.4.7/dist/src/index.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/mpbarbosa/olinda_shell_interface.js@0.4.8/dist/src/index.js"></script>
 ```
 
 **ES Module:**
@@ -367,6 +431,6 @@ Remove ANSI escape codes from a string (useful for plain-text log files).
 ```html
 <script type="module">
     import { execute, ExecutionError } from
-        'https://cdn.jsdelivr.net/gh/mpbarbosa/olinda_shell_interface.js@0.4.7/dist/src/index.js';
+        'https://cdn.jsdelivr.net/gh/mpbarbosa/olinda_shell_interface.js@0.4.8/dist/src/index.js';
 </script>
 ```

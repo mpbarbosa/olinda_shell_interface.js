@@ -45,6 +45,11 @@ olinda_shell_interface.js/
 ├── scripts/
 │   ├── colors.sh             # ANSI colour helpers
 │   └── deploy.sh             # Build → tag → push → CDN URL generation
+├── .github/
+│   ├── workflows/
+│   │   └── ci.yml            # GitHub Actions CI (lint, build, test on every push/PR)
+│   ├── copilot-instructions.md  # Copilot coding-agent project instructions
+│   └── dependabot.yml        # Dependabot: weekly npm and Actions updates
 ├── .ai_workflow/             # ai_workflow.js runtime artifacts
 ├── cdn-delivery.sh           # Generates cdn-urls.txt
 ├── .workflow-config.yaml     # ai_workflow.js project configuration
@@ -162,6 +167,16 @@ Deployment flow (automated by `scripts/deploy.sh` / `ai-workflow deploy`):
 4. `git tag v{version}` — version tag
 5. `git push --tags` — push to GitHub (jsDelivr picks up the tag)
 6. `npm run cdn` — generate `cdn-urls.txt`
+
+---
+
+## GitHub Automation (`.github/`)
+
+| Path | Purpose |
+|---|---|
+| `.github/workflows/ci.yml` | GitHub Actions CI pipeline — runs on every push and pull request to any branch. Executes lint, TypeScript build, and the full Jest test suite. |
+| `.github/copilot-instructions.md` | Project-specific instructions for the GitHub Copilot coding agent (stack, conventions, commands). |
+| `.github/dependabot.yml` | Dependabot configuration — opens weekly PRs for outdated npm packages and GitHub Actions. |
 
 ---
 
