@@ -165,7 +165,7 @@ describe('Pure Functions - sortByModificationTime', () => {
 	it('handles files with invalid mtime', () => {
 		const filesWithInvalid = [
 			{ path: '/file1.txt', mtime: now },
-			{ path: '/file2.txt', mtime: 'invalid' },
+			{ path: '/file2.txt', mtime: null },
 			{ path: '/file3.txt', mtime: null },
 		];
 		const result = sortByModificationTime(filesWithInvalid, true);

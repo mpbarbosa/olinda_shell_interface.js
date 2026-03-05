@@ -63,7 +63,7 @@ export interface StatLike {
 /** A file entry with modification time, used by {@link sortByModificationTime}. */
 export interface FileEntry {
 	path: string;
-	mtime: Date | unknown;
+	mtime: Date | null | undefined;
 }
 
 /** Options for {@link FileOperations.listDirectory} and {@link FileOperations.listDirectoryRecursive}. */
@@ -548,7 +548,7 @@ export class FileOperations {
 			await fs.mkdir(dirPath, options);
 			if (this.verbose) logger.success(`Directory created: ${dirPath}`);
 		} catch (error) {
-			if (!(error instanceof Error) || (error as NodeJS.ErrnoException).code === 'EEXIST') return;
+			if (!(error instanceof Error) || ('code' in error && (error as NodeJS.ErrnoException).code === 'EEXIST')) return;
 			throw new FileSystemError(`Failed to create directory: ${error.message}`, {
 				path: dirPath,
 				originalError: error,
