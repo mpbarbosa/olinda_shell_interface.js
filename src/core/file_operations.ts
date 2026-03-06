@@ -6,7 +6,7 @@
  * Architecture: Pure functions + async wrapper class
  * - Pure functions: path validation, file filtering, metadata building
  * - Async wrapper class: FileOperations for real file I/O
- * @since 0.5.0
+ * @since 0.5.1
  */
 
 import fs from 'fs/promises';
@@ -232,7 +232,7 @@ export function calculateRelativePath(from: string, to: string): string {
  *
  * Uses {@link validatePath} on every call before touching the file system.
  * Dry-run mode logs intended operations without performing them.
- * @since 0.5.0
+ * @since 0.5.1
  * @example
  * const ops = new FileOperations({ dryRun: false, verbose: true });
  * const content = await ops.readFile('/tmp/data.txt');

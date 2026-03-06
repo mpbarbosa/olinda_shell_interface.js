@@ -1,0 +1,140 @@
+[2026-03-05T17:25:21.031Z] ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[2026-03-05T17:25:21.032Z]   AI Workflow Automation - Starting
+[2026-03-05T17:25:21.032Z] ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[2026-03-05T17:25:21.032Z] Stage: full
+[2026-03-05T17:25:21.032Z] Mode: interactive
+[2026-03-05T17:25:21.032Z] Detecting workflow profile based on changes...
+[2026-03-05T17:25:21.040Z] Detected profile: docs_only
+[2026-03-05T17:25:21.040Z]   Changed files: 6 (docs: 3, code: 0, tests: 0, infra: 0, other: 3)
+[2026-03-05T17:25:21.040Z] Profile: docs_only
+[2026-03-05T17:25:21.040Z] Performing health checks...
+[2026-03-05T17:25:21.040Z] ✓ All health checks passed
+[2026-03-05T17:25:21.043Z] Registering workflow steps...
+[2026-03-05T17:25:21.044Z] [DEBUG] Registered step: step_00
+[2026-03-05T17:25:21.044Z] [DEBUG] Registered step: step_0b
+[2026-03-05T17:25:21.044Z] [DEBUG] Registered step: step_01
+[2026-03-05T17:25:21.044Z] [DEBUG] Registered step: step_02
+[2026-03-05T17:25:21.044Z] [DEBUG] Registered step: step_02_5
+[2026-03-05T17:25:21.044Z] [DEBUG] Registered step: step_03
+[2026-03-05T17:25:21.044Z] [DEBUG] Registered step: step_04
+[2026-03-05T17:25:21.044Z] [DEBUG] Registered step: step_05
+[2026-03-05T17:25:21.044Z] [DEBUG] Registered step: step_06
+[2026-03-05T17:25:21.044Z] [DEBUG] Registered step: step_07
+[2026-03-05T17:25:21.044Z] [DEBUG] Registered step: step_08
+[2026-03-05T17:25:21.044Z] [DEBUG] Registered step: step_09
+[2026-03-05T17:25:21.044Z] [DEBUG] Registered step: step_10
+[2026-03-05T17:25:21.044Z] [DEBUG] Registered step: step_11
+[2026-03-05T17:25:21.044Z] [DEBUG] Registered step: step_11_5
+[2026-03-05T17:25:21.044Z] [DEBUG] Registered step: step_11_6
+[2026-03-05T17:25:21.044Z] [DEBUG] Registered step: step_13
+[2026-03-05T17:25:21.044Z] [DEBUG] Registered step: step_14
+[2026-03-05T17:25:21.044Z] [DEBUG] Registered step: step_15
+[2026-03-05T17:25:21.044Z] [DEBUG] Registered step: step_16
+[2026-03-05T17:25:21.044Z] [DEBUG] Registered step: step_18
+[2026-03-05T17:25:21.044Z] [DEBUG] Registered step: step_19
+[2026-03-05T17:25:21.044Z] [DEBUG] Registered step: step_17
+[2026-03-05T17:25:21.044Z] [DEBUG] Registered step: step_0f
+[2026-03-05T17:25:21.044Z] [DEBUG] Registered step: step_12
+[2026-03-05T17:25:21.044Z] ✓ Registered 25 workflow steps
+[2026-03-05T17:25:21.045Z] Executing 25 steps for stage: full
+[2026-03-05T17:25:21.045Z] [DEBUG] [CommitHistory] Loaded history; lastRunCommit=40e8974183b7f417fce6a55e0305e2a048166c73
+[2026-03-05T17:25:21.054Z] [CommitHistory] 5 file(s) changed since last run (40e8974)
+[2026-03-05T17:25:21.059Z] Docs-only analysis: NO (50% docs, 0% faster)
+[2026-03-05T17:25:21.060Z] 
+Starting workflow execution...
+
+[2026-03-05T17:25:21.074Z] [DEBUG] No model file found, starting fresh
+[2026-03-05T17:25:21.074Z] ML Optimizer initialized
+[2026-03-05T17:25:21.075Z] Loading workflow configuration...
+[2026-03-05T17:25:21.075Z] ✓ Workflow loaded: AI Workflow Automation v2.0.0
+[2026-03-05T17:25:21.075Z] Execution plan: 25 steps
+[2026-03-05T17:25:21.075Z] Starting workflow execution: AI Workflow Automation
+[2026-03-05T17:25:21.075Z] Executing step: Pre-Analysis (step_00)
+[2026-03-05T17:25:21.075Z] [DEBUG] Prediction for step_00: skip (confidence: 0.95)
+[2026-03-05T17:25:21.075Z] [DEBUG] [MLOptimizer] step_00: predicted skippable (confidence 0.95)
+[2026-03-05T17:25:21.075Z] 
+→ Starting: Pre-Analysis
+[2026-03-05T17:25:21.076Z] ════════════════════════════════════════════════════════════
+[2026-03-05T17:25:21.076Z] 🔷  Step 0: Pre-Analysis - Analyzing Recent Changes
+[2026-03-05T17:25:21.076Z] ════════════════════════════════════════════════════════════
+[2026-03-05T17:25:21.092Z] Commits ahead of remote: 0
+[2026-03-05T17:25:21.092Z] Modified files: 7
+[2026-03-05T17:25:21.095Z] ✓ Project kind from config: nodejs_automation (configured)
+[2026-03-05T17:25:21.104Z] ✓ Pre-analysis complete:
+  • Commits ahead: 0
+  • Modified files: 7
+  • Change scope: mixed-changes
+  • Documentation: 0 files
+  • Tests: 0 files
+  • Source: 0 files
+  • Config: 0 files
+  • Project kind: nodejs_automation (100% confidence)
+
+[2026-03-05T17:25:21.108Z] ✓ Step step_00 completed in 33ms
+[2026-03-05T17:25:21.108Z] [DEBUG] [Performance] step_00: 33ms
+[2026-03-05T17:25:21.108Z] [DEBUG] Recorded outcome for step_00: success
+[2026-03-05T17:25:21.108Z] ✓ Completed: Pre-Analysis (0s)
+[2026-03-05T17:25:21.108Z] Executing step: Bootstrap Documentation (step_0b)
+[2026-03-05T17:25:21.109Z] [DEBUG] Prediction for step_0b: skip (confidence: 0.95)
+[2026-03-05T17:25:21.109Z] [DEBUG] [MLOptimizer] step_0b: predicted skippable (confidence 0.95)
+[2026-03-05T17:25:21.109Z] 
+→ Starting: Bootstrap Documentation
+[2026-03-05T17:25:21.109Z] [DEBUG] Step0bBootstrapDocs.execute()
+[2026-03-05T17:25:21.109Z] ════════════════════════════════════════════════════════════
+[2026-03-05T17:25:21.109Z] 🔷  Step 0b: Documentation Gap Analysis and Generation
+[2026-03-05T17:25:21.109Z] ════════════════════════════════════════════════════════════
+[2026-03-05T17:25:21.109Z] Phase 1: Gathering project statistics...
+[2026-03-05T17:25:21.109Z] [DEBUG] Gathering project statistics by scanning files...
+[2026-03-05T17:25:21.109Z] [DEBUG] Listing all files in the project directory...
+[2026-03-05T17:25:21.109Z] [DEBUG] Project root: /home/mpb/Documents/GitHub/olinda_shell_interface.js
+[2026-03-05T17:25:21.111Z] [DEBUG] Total files found: 212
+[2026-03-05T17:25:21.111Z] [DEBUG] Converting to relative paths...
+[2026-03-05T17:25:21.112Z] Project has 80 documentation files and 51 source files
+[2026-03-05T17:25:21.112Z] README.md size: 2569 bytes, Has CHANGELOG: true, Has docs/ directory: true
+[2026-03-05T17:25:21.112Z] Phase 2: Evaluating documentation coverage...
+[2026-03-05T17:25:21.112Z] Step 0b: Documentation coverage adequate - no bootstrap needed
+[2026-03-05T17:25:21.112Z] ✓ Step step_0b completed in 4ms
+[2026-03-05T17:25:21.112Z] [DEBUG] [Performance] step_0b: 4ms
+[2026-03-05T17:25:21.113Z] [DEBUG] Recorded outcome for step_0b: success
+[2026-03-05T17:25:21.113Z] ✓ Completed: Bootstrap Documentation (0s)
+[2026-03-05T17:25:21.113Z] Executing step: Documentation Updates (step_01)
+[2026-03-05T17:25:21.113Z] [DEBUG] Prediction for step_01: skip (confidence: 0.95)
+[2026-03-05T17:25:21.113Z] [DEBUG] [MLOptimizer] step_01: predicted skippable (confidence 0.95)
+[2026-03-05T17:25:21.113Z] 
+→ Starting: Documentation Updates
+[2026-03-05T17:25:21.113Z] ════════════════════════════════════════════════════════════
+[2026-03-05T17:25:21.113Z] 🔷  Step 1: AI-Powered Documentation Updates
+[2026-03-05T17:25:21.113Z] ════════════════════════════════════════════════════════════
+[2026-03-05T17:25:21.113Z] Changed files detected: 7 files
+[2026-03-05T17:25:21.113Z] Classification: 0 docs, 0 source, 0 tests
+[2026-03-05T17:25:21.113Z] Running documentation consistency validation...
+[2026-03-05T17:25:23.241Z] [DEBUG] Could not fetch available models: Pending response rejected since connection got disposed
+[2026-03-05T17:25:24.628Z] ✓ GitHub Copilot SDK initialized successfully
+[2026-03-05T17:25:24.628Z] Available Copilot models (0): 
+[2026-03-05T17:25:24.637Z] [DEBUG] AI cache initialized: .ai_workflow/.ai_cache
+[2026-03-05T17:25:24.638Z] ✓ Step 1 completed successfully
+[2026-03-05T17:25:24.638Z] ✓ Step step_01 completed in 3525ms
+[2026-03-05T17:25:24.638Z] [DEBUG] [Performance] step_01: 3.5s
+[2026-03-05T17:25:24.638Z] [DEBUG] Recorded outcome for step_01: success
+[2026-03-05T17:25:24.638Z] ✓ Completed: Documentation Updates (4s)
+[2026-03-05T17:25:24.638Z] ⚠ Workflow aborted by user.
+[2026-03-05T17:25:24.638Z] ⚠ Workflow aborted after 3563ms
+[2026-03-05T17:25:24.639Z] Checkpoint saved: workflow_1772731521059-1772731524638
+[2026-03-05T17:25:24.890Z] 
+Generating workflow summary...
+[2026-03-05T17:25:24.890Z] ════════════════════════════════════════════════════════════
+[2026-03-05T17:25:24.890Z] 🔷  Step 17: Workflow Summary
+[2026-03-05T17:25:24.890Z] ════════════════════════════════════════════════════════════
+[2026-03-05T17:25:24.890Z] Generating workflow summary report...
+[2026-03-05T17:25:24.891Z] Summary report written to: /home/mpb/Documents/GitHub/olinda_shell_interface.js/.ai_workflow/summaries/workflow_20260305_142521/workflow_summary.md
+[2026-03-05T17:25:24.891Z] ✓ Workflow summary generated successfully
+[2026-03-05T17:25:24.891Z] [DEBUG] [Performance] workflow_total: 3.8s
+[2026-03-05T17:25:24.891Z] [DEBUG] [Performance] Total workflow: 3.8s
+[2026-03-05T17:25:24.891Z] 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+[2026-03-05T17:25:24.891Z] ⚠ ⚠ Workflow completed with failures
+[2026-03-05T17:25:24.891Z] Duration: 4s
+[2026-03-05T17:25:24.891Z] Steps: 3/3 succeeded
+[2026-03-05T17:25:24.891Z] ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+[2026-03-05T17:25:24.892Z] [DEBUG] [CommitHistory] Saved hash=11d409ad6252618deb715a617eeb2dfacb7205f3 runId=workflow_1772731521059
