@@ -45,6 +45,8 @@ describe('ExecutionError', () => {
     expect(err.exitCode).toBe(1);
     expect(err.stdout).toBe('');
     expect(err.stderr).toBe('');
+    expect(err.signal).toBeNull();
+    expect(err.killed).toBe(false);
   });
 
   it('should allow empty string for message, stdout, and stderr', () => {
@@ -68,6 +70,18 @@ describe('ExecutionError', () => {
 
     const errFloat = new ExecutionError('Float exit', 2.5, '', '');
     expect(errFloat.exitCode).toBe(2.5);
+  });
+
+  it('should store signal and killed when provided', () => {
+    const err = new ExecutionError('Killed', 1, '', '', 'SIGTERM', true);
+    expect(err.signal).toBe('SIGTERM');
+    expect(err.killed).toBe(true);
+  });
+
+  it('should default signal to null and killed to false', () => {
+    const err = new ExecutionError('Normal exit', 1, 'out', 'err');
+    expect(err.signal).toBeNull();
+    expect(err.killed).toBe(false);
   });
 
   it('should preserve stack trace', () => {

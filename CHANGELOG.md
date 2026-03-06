@@ -11,6 +11,30 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [0.5.0] — 2026-03-06
+
+### Added
+
+- `ExecutionError` now exposes `signal: string | null` and `killed: boolean` fields,
+  populated from the underlying `ExecException` when a process is terminated by a
+  signal (e.g. SIGTERM on timeout). Previously these were silently discarded.
+- `ExecuteOptions.maxBuffer?: number` — callers can now override the output buffer
+  size (default remains 10 MB).
+- New tests: `signal`/`killed` fields on `ExecutionError`; `maxBuffer` option;
+  `executeStream` with quoted arguments.
+
+### Fixed
+
+- `ExecuteOptions.shell` is now typed `boolean | string` (was `string`). Callers
+  passing `shell: true` no longer get a TypeScript type error. Internally, `true`
+  is normalised to `'/bin/sh'` before being passed to `child_process.exec`.
+- `executeStream` no longer splits the command string on spaces before calling
+  `spawn()`. Commands with quoted arguments or spaces in paths were previously
+  mangled (e.g. `echo "hello world"` → `args = ['"hello', 'world"']`). The full
+  command string is now passed directly to the shell (`shell: true`).
+
+---
+
 ## [0.4.9] — 2026-03-03
 
 ### Added

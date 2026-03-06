@@ -39,12 +39,16 @@ export class ExecutionError extends ShellError {
 	 * @param exitCode - Process exit code.
 	 * @param stdout   - Captured standard output.
 	 * @param stderr   - Captured standard error.
+	 * @param signal   - OS signal that terminated the process (e.g. `'SIGTERM'`), or `null`.
+	 * @param killed   - Whether the process was killed by the timeout mechanism.
 	 */
 	constructor(
 		message: string,
 		public readonly exitCode: number = 1,
 		public readonly stdout: string = '',
 		public readonly stderr: string = '',
+		public readonly signal: string | null = null,
+		public readonly killed: boolean = false,
 	) {
 		super(message);
 		Object.setPrototypeOf(this, new.target.prototype);

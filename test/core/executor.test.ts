@@ -101,6 +101,29 @@ describe('execute', () => {
 		it('rejects when command exceeds timeout', async () => {
 			await expect(execute('sleep 10', { timeout: 50 })).rejects.toBeInstanceOf(ExecutionError);
 		});
+
+		it('sets killed=true and signal=SIGTERM on timeout', async () => {
+			const err = await execute('sleep 10', { timeout: 50 }).catch((e: unknown) => e);
+			expect(err).toBeInstanceOf(ExecutionError);
+			expect((err as ExecutionError).killed).toBe(true);
+			expect((err as ExecutionError).signal).toBe('SIGTERM');
+		});
+	});
+
+	describe('signal and killed fields on normal non-zero exit', () => {
+		it('sets signal=null and killed=false when process exits normally', async () => {
+			const err = await execute('exit 1').catch((e: unknown) => e);
+			expect(err).toBeInstanceOf(ExecutionError);
+			expect((err as ExecutionError).signal).toBeNull();
+			expect((err as ExecutionError).killed).toBe(false);
+		});
+	});
+
+	describe('maxBuffer option', () => {
+		it('accepts a custom maxBuffer without error for normal output', async () => {
+			const result = await execute('echo hello', { maxBuffer: 1024 });
+			expect(result.stdout).toBe('hello');
+		});
 	});
 });
 
@@ -186,6 +209,20 @@ describe('executeStream', () => {
 		it('resolves when no callbacks provided (pipes to process streams)', async () => {
 			// stdout/stderr pipe to process.stdout/stderr — just verify it resolves
 			await expect(executeStream('true')).resolves.toBe(0);
+		});
+	});
+
+	describe('quoted arguments', () => {
+		it('handles commands with quoted arguments containing spaces', async () => {
+			const chunks: string[] = [];
+			await executeStream('echo "hello world"', { onStdout: (c) => chunks.push(c) });
+			expect(chunks.join('').trim()).toBe('hello world');
+		});
+
+		it('handles printf with format string containing spaces', async () => {
+			const chunks: string[] = [];
+			await executeStream('printf "%s %s" foo bar', { onStdout: (c) => chunks.push(c) });
+			expect(chunks.join('').trim()).toBe('foo bar');
 		});
 	});
 });

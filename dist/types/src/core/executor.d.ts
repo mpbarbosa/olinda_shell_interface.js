@@ -11,8 +11,10 @@ export interface ExecuteOptions {
     env?: NodeJS.ProcessEnv;
     /** Timeout in milliseconds. Defaults to 300 000 (5 min). */
     timeout?: number;
-    /** Run the command through the shell (pass a shell path e.g. `'/bin/sh'`). Defaults to `'/bin/sh'`. */
-    shell?: string;
+    /** Run the command through the shell (`true` or a shell path e.g. `'/bin/bash'`). Defaults to `'/bin/sh'`. */
+    shell?: boolean | string;
+    /** Maximum bytes of combined stdout+stderr the buffer may hold. Defaults to 10 MB. */
+    maxBuffer?: number;
 }
 /** Options for {@link executeStream}. */
 export interface StreamOptions extends Omit<ExecuteOptions, 'timeout' | 'shell'> {

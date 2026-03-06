@@ -23,14 +23,16 @@ const execAsync = (0, util_1.promisify)(child_process_1.exec);
  * const { stdout } = await execute('ls -la');
  */
 async function execute(command, options = {}) {
-    const { cwd = process.cwd(), env = process.env, timeout = 300000, shell = '/bin/sh', } = options;
+    const { cwd = process.cwd(), env = process.env, timeout = 300000, shell = '/bin/sh', maxBuffer = 10 * 1024 * 1024, } = options;
+    // `exec()` only accepts `string | undefined` for `shell`; normalize boolean values.
+    const execShell = shell === true ? '/bin/sh' : shell === false ? undefined : shell;
     try {
         const { stdout, stderr } = await execAsync(command, {
             cwd,
             env,
             timeout,
-            shell,
-            maxBuffer: 10 * 1024 * 1024,
+            shell: execShell,
+            maxBuffer,
         });
         return { stdout: stdout.trim(), stderr: stderr.trim(), exitCode: 0 };
     }
@@ -39,7 +41,9 @@ async function execute(command, options = {}) {
         const exitCode = typeof error.code === 'number' ? error.code : 1;
         const stdout = typeof error.stdout === 'string' ? error.stdout.trim() : '';
         const stderr = typeof error.stderr === 'string' ? error.stderr.trim() : '';
-        throw new errors_js_1.ExecutionError(`ExecutionError: ${command}`, exitCode, stdout, stderr);
+        const signal = error.signal ?? null;
+        const killed = error.killed ?? false;
+        throw new errors_js_1.ExecutionError(`ExecutionError: ${command}`, exitCode, stdout, stderr, signal, killed);
     }
 }
 /**
@@ -55,8 +59,9 @@ async function execute(command, options = {}) {
 function executeStream(command, options = {}) {
     return new Promise((resolve, reject) => {
         const { cwd = process.cwd(), env = process.env, onStdout, onStderr } = options;
-        const [cmd, ...args] = command.split(' ');
-        const child = (0, child_process_1.spawn)(cmd, args, { cwd, env, stdio: ['inherit', 'pipe', 'pipe'], shell: true });
+        // Pass the full command string to the shell rather than splitting on spaces,
+        // which would break quoted arguments and paths containing spaces.
+        const child = (0, child_process_1.spawn)(command, [], { cwd, env, stdio: ['inherit', 'pipe', 'pipe'], shell: true });
         if (onStdout) {
             child.stdout.on('data', (data) => onStdout(data.toString()));
         }

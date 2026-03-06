@@ -27,6 +27,8 @@ export declare class ExecutionError extends ShellError {
     readonly exitCode: number;
     readonly stdout: string;
     readonly stderr: string;
+    readonly signal: string | null;
+    readonly killed: boolean;
     /** @readonly */
     name: string;
     /**
@@ -34,8 +36,10 @@ export declare class ExecutionError extends ShellError {
      * @param exitCode - Process exit code.
      * @param stdout   - Captured standard output.
      * @param stderr   - Captured standard error.
+     * @param signal   - OS signal that terminated the process (e.g. `'SIGTERM'`), or `null`.
+     * @param killed   - Whether the process was killed by the timeout mechanism.
      */
-    constructor(message: string, exitCode?: number, stdout?: string, stderr?: string);
+    constructor(message: string, exitCode?: number, stdout?: string, stderr?: string, signal?: string | null, killed?: boolean);
 }
 /**
  * Thrown when a system-level operation fails (e.g. package manager detection).

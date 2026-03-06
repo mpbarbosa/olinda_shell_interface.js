@@ -18,8 +18,10 @@ export interface ExecuteOptions {
 	env?: NodeJS.ProcessEnv;
 	/** Timeout in milliseconds. Defaults to 300 000 (5 min). */
 	timeout?: number;
-	/** Run the command through the shell (pass a shell path e.g. `'/bin/sh'`). Defaults to `'/bin/sh'`. */
-	shell?: string;
+	/** Run the command through the shell (`true` or a shell path e.g. `'/bin/bash'`). Defaults to `'/bin/sh'`. */
+	shell?: boolean | string;
+	/** Maximum bytes of combined stdout+stderr the buffer may hold. Defaults to 10 MB. */
+	maxBuffer?: number;
 }
 
 /** Options for {@link executeStream}. */
@@ -53,15 +55,19 @@ export async function execute(command: string, options: ExecuteOptions = {}): Pr
 		env = process.env,
 		timeout = 300_000,
 		shell = '/bin/sh',
+		maxBuffer = 10 * 1024 * 1024,
 	} = options;
+
+	// `exec()` only accepts `string | undefined` for `shell`; normalize boolean values.
+	const execShell: string | undefined = shell === true ? '/bin/sh' : shell === false ? undefined : shell;
 
 	try {
 		const { stdout, stderr } = await execAsync(command, {
 			cwd,
 			env,
 			timeout,
-			shell,
-			maxBuffer: 10 * 1024 * 1024,
+			shell: execShell,
+			maxBuffer,
 		});
 
 		return { stdout: stdout.trim(), stderr: stderr.trim(), exitCode: 0 };
@@ -70,7 +76,9 @@ export async function execute(command: string, options: ExecuteOptions = {}): Pr
 		const exitCode = typeof error.code === 'number' ? error.code : 1;
 		const stdout = typeof error.stdout === 'string' ? error.stdout.trim() : '';
 		const stderr = typeof error.stderr === 'string' ? error.stderr.trim() : '';
-		throw new ExecutionError(`ExecutionError: ${command}`, exitCode, stdout, stderr);
+		const signal = error.signal ?? null;
+		const killed = error.killed ?? false;
+		throw new ExecutionError(`ExecutionError: ${command}`, exitCode, stdout, stderr, signal, killed);
 	}
 }
 
@@ -88,8 +96,9 @@ export function executeStream(command: string, options: StreamOptions = {}): Pro
 	return new Promise((resolve, reject) => {
 		const { cwd = process.cwd(), env = process.env, onStdout, onStderr } = options;
 
-		const [cmd, ...args] = command.split(' ');
-		const child = spawn(cmd, args, { cwd, env, stdio: ['inherit', 'pipe', 'pipe'], shell: true });
+		// Pass the full command string to the shell rather than splitting on spaces,
+		// which would break quoted arguments and paths containing spaces.
+		const child = spawn(command, [], { cwd, env, stdio: ['inherit', 'pipe', 'pipe'], shell: true });
 
 		if (onStdout) {
 			child.stdout.on('data', (data: Buffer) => onStdout(data.toString()));
