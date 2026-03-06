@@ -65,6 +65,31 @@
       "score": 100,
       "issueCount": 0,
       "lastAnalyzed": "2026-03-05T17:24:31.984Z"
+    },
+    "package-lock.json": {
+      "score": 100,
+      "issueCount": 0,
+      "lastAnalyzed": "2026-03-06T01:25:03.130Z"
+    },
+    "tsconfig.esm.json": {
+      "score": 100,
+      "issueCount": 0,
+      "lastAnalyzed": "2026-03-06T01:25:03.130Z"
+    },
+    "tsconfig.json": {
+      "score": 100,
+      "issueCount": 0,
+      "lastAnalyzed": "2026-03-06T01:25:03.130Z"
+    },
+    "typedoc.json": {
+      "score": 100,
+      "issueCount": 0,
+      "lastAnalyzed": "2026-03-06T01:25:03.130Z"
+    },
+    "eslint.config.js": {
+      "score": 100,
+      "issueCount": 0,
+      "lastAnalyzed": "2026-03-06T01:25:03.130Z"
     }
   }
 }

@@ -1,12 +1,11 @@
 {
   "version": 1,
   "partitionIndex": 1,
-  "totalPartitions": 3,
-  "filesHash": "0cb46e82",
+  "totalPartitions": 2,
+  "filesHash": "a6cc7658",
   "partitionLabels": [
-    "src/core",
     "package-lock.json, tsconfig.esm.json, tsconfig.json, typedoc.json, eslint.config.js",
     "jest.config.js, cdn-delivery.sh, scripts"
   ],
-  "updatedAt": "2026-03-05T17:24:31.985Z"
+  "updatedAt": "2026-03-06T01:25:03.130Z"
 }
