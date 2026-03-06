@@ -75,7 +75,7 @@ class SystemError extends ShellError {
 exports.SystemError = SystemError;
 /**
  * Thrown when a file system operation fails (read, write, copy, move, delete, etc.).
- * @since 0.5.0
+ * @since 0.5.1
  * @example
  * throw new FileSystemError('Failed to read file: ENOENT', { path: '/tmp/missing.txt' });
  */
