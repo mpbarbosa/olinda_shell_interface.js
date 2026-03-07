@@ -1,12 +1,11 @@
 {
   "version": 1,
   "partitionIndex": 1,
-  "totalPartitions": 3,
-  "filesHash": "ce1223ce",
+  "totalPartitions": 2,
+  "filesHash": "f4ebec93",
   "partitionLabels": [
-    ".ai_workflow/metrics, package.json, .ai_workflow/.step_cache",
-    ".ai_workflow, .markdownlint.json, .vscode, jest.config.js, cdn-delivery.sh",
-    "scripts"
+    ".ai_workflow/metrics, .ai_workflow, .markdownlint.json, .vscode, jest.config.js",
+    "cdn-delivery.sh, scripts"
   ],
-  "updatedAt": "2026-03-07T20:14:23.320Z"
+  "updatedAt": "2026-03-07T22:20:50.408Z"
 }

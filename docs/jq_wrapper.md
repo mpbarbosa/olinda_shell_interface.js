@@ -1,7 +1,7 @@
 # jq_wrapper - Safe jq Command Wrapper
 
 **Module:** `core/jq_wrapper`
-**Version:** 0.5.2
+**Version:** 0.5.3
 **Type:** Pure Functions + Async Wrapper Class
 
 ## Overview
