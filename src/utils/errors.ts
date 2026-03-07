@@ -88,7 +88,7 @@ originalError?: Error;
 
 /**
  * Thrown when a file system operation fails (read, write, copy, move, delete, etc.).
- * @since 0.5.3
+ * @since 0.5.4
  * @example
  * throw new FileSystemError('Failed to read file: ENOENT', { path: '/tmp/missing.txt' });
  */

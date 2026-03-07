@@ -2,7 +2,7 @@
 
 This document outlines the planned evolution of `olinda_shell_interface.js` from its current stable state toward a v1.0 production milestone. Each phase builds on the previous one without breaking existing public APIs.
 
-Current stable release: **v0.5.3** — executor, system detection, semver, jq wrapper, file operations.
+Current stable release: **v0.5.4** — executor, system detection, semver, jq wrapper, file operations.
 
 ---
 
@@ -152,7 +152,7 @@ These items span all releases and are continuously maintained:
 
 | Version | Theme |
 |---------|-------|
-| **0.5.3** | ✅ Current — executor, system, semver, jq wrapper, file operations |
+| **0.5.4** | ✅ Current — executor, system, semver, jq wrapper, file operations |
 | **0.6.x** | Process control, retry/back-off, stdin, env helpers |
 | **0.7.x** | Pipelines, parallel execution, heredoc scripts, shell detection |
 | **0.8.x** | Extended platform support, systemd, SSH, macOS utilities |
