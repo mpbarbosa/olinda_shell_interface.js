@@ -66,7 +66,7 @@ export interface FileSystemErrorDetails {
 }
 /**
  * Thrown when a file system operation fails (read, write, copy, move, delete, etc.).
- * @since 0.5.1
+ * @since 0.5.2
  * @example
  * throw new FileSystemError('Failed to read file: ENOENT', { path: '/tmp/missing.txt' });
  */

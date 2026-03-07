@@ -26,7 +26,7 @@ const executor_js_1 = require("./executor.js");
 /**
  * Thrown when jq validation or execution fails.
  * Extends {@link ShellError} with a machine-readable `code` and caller `context`.
- * @since 0.5.1
+ * @since 0.5.2
  * @example
  * throw new JqExecutionError('validation failed', 'JQ_VALIDATION_ERROR', 'my-script');
  */
@@ -215,7 +215,7 @@ function buildJqCommand(args) {
  * - `--argjson` argument validation (prevents empty values)
  * - Optional debug logging
  * - Clear error messages with caller context
- * @since 0.5.1
+ * @since 0.5.2
  * @example
  * const wrapper = new JqWrapper({ debug: true, callerContext: 'my-script' });
  * const result = await wrapper.execute(['-n', '--argjson', 'count', '5', '{count: $count}']);
