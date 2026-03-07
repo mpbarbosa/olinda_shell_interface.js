@@ -1,13 +1,12 @@
 {
   "name": "olinda_shell_interface.js",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "Public JavaScript library to interface Linux shell commands",
   "main": "dist/src/index.js",
   "exports": {
     ".": "./dist/src/index.js",
     "./core/executor": "./dist/src/core/executor.js",
     "./core/system": "./dist/src/core/system.js",
-    "./core/colors": "./dist/src/core/colors.js",
     "./core/version": "./dist/src/core/version.js",
     "./core/jq_wrapper": "./dist/src/core/jq_wrapper.js",
     "./utils/errors": "./dist/src/utils/errors.js",
@@ -30,8 +29,8 @@
     "validate": "tsc --noEmit",
     "lint": "eslint 'src/**/*.ts'",
     "lint:fix": "eslint 'src/**/*.ts' --fix",
-    "lint:md": "markdownlint --config .markdownlint.json \"**/*.md\" --ignore node_modules --ignore dist",
-    "lint:md:fix": "markdownlint --fix --config .markdownlint.json \"**/*.md\" --ignore node_modules --ignore dist",
+    "lint:md": "markdownlint --config .markdownlint.json \"**/*.md\" --ignore node_modules --ignore .ai_workflow --ignore dist",
+    "lint:md:fix": "markdownlint --fix --config .markdownlint.json \"**/*.md\" --ignore node_modules --ignore .ai_workflow --ignore dist",
     "docs:generate": "typedoc",
     "cdn": "npm run build && bash cdn-delivery.sh"
   },
@@ -47,8 +46,8 @@
   "author": "Marcelo Pereira Barbosa",
   "license": "MIT",
   "engines": {
-    "node": ">=18.0.0",
-    "npm": ">=9.0.0"
+    "node": ">=18",
+    "npm": ">=9"
   },
   "homepage": "https://github.com/mpbarbosa/olinda_shell_interface.js#readme",
   "bugs": {
@@ -81,7 +80,7 @@
     "typescript": "^5.4.0"
   },
   "dependencies": {
-    "olinda_utils.js": "github:mpbarbosa/olinda_utils.js#v0.3.8"
+    "olinda_utils.js": "github:mpbarbosa/olinda_utils.js#v0.3.9"
   },
   "private": true
 }
