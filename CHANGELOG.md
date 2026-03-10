@@ -11,6 +11,25 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [0.5.5] — 2026-03-10
+
+### Added
+
+- Upgraded `olinda_utils.js` dependency from `v0.3.9` to `v0.3.14`.
+- `src/index.ts` — re-exports all 26 pure utility functions from `olinda_utils.js`:
+    - **String:** `camelCase`, `kebabCase`, `snakeCase`, `pascalCase`, `capitalize`,
+      `truncate`, `sanitize`, `cleanWhitespace`, `escapeRegex`
+    - **Array:** `dedupe`, `chunk`, `flatten`, `groupBy`, `sortBy`,
+      `intersection`, `difference`, `partition`
+    - **Object:** `deepClone`, `deepMerge`, `pick`, `omit`, `getProperty`,
+      `setProperty`, `hasProperty`, `deepEqual`, `isEmpty`
+- `test/index.test.ts` — 53 new smoke and functional tests covering all 26 new exports
+  (surface checks + one representative assertion per function).
+- `docs/utils.md` — full API reference for all 26 utility functions.
+- `docs/API.md` — utils module added to the module table and API reference.
+
+---
+
 ## [0.5.4] — 2026-03-06
 
 ### Added

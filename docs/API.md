@@ -1,11 +1,11 @@
 # API Reference — olinda_shell_interface.js
 
-Public API for `olinda_shell_interface.js` v0.4.9.
+Public API for `olinda_shell_interface.js` v0.5.5.
 
 CDN entry point:
 
 ```text
-https://cdn.jsdelivr.net/gh/mpbarbosa/olinda_shell_interface.js@0.4.9/dist/src/index.js
+https://cdn.jsdelivr.net/gh/mpbarbosa/olinda_shell_interface.js@0.5.5/dist/src/index.js
 ```
 
 ---
@@ -20,6 +20,7 @@ https://cdn.jsdelivr.net/gh/mpbarbosa/olinda_shell_interface.js@0.4.9/dist/src/i
 | [errors](#errors) | Custom error hierarchy |
 | [colors](#colors) | ANSI color codes and terminal support (via `olinda_utils.js`) |
 | [logger](#logger) | Colored logging with file output (via `olinda_utils.js`) |
+| [utils](#utils) | Pure utility functions — string, array, object (via `olinda_utils.js`) |
 
 ---
 
@@ -354,6 +355,67 @@ Remove ANSI escape codes from a string (useful for plain-text log files).
 
 ---
 
+## Utils
+
+Re-exported from [`olinda_utils.js`](https://github.com/mpbarbosa/olinda_utils.js).
+See [`docs/utils.md`](./utils.md) for the full API reference.
+
+26 pure utility functions — deterministic, no side effects, no logging, no global state.
+
+### String utilities
+
+| Function | Description |
+|---|---|
+| `camelCase(str)` | Convert to `camelCase` |
+| `kebabCase(str)` | Convert to `kebab-case` |
+| `snakeCase(str)` | Convert to `snake_case` |
+| `pascalCase(str)` | Convert to `PascalCase` |
+| `capitalize(str)` | Uppercase first letter |
+| `truncate(str, length, suffix?)` | Cut to length, append suffix (`'...'`) |
+| `sanitize(str, allowed?)` | Keep alphanumeric + allowed chars (`'-_'`) |
+| `cleanWhitespace(str)` | Collapse spaces and trim |
+| `escapeRegex(str)` | Escape RegExp metacharacters |
+
+### Array utilities
+
+| Function | Description |
+|---|---|
+| `dedupe(arr)` | Remove duplicate values |
+| `chunk(arr, size)` | Split into fixed-size chunks |
+| `flatten(arr, depth?)` | Recursively flatten nested arrays |
+| `groupBy(arr, keyOrFn)` | Group elements by key or function |
+| `sortBy(arr, keyOrFn, order?)` | Sort by key or function (`'asc'` / `'desc'`) |
+| `intersection(...arrays)` | Elements present in all arrays |
+| `difference(arr1, arr2)` | Elements in `arr1` not in `arr2` |
+| `partition(arr, predicate)` | Split into `[matches, nonMatches]` |
+
+### Object utilities
+
+| Function | Description |
+|---|---|
+| `deepClone(obj)` | Fully independent deep copy |
+| `deepMerge(target, ...sources)` | Recursively merge objects |
+| `pick(obj, keys)` | New object with only selected keys |
+| `omit(obj, keys)` | New object with specified keys removed |
+| `getProperty(obj, path, default?)` | Read via dot-notation path |
+| `setProperty(obj, path, value)` | Write via dot-notation path |
+| `hasProperty(obj, path)` | Check existence via dot-notation path |
+| `deepEqual(a, b)` | Structural equality comparison |
+| `isEmpty(value)` | `true` for `{}`, `[]`, `''`, `null`, `undefined` |
+
+**Example**
+
+```typescript
+import { camelCase, dedupe, deepClone, isEmpty } from 'olinda_shell_interface.js';
+
+camelCase('hello-world')             // 'helloWorld'
+dedupe([1, 2, 2, 3])                 // [1, 2, 3]
+deepClone({ a: { b: 1 } })           // independent copy
+isEmpty({})                          // true
+```
+
+---
+
 ## Shell Scripts
 
 ### `cdn-delivery.sh`
@@ -423,7 +485,7 @@ echo -e "${GREEN}Success${NC}"
 **Script tag (CJS):**
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/mpbarbosa/olinda_shell_interface.js@0.4.9/dist/src/index.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/mpbarbosa/olinda_shell_interface.js@0.5.5/dist/src/index.js"></script>
 ```
 
 **ES Module:**
@@ -431,6 +493,6 @@ echo -e "${GREEN}Success${NC}"
 ```html
 <script type="module">
     import { execute, ExecutionError } from
-        'https://cdn.jsdelivr.net/gh/mpbarbosa/olinda_shell_interface.js@0.4.9/dist/src/index.js';
+        'https://cdn.jsdelivr.net/gh/mpbarbosa/olinda_shell_interface.js@0.5.5/dist/src/index.js';
 </script>
 ```

@@ -1,16 +1,80 @@
 {
   "name": "olinda_shell_interface.js",
-  "version": "0.5.4",
+  "version": "0.5.5",
   "description": "Public JavaScript library to interface Linux shell commands",
   "main": "dist/src/index.js",
+  "types": "dist/types/src/index.d.ts",
   "exports": {
-    ".": "./dist/src/index.js",
-    "./core/executor": "./dist/src/core/executor.js",
-    "./core/system": "./dist/src/core/system.js",
-    "./core/version": "./dist/src/core/version.js",
-    "./core/jq_wrapper": "./dist/src/core/jq_wrapper.js",
-    "./utils/errors": "./dist/src/utils/errors.js",
-    "./core/file_operations": "./dist/src/core/file_operations.js"
+    ".": {
+      "import": {
+        "types": "dist/esm/types/index.d.ts",
+        "default": "./dist/esm/index.js"
+      },
+      "require": {
+        "types": "dist/types/src/index.d.ts",
+        "default": "./dist/src/index.js"
+      }
+    },
+    "./core/executor": {
+      "import": {
+        "types": "dist/esm/types/core/executor.d.ts",
+        "default": "./dist/esm/core/executor.js"
+      },
+      "require": {
+        "types": "dist/types/src/core/executor.d.ts",
+        "default": "./dist/src/core/executor.js"
+      }
+    },
+    "./core/system": {
+      "import": {
+        "types": "dist/esm/types/core/system.d.ts",
+        "default": "./dist/esm/core/system.js"
+      },
+      "require": {
+        "types": "dist/types/src/core/system.d.ts",
+        "default": "./dist/src/core/system.js"
+      }
+    },
+    "./core/version": {
+      "import": {
+        "types": "dist/esm/types/core/version.d.ts",
+        "default": "./dist/esm/core/version.js"
+      },
+      "require": {
+        "types": "dist/types/src/core/version.d.ts",
+        "default": "./dist/src/core/version.js"
+      }
+    },
+    "./core/jq_wrapper": {
+      "import": {
+        "types": "dist/esm/types/core/jq_wrapper.d.ts",
+        "default": "./dist/esm/core/jq_wrapper.js"
+      },
+      "require": {
+        "types": "dist/types/src/core/jq_wrapper.d.ts",
+        "default": "./dist/src/core/jq_wrapper.js"
+      }
+    },
+    "./utils/errors": {
+      "import": {
+        "types": "dist/esm/types/utils/errors.d.ts",
+        "default": "./dist/esm/utils/errors.js"
+      },
+      "require": {
+        "types": "dist/types/src/utils/errors.d.ts",
+        "default": "./dist/src/utils/errors.js"
+      }
+    },
+    "./core/file_operations": {
+      "import": {
+        "types": "dist/esm/types/core/file_operations.d.ts",
+        "default": "./dist/esm/core/file_operations.js"
+      },
+      "require": {
+        "types": "dist/types/src/core/file_operations.d.ts",
+        "default": "./dist/src/core/file_operations.js"
+      }
+    }
   },
   "scripts": {
     "start": "node dist/src/index.js",
@@ -80,7 +144,7 @@
     "typescript": "^5.4.0"
   },
   "dependencies": {
-    "olinda_utils.js": "github:mpbarbosa/olinda_utils.js#v0.3.9"
+    "olinda_utils.js": "github:mpbarbosa/olinda_utils.js#v0.3.14"
   },
   "private": true
 }

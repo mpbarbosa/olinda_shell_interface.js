@@ -5,6 +5,9 @@ import {
 	OS, PackageManager, detectOS, detectPackageManager, commandExists, getSystemInfo,
 	parseVersion, compareVersions, isGreaterThan, isLessThan, isEqual, getLatestVersion,
 	Logger, logger, LogLevel, stripAnsi,
+	camelCase, kebabCase, snakeCase, pascalCase, capitalize, truncate, sanitize, cleanWhitespace, escapeRegex,
+	dedupe, chunk, flatten, groupBy, sortBy, intersection, difference, partition,
+	deepClone, deepMerge, pick, omit, getProperty, setProperty, hasProperty, deepEqual, isEmpty,
 } from '../src/index';
 
 describe('Public API surface', () => {
@@ -44,6 +47,38 @@ describe('Public API surface', () => {
 	it('exports logger', () => expect(typeof logger).toBe('object'));
 	it('exports LogLevel', () => expect(typeof LogLevel).toBe('object'));
 	it('exports stripAnsi', () => expect(typeof stripAnsi).toBe('function'));
+
+	// utils — string (from olinda_utils.js)
+	it('exports camelCase', () => expect(typeof camelCase).toBe('function'));
+	it('exports kebabCase', () => expect(typeof kebabCase).toBe('function'));
+	it('exports snakeCase', () => expect(typeof snakeCase).toBe('function'));
+	it('exports pascalCase', () => expect(typeof pascalCase).toBe('function'));
+	it('exports capitalize', () => expect(typeof capitalize).toBe('function'));
+	it('exports truncate', () => expect(typeof truncate).toBe('function'));
+	it('exports sanitize', () => expect(typeof sanitize).toBe('function'));
+	it('exports cleanWhitespace', () => expect(typeof cleanWhitespace).toBe('function'));
+	it('exports escapeRegex', () => expect(typeof escapeRegex).toBe('function'));
+
+	// utils — array (from olinda_utils.js)
+	it('exports dedupe', () => expect(typeof dedupe).toBe('function'));
+	it('exports chunk', () => expect(typeof chunk).toBe('function'));
+	it('exports flatten', () => expect(typeof flatten).toBe('function'));
+	it('exports groupBy', () => expect(typeof groupBy).toBe('function'));
+	it('exports sortBy', () => expect(typeof sortBy).toBe('function'));
+	it('exports intersection', () => expect(typeof intersection).toBe('function'));
+	it('exports difference', () => expect(typeof difference).toBe('function'));
+	it('exports partition', () => expect(typeof partition).toBe('function'));
+
+	// utils — object (from olinda_utils.js)
+	it('exports deepClone', () => expect(typeof deepClone).toBe('function'));
+	it('exports deepMerge', () => expect(typeof deepMerge).toBe('function'));
+	it('exports pick', () => expect(typeof pick).toBe('function'));
+	it('exports omit', () => expect(typeof omit).toBe('function'));
+	it('exports getProperty', () => expect(typeof getProperty).toBe('function'));
+	it('exports setProperty', () => expect(typeof setProperty).toBe('function'));
+	it('exports hasProperty', () => expect(typeof hasProperty).toBe('function'));
+	it('exports deepEqual', () => expect(typeof deepEqual).toBe('function'));
+	it('exports isEmpty', () => expect(typeof isEmpty).toBe('function'));
 });
 
 describe('execute', () => {
@@ -200,4 +235,45 @@ describe('Logger', () => {
 	it('stripAnsi removes ANSI codes', () => {
 		expect(stripAnsi('\x1b[32mgreen\x1b[0m')).toBe('green');
 	});
+});
+
+describe('utils — string', () => {
+	it('camelCase converts kebab-case', () => expect(camelCase('hello-world')).toBe('helloWorld'));
+	it('kebabCase converts camelCase', () => expect(kebabCase('helloWorld')).toBe('hello-world'));
+	it('snakeCase converts camelCase', () => expect(snakeCase('helloWorld')).toBe('hello_world'));
+	it('pascalCase converts kebab-case', () => expect(pascalCase('hello-world')).toBe('HelloWorld'));
+	it('capitalize uppercases first letter', () => expect(capitalize('hello')).toBe('Hello'));
+	it('truncate cuts to length', () => expect(truncate('hello world', 8)).toBe('hello...'));
+	it('sanitize removes special chars', () => expect(sanitize('hello@world!')).toBe('helloworld'));
+	it('cleanWhitespace collapses spaces', () => expect(cleanWhitespace('  hello   world  ')).toBe('hello world'));
+	it('escapeRegex escapes special chars', () => expect(escapeRegex('a.b*c')).toBe('a\\.b\\*c'));
+});
+
+describe('utils — array', () => {
+	it('dedupe removes duplicates', () => expect(dedupe([1, 2, 2, 3])).toEqual([1, 2, 3]));
+	it('chunk splits array', () => expect(chunk([1, 2, 3, 4], 2)).toEqual([[1, 2], [3, 4]]));
+	it('flatten flattens nested arrays', () => expect(flatten([[1, 2], [3]])).toEqual([1, 2, 3]));
+	it('groupBy groups by key', () => expect(groupBy([{k:'a'},{k:'b'},{k:'a'}], 'k')).toEqual({a:[{k:'a'},{k:'a'}],b:[{k:'b'}]}));
+	it('sortBy sorts ascending by key', () => expect((sortBy([{n:2},{n:1}], 'n') as {n:number}[]).map((x) => x.n)).toEqual([1,2]));
+	it('intersection returns common elements', () => expect(intersection([1,2,3],[2,3,4])).toEqual([2,3]));
+	it('difference returns unique-to-first elements', () => expect(difference([1,2,3],[2,3])).toEqual([1]));
+	it('partition splits by predicate', () => expect(partition([1,2,3,4], (x: number) => x % 2 === 0)).toEqual([[2,4],[1,3]]));
+});
+
+describe('utils — object', () => {
+	it('deepClone creates independent copy', () => {
+		const obj = { a: { b: 1 } };
+		const clone = deepClone(obj);
+		clone.a.b = 99;
+		expect(obj.a.b).toBe(1);
+	});
+	it('deepMerge merges objects', () => expect(deepMerge({ a: 1 }, { b: 2 })).toEqual({ a: 1, b: 2 }));
+	it('pick selects keys', () => expect(pick({ a: 1, b: 2, c: 3 }, ['a', 'c'])).toEqual({ a: 1, c: 3 }));
+	it('omit removes keys', () => expect(omit({ a: 1, b: 2, c: 3 }, ['b'])).toEqual({ a: 1, c: 3 }));
+	it('getProperty reads nested path', () => expect(getProperty({ a: { b: 42 } }, 'a.b')).toBe(42));
+	it('setProperty writes nested path', () => expect(setProperty({} as {a:{b:number}}, 'a.b', 7)).toEqual({ a: { b: 7 } }));
+	it('hasProperty detects nested path', () => expect(hasProperty({ a: { b: 1 } }, 'a.b')).toBe(true));
+	it('deepEqual compares nested objects', () => expect(deepEqual({ a: 1 }, { a: 1 })).toBe(true));
+	it('isEmpty returns true for empty object', () => expect(isEmpty({})).toBe(true));
+	it('isEmpty returns false for non-empty', () => expect(isEmpty({ a: 1 })).toBe(false));
 });
