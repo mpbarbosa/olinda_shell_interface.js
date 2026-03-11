@@ -9,9 +9,9 @@
  * @since 0.5.7
  */
 
-import { logger } from 'olinda_utils.js';
-import { FileOperations } from './file_operations.js';
-import { FileSystemError } from '../utils/errors.js';
+import { logger } from "olinda_utils.js";
+import { FileOperations } from "./file_operations.js";
+import { FileSystemError } from "../utils/errors.js";
 
 // ============================================================================
 // INTERFACES
@@ -33,12 +33,25 @@ export interface Match {
 export interface DiffChange {
 	/** Line number (1-based). */
 	line: number;
-	/** Change type. */
-	type: 'added' | 'deleted' | 'modified';
+	/** Change type. `"context"` lines are unchanged lines included for surrounding context. */
+	type: "added" | "deleted" | "modified" | "context";
 	/** Original line content (`null` for added lines). */
 	oldContent: string | null;
 	/** New line content (`null` for deleted lines). */
 	newContent: string | null;
+}
+
+/** Options for {@link generateDiff}. */
+export interface DiffOptions {
+	/**
+	 * Number of surrounding unchanged lines to include as context around each change.
+	 * Context lines have `type: "context"` and are excluded from change counts.
+	 * Default: `0` (no context).
+	 * @example
+	 * generateDiff('a\nb\nc', 'a\nX\nc', { context: 1 })
+	 * // includes line 1 ("a") and line 3 ("c") as context around the change on line 2
+	 */
+	context?: number;
 }
 
 /** Diff result returned by {@link generateDiff}. */
@@ -100,13 +113,13 @@ export interface EditOperationsOptions {
  * // [{ match: 'Hello', index: 0, line: 1, lineContent: 'Hello' }]
  */
 export function findMatches(text: string, pattern: RegExp | string): Match[] {
-	if (typeof text !== 'string') {
+	if (typeof text !== "string") {
 		return [];
 	}
 
-	const regex = pattern instanceof RegExp ? pattern : new RegExp(pattern, 'g');
+	const regex = pattern instanceof RegExp ? pattern : new RegExp(pattern, "g");
 	const matches: Match[] = [];
-	const lines = text.split('\n');
+	const lines = text.split("\n");
 
 	lines.forEach((line, lineIndex) => {
 		let match: RegExpExecArray | null;
@@ -141,11 +154,11 @@ export function replaceAll(
 	pattern: RegExp | string,
 	replacement: string | ((substring: string, ...args: unknown[]) => string),
 ): string {
-	if (typeof text !== 'string') {
-		return '';
+	if (typeof text !== "string") {
+		return "";
 	}
 
-	const regex = pattern instanceof RegExp ? pattern : new RegExp(pattern, 'g');
+	const regex = pattern instanceof RegExp ? pattern : new RegExp(pattern, "g");
 	return text.replace(regex, replacement as string);
 }
 
@@ -165,13 +178,13 @@ export function replaceFirst(
 	pattern: RegExp | string,
 	replacement: string | ((substring: string, ...args: unknown[]) => string),
 ): string {
-	if (typeof text !== 'string') {
-		return '';
+	if (typeof text !== "string") {
+		return "";
 	}
 
 	const regex =
 		pattern instanceof RegExp
-			? new RegExp(pattern.source, pattern.flags.replace('g', ''))
+			? new RegExp(pattern.source, pattern.flags.replace("g", ""))
 			: new RegExp(pattern);
 	return text.replace(regex, replacement as string);
 }
@@ -192,26 +205,26 @@ export function insertAtLine(
 	text: string,
 	lineNumber: number,
 	content: string,
-	position: 'before' | 'after' = 'after',
+	position: "before" | "after" = "after",
 ): string {
-	if (typeof text !== 'string' || lineNumber < 1) {
+	if (typeof text !== "string" || lineNumber < 1) {
 		return text;
 	}
 
-	const lines = text.split('\n');
+	const lines = text.split("\n");
 	const index = lineNumber - 1;
 
 	if (index < 0 || index > lines.length) {
 		return text;
 	}
 
-	if (position === 'before') {
+	if (position === "before") {
 		lines.splice(index, 0, content);
 	} else {
 		lines.splice(index + 1, 0, content);
 	}
 
-	return lines.join('\n');
+	return lines.join("\n");
 }
 
 /**
@@ -225,8 +238,12 @@ export function insertAtLine(
  * @example
  * appendText('hello', 'world') // 'hello\nworld'
  */
-export function appendText(text: string, content: string, ensureNewline = true): string {
-	if (typeof text !== 'string') {
+export function appendText(
+	text: string,
+	content: string,
+	ensureNewline = true,
+): string {
+	if (typeof text !== "string") {
 		return content;
 	}
 
@@ -234,8 +251,8 @@ export function appendText(text: string, content: string, ensureNewline = true):
 		return text;
 	}
 
-	if (ensureNewline && text.length > 0 && !text.endsWith('\n')) {
-		return text + '\n' + content;
+	if (ensureNewline && text.length > 0 && !text.endsWith("\n")) {
+		return text + "\n" + content;
 	}
 
 	return text + content;
@@ -252,8 +269,12 @@ export function appendText(text: string, content: string, ensureNewline = true):
  * @example
  * prependText('world', 'hello') // 'hello\nworld'
  */
-export function prependText(text: string, content: string, ensureNewline = true): string {
-	if (typeof text !== 'string') {
+export function prependText(
+	text: string,
+	content: string,
+	ensureNewline = true,
+): string {
+	if (typeof text !== "string") {
 		return content;
 	}
 
@@ -265,8 +286,8 @@ export function prependText(text: string, content: string, ensureNewline = true)
 		return content;
 	}
 
-	if (ensureNewline && content.length > 0 && !content.endsWith('\n')) {
-		return content + '\n' + text;
+	if (ensureNewline && content.length > 0 && !content.endsWith("\n")) {
+		return content + "\n" + text;
 	}
 
 	return content + text;
@@ -283,15 +304,15 @@ export function prependText(text: string, content: string, ensureNewline = true)
  * deleteLines('keep\nremove me\nkeep', /remove/) // 'keep\nkeep'
  */
 export function deleteLines(text: string, pattern: RegExp | string): string {
-	if (typeof text !== 'string') {
-		return '';
+	if (typeof text !== "string") {
+		return "";
 	}
 
 	const regex = pattern instanceof RegExp ? pattern : new RegExp(pattern);
-	const lines = text.split('\n');
+	const lines = text.split("\n");
 	const filtered = lines.filter((line) => !regex.test(line));
 
-	return filtered.join('\n');
+	return filtered.join("\n");
 }
 
 /**
@@ -305,12 +326,12 @@ export function deleteLines(text: string, pattern: RegExp | string): string {
  * extractLines('foo\nbar\nfoo', /foo/) // ['foo', 'foo']
  */
 export function extractLines(text: string, pattern: RegExp | string): string[] {
-	if (typeof text !== 'string') {
+	if (typeof text !== "string") {
 		return [];
 	}
 
 	const regex = pattern instanceof RegExp ? pattern : new RegExp(pattern);
-	const lines = text.split('\n');
+	const lines = text.split("\n");
 
 	return lines.filter((line) => regex.test(line));
 }
@@ -326,16 +347,20 @@ export function extractLines(text: string, pattern: RegExp | string): string[] {
  * @example
  * getLineRange('a\nb\nc\nd', 2, 3) // 'b\nc'
  */
-export function getLineRange(text: string, startLine: number, endLine: number): string {
-	if (typeof text !== 'string' || startLine < 1) {
-		return '';
+export function getLineRange(
+	text: string,
+	startLine: number,
+	endLine: number,
+): string {
+	if (typeof text !== "string" || startLine < 1) {
+		return "";
 	}
 
-	const lines = text.split('\n');
+	const lines = text.split("\n");
 	const start = startLine - 1;
 	const end = endLine === -1 ? lines.length : endLine;
 
-	return lines.slice(start, end).join('\n');
+	return lines.slice(start, end).join("\n");
 }
 
 /**
@@ -356,11 +381,11 @@ export function replaceLineRange(
 	endLine: number,
 	replacement: string,
 ): string {
-	if (typeof text !== 'string' || startLine < 1) {
+	if (typeof text !== "string" || startLine < 1) {
 		return text;
 	}
 
-	const lines = text.split('\n');
+	const lines = text.split("\n");
 	const start = startLine - 1;
 	const end = endLine;
 
@@ -368,10 +393,10 @@ export function replaceLineRange(
 		return text;
 	}
 
-	const replacementLines = replacement.split('\n');
+	const replacementLines = replacement.split("\n");
 	lines.splice(start, end - start, ...replacementLines);
 
-	return lines.join('\n');
+	return lines.join("\n");
 }
 
 /**
@@ -379,17 +404,23 @@ export function replaceLineRange(
  *
  * @param oldText - Original text.
  * @param newText - Modified text.
+ * @param options - Options controlling diff output (e.g. context lines).
  * @returns Structured diff with change counts and per-line details.
  *
  * @example
  * generateDiff('a\nb', 'a\nc')
  * // { totalChanges: 1, linesAdded: 0, linesDeleted: 0, linesModified: 1, changes: [...] }
+ *
+ * @example
+ * generateDiff('a\nb\nc', 'a\nX\nc', { context: 1 })
+ * // includes lines 1 and 3 as context around the modification on line 2
  */
-export function generateDiff(oldText: string, newText: string): Diff {
-	const oldLines = oldText.split('\n');
-	const newLines = newText.split('\n');
+export function generateDiff(oldText: string, newText: string, options: DiffOptions = {}): Diff {
+	const { context = 0 } = options;
+	const oldLines = oldText.split("\n");
+	const newLines = newText.split("\n");
 
-	const changes: DiffChange[] = [];
+	const changedLines: DiffChange[] = [];
 	const maxLength = Math.max(oldLines.length, newLines.length);
 
 	for (let i = 0; i < maxLength; i++) {
@@ -397,20 +428,52 @@ export function generateDiff(oldText: string, newText: string): Diff {
 		const newLine = newLines[i] !== undefined ? newLines[i] : null;
 
 		if (oldLine !== newLine) {
-			changes.push({
+			changedLines.push({
 				line: i + 1,
-				type: oldLine === null ? 'added' : newLine === null ? 'deleted' : 'modified',
+				type:
+					oldLine === null
+						? "added"
+						: newLine === null
+							? "deleted"
+							: "modified",
 				oldContent: oldLine,
 				newContent: newLine,
 			});
 		}
 	}
 
+	const changes: DiffChange[] = [...changedLines];
+
+	if (context > 0 && changedLines.length > 0) {
+		const changedIndices = new Set(changedLines.map((c) => c.line - 1));
+		const addedContextIndices = new Set<number>();
+
+		for (const idx of changedIndices) {
+			const from = Math.max(0, idx - context);
+			const to = Math.min(maxLength - 1, idx + context);
+
+			for (let c = from; c <= to; c++) {
+				if (!changedIndices.has(c) && !addedContextIndices.has(c)) {
+					const lineContent = oldLines[c] !== undefined ? oldLines[c] : newLines[c] ?? null;
+					changes.push({
+						line: c + 1,
+						type: "context",
+						oldContent: lineContent,
+						newContent: lineContent,
+					});
+					addedContextIndices.add(c);
+				}
+			}
+		}
+
+		changes.sort((a, b) => a.line - b.line);
+	}
+
 	return {
-		totalChanges: changes.length,
-		linesAdded: changes.filter((c) => c.type === 'added').length,
-		linesDeleted: changes.filter((c) => c.type === 'deleted').length,
-		linesModified: changes.filter((c) => c.type === 'modified').length,
+		totalChanges: changedLines.length,
+		linesAdded: changedLines.filter((c) => c.type === "added").length,
+		linesDeleted: changedLines.filter((c) => c.type === "deleted").length,
+		linesModified: changedLines.filter((c) => c.type === "modified").length,
 		changes,
 	};
 }
@@ -427,7 +490,7 @@ export function generateDiff(oldText: string, newText: string): Diff {
  */
 export function formatDiff(diff: Diff): string {
 	if (!diff || !diff.changes || diff.changes.length === 0) {
-		return 'No changes detected.';
+		return "No changes detected.";
 	}
 
 	const lines: string[] = [];
@@ -435,21 +498,23 @@ export function formatDiff(diff: Diff): string {
 	lines.push(`  +${diff.linesAdded} lines added`);
 	lines.push(`  -${diff.linesDeleted} lines deleted`);
 	lines.push(`  ~${diff.linesModified} lines modified`);
-	lines.push('');
+	lines.push("");
 
 	diff.changes.forEach((change) => {
-		if (change.type === 'added') {
+		if (change.type === "added") {
 			lines.push(`+ Line ${change.line}: ${change.newContent}`);
-		} else if (change.type === 'deleted') {
+		} else if (change.type === "deleted") {
 			lines.push(`- Line ${change.line}: ${change.oldContent}`);
-		} else if (change.type === 'modified') {
+		} else if (change.type === "modified") {
 			lines.push(`~ Line ${change.line}:`);
 			lines.push(`  - ${change.oldContent}`);
 			lines.push(`  + ${change.newContent}`);
+		} else if (change.type === "context") {
+			lines.push(`  Line ${change.line}: ${change.oldContent}`);
 		}
 	});
 
-	return lines.join('\n');
+	return lines.join("\n");
 }
 
 // ============================================================================
@@ -484,7 +549,10 @@ export class EditOperations {
 	 * @param pattern  - Pattern to search for.
 	 * @returns Array of matches with position information.
 	 */
-	async findInFile(filePath: string, pattern: RegExp | string): Promise<Match[]> {
+	async findInFile(
+		filePath: string,
+		pattern: RegExp | string,
+	): Promise<Match[]> {
 		try {
 			const content = await this.fileOps.readFile(filePath);
 			const matches = findMatches(content, pattern);
@@ -495,10 +563,13 @@ export class EditOperations {
 
 			return matches;
 		} catch (error) {
-			throw new FileSystemError(`Failed to find in file: ${(error as Error).message}`, {
-				path: filePath,
-				originalError: error as Error,
-			});
+			throw new FileSystemError(
+				`Failed to find in file: ${(error as Error).message}`,
+				{
+					path: filePath,
+					originalError: error as Error,
+				},
+			);
 		}
 	}
 
@@ -532,16 +603,21 @@ export class EditOperations {
 				await this.fileOps.writeFile(filePath, newContent);
 
 				if (this.verbose) {
-					logger.success(`Replaced ${diff.totalChanges} occurrence(s) in ${filePath}`);
+					logger.success(
+						`Replaced ${diff.totalChanges} occurrence(s) in ${filePath}`,
+					);
 				}
 			}
 
 			return { changed: diff.totalChanges > 0, diff };
 		} catch (error) {
-			throw new FileSystemError(`Failed to replace in file: ${(error as Error).message}`, {
-				path: filePath,
-				originalError: error as Error,
-			});
+			throw new FileSystemError(
+				`Failed to replace in file: ${(error as Error).message}`,
+				{
+					path: filePath,
+					originalError: error as Error,
+				},
+			);
 		}
 	}
 
@@ -557,14 +633,21 @@ export class EditOperations {
 		filePath: string,
 		lineNumber: number,
 		content: string,
-		position: 'before' | 'after' = 'after',
+		position: "before" | "after" = "after",
 	): Promise<void> {
 		try {
 			const oldContent = await this.fileOps.readFile(filePath);
-			const newContent = insertAtLine(oldContent, lineNumber, content, position);
+			const newContent = insertAtLine(
+				oldContent,
+				lineNumber,
+				content,
+				position,
+			);
 
 			if (this.dryRun) {
-				logger.info(`[DRY RUN] Would insert at line ${lineNumber} in ${filePath}`);
+				logger.info(
+					`[DRY RUN] Would insert at line ${lineNumber} in ${filePath}`,
+				);
 				return;
 			}
 
@@ -574,10 +657,13 @@ export class EditOperations {
 				logger.success(`Inserted content at line ${lineNumber} in ${filePath}`);
 			}
 		} catch (error) {
-			throw new FileSystemError(`Failed to insert at line: ${(error as Error).message}`, {
-				path: filePath,
-				originalError: error as Error,
-			});
+			throw new FileSystemError(
+				`Failed to insert at line: ${(error as Error).message}`,
+				{
+					path: filePath,
+					originalError: error as Error,
+				},
+			);
 		}
 	}
 
@@ -603,10 +689,13 @@ export class EditOperations {
 				logger.success(`Appended content to ${filePath}`);
 			}
 		} catch (error) {
-			throw new FileSystemError(`Failed to append to file: ${(error as Error).message}`, {
-				path: filePath,
-				originalError: error as Error,
-			});
+			throw new FileSystemError(
+				`Failed to append to file: ${(error as Error).message}`,
+				{
+					path: filePath,
+					originalError: error as Error,
+				},
+			);
 		}
 	}
 
@@ -632,10 +721,13 @@ export class EditOperations {
 				logger.success(`Prepended content to ${filePath}`);
 			}
 		} catch (error) {
-			throw new FileSystemError(`Failed to prepend to file: ${(error as Error).message}`, {
-				path: filePath,
-				originalError: error as Error,
-			});
+			throw new FileSystemError(
+				`Failed to prepend to file: ${(error as Error).message}`,
+				{
+					path: filePath,
+					originalError: error as Error,
+				},
+			);
 		}
 	}
 
@@ -646,17 +738,22 @@ export class EditOperations {
 	 * @param pattern  - Pattern to match against each line.
 	 * @returns Object with `deletedLines` count.
 	 */
-	async deleteLines(filePath: string, pattern: RegExp | string): Promise<DeleteResult> {
+	async deleteLines(
+		filePath: string,
+		pattern: RegExp | string,
+	): Promise<DeleteResult> {
 		try {
 			const oldContent = await this.fileOps.readFile(filePath);
 			const newContent = deleteLines(oldContent, pattern);
 
-			const oldLineCount = oldContent.split('\n').length;
-			const newLineCount = newContent.split('\n').length;
+			const oldLineCount = oldContent.split("\n").length;
+			const newLineCount = newContent.split("\n").length;
 			const deletedLines = oldLineCount - newLineCount;
 
 			if (this.dryRun) {
-				logger.info(`[DRY RUN] Would delete ${deletedLines} line(s) from ${filePath}`);
+				logger.info(
+					`[DRY RUN] Would delete ${deletedLines} line(s) from ${filePath}`,
+				);
 				return { deletedLines };
 			}
 
@@ -670,10 +767,13 @@ export class EditOperations {
 
 			return { deletedLines };
 		} catch (error) {
-			throw new FileSystemError(`Failed to delete lines: ${(error as Error).message}`, {
-				path: filePath,
-				originalError: error as Error,
-			});
+			throw new FileSystemError(
+				`Failed to delete lines: ${(error as Error).message}`,
+				{
+					path: filePath,
+					originalError: error as Error,
+				},
+			);
 		}
 	}
 
@@ -693,10 +793,17 @@ export class EditOperations {
 	): Promise<void> {
 		try {
 			const oldContent = await this.fileOps.readFile(filePath);
-			const newContent = replaceLineRange(oldContent, startLine, endLine, replacement);
+			const newContent = replaceLineRange(
+				oldContent,
+				startLine,
+				endLine,
+				replacement,
+			);
 
 			if (this.dryRun) {
-				logger.info(`[DRY RUN] Would replace lines ${startLine}-${endLine} in ${filePath}`);
+				logger.info(
+					`[DRY RUN] Would replace lines ${startLine}-${endLine} in ${filePath}`,
+				);
 				return;
 			}
 
@@ -706,10 +813,13 @@ export class EditOperations {
 				logger.success(`Replaced lines ${startLine}-${endLine} in ${filePath}`);
 			}
 		} catch (error) {
-			throw new FileSystemError(`Failed to replace line range: ${(error as Error).message}`, {
-				path: filePath,
-				originalError: error as Error,
-			});
+			throw new FileSystemError(
+				`Failed to replace line range: ${(error as Error).message}`,
+				{
+					path: filePath,
+					originalError: error as Error,
+				},
+			);
 		}
 	}
 
@@ -737,10 +847,13 @@ export class EditOperations {
 				hasChanges: diff.totalChanges > 0,
 			};
 		} catch (error) {
-			throw new FileSystemError(`Failed to preview changes: ${(error as Error).message}`, {
-				path: filePath,
-				originalError: error as Error,
-			});
+			throw new FileSystemError(
+				`Failed to preview changes: ${(error as Error).message}`,
+				{
+					path: filePath,
+					originalError: error as Error,
+				},
+			);
 		}
 	}
 
@@ -779,10 +892,13 @@ export class EditOperations {
 
 			return { applied: diff.totalChanges > 0, diff };
 		} catch (error) {
-			throw new FileSystemError(`Failed to apply transform: ${(error as Error).message}`, {
-				path: filePath,
-				originalError: error as Error,
-			});
+			throw new FileSystemError(
+				`Failed to apply transform: ${(error as Error).message}`,
+				{
+					path: filePath,
+					originalError: error as Error,
+				},
+			);
 		}
 	}
 }

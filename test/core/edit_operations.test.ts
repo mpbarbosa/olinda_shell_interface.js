@@ -53,12 +53,12 @@ describe('Pure Functions - findMatches', () => {
 
 	it('returns empty array for no matches', () => {
 		const matches = findMatches(text, /NotFound/g);
-		expect(matches).toEqual([]);
+		expect(matches).toHaveLength(0);
 	});
 
-	it('handles invalid input', () => {
-		expect(findMatches(null as unknown as string, /test/)).toEqual([]);
-		expect(findMatches(undefined as unknown as string, /test/)).toEqual([]);
+	it('returns empty array for null or undefined input', () => {
+		expect(findMatches(null as unknown as string, /test/)).toHaveLength(0);
+		expect(findMatches(undefined as unknown as string, /test/)).toHaveLength(0);
 	});
 
 	it('includes line content in results', () => {
@@ -83,7 +83,7 @@ describe('Pure Functions - replaceAll', () => {
 		expect(result).toBe('xyz xyz');
 	});
 
-	it('handles invalid input', () => {
+	it('returns empty string for null or undefined input', () => {
 		expect(replaceAll(null as unknown as string, /test/, 'replacement')).toBe('');
 		expect(replaceAll(undefined as unknown as string, /test/, 'replacement')).toBe('');
 	});
@@ -105,7 +105,7 @@ describe('Pure Functions - replaceFirst', () => {
 		expect(result).toBe('TEST test');
 	});
 
-	it('handles invalid input', () => {
+	it('returns empty string for null input', () => {
 		expect(replaceFirst(null as unknown as string, /test/, 'replacement')).toBe('');
 	});
 });
@@ -133,12 +133,12 @@ describe('Pure Functions - insertAtLine', () => {
 		expect(result).toBe('line1\nline2\nline3\nlast');
 	});
 
-	it('handles invalid line numbers', () => {
+	it('returns original text unchanged for out-of-range line numbers', () => {
 		expect(insertAtLine(text, 0, 'test')).toBe(text);
 		expect(insertAtLine(text, 100, 'test')).toBe(text);
 	});
 
-	it('handles invalid input', () => {
+	it('returns null for null input', () => {
 		expect(insertAtLine(null as unknown as string, 1, 'test')).toBe(null);
 	});
 });
@@ -164,7 +164,7 @@ describe('Pure Functions - appendText', () => {
 		expect(result).toBe('hello\nworld');
 	});
 
-	it('handles invalid input', () => {
+	it('returns the text-to-append for null original text', () => {
 		expect(appendText(null as unknown as string, 'test')).toBe('test');
 	});
 });
@@ -190,7 +190,7 @@ describe('Pure Functions - prependText', () => {
 		expect(result).toBe('hello\nworld');
 	});
 
-	it('handles invalid input', () => {
+	it('returns the text-to-prepend for null original text', () => {
 		expect(prependText(null as unknown as string, 'test')).toBe('test');
 	});
 });
@@ -213,7 +213,7 @@ describe('Pure Functions - deleteLines', () => {
 		expect(result).toBe(text);
 	});
 
-	it('handles invalid input', () => {
+	it('returns empty string for null input', () => {
 		expect(deleteLines(null as unknown as string, /test/)).toBe('');
 	});
 });
@@ -233,11 +233,11 @@ describe('Pure Functions - extractLines', () => {
 
 	it('returns empty array if no matches', () => {
 		const result = extractLines(text, /notfound/);
-		expect(result).toEqual([]);
+		expect(result).toHaveLength(0);
 	});
 
-	it('handles invalid input', () => {
-		expect(extractLines(null as unknown as string, /test/)).toEqual([]);
+	it('returns empty array for null input', () => {
+		expect(extractLines(null as unknown as string, /test/)).toHaveLength(0);
 	});
 });
 
@@ -259,12 +259,12 @@ describe('Pure Functions - getLineRange', () => {
 		expect(result).toBe('line2');
 	});
 
-	it('handles invalid line numbers', () => {
+	it('returns empty string for out-of-range or invalid line numbers', () => {
 		expect(getLineRange(text, 0, 2)).toBe('');
 		expect(getLineRange(text, 10, 20)).toBe('');
 	});
 
-	it('handles invalid input', () => {
+	it('returns empty string for null input', () => {
 		expect(getLineRange(null as unknown as string, 1, 2)).toBe('');
 	});
 });
@@ -287,12 +287,12 @@ describe('Pure Functions - replaceLineRange', () => {
 		expect(result).toBe('line1\nline2\nnew\nline4\nline5');
 	});
 
-	it('handles invalid line numbers', () => {
+	it('returns original text for out-of-range line numbers', () => {
 		expect(replaceLineRange(text, 0, 2, 'test')).toBe(text);
 		expect(replaceLineRange(text, 100, 200, 'test')).toBe(text);
 	});
 
-	it('handles invalid input', () => {
+	it('returns null for null input', () => {
 		expect(replaceLineRange(null as unknown as string, 1, 2, 'test')).toBe(null);
 	});
 });
@@ -658,5 +658,141 @@ describe('EditOperations Integration Tests', () => {
 			const content = await fs.readFile(testFile, 'utf8');
 			expect(content).toBe('test');
 		});
+	});
+
+	describe('verbose mode', () => {
+		let verboseOps: EditOperations;
+		let verboseDryRun: EditOperations;
+
+		beforeEach(() => {
+			verboseOps = new EditOperations({ verbose: true });
+			verboseDryRun = new EditOperations({ verbose: true, dryRun: true });
+		});
+
+		it('findInFile logs match count when verbose', async () => {
+			await fs.writeFile(testFile, 'hello world\nhello again');
+			const matches = await verboseOps.findInFile(testFile, /hello/g);
+			expect(matches).toHaveLength(2);
+		});
+
+		it('replaceInFile logs success when verbose and changes occur', async () => {
+			await fs.writeFile(testFile, 'foo bar foo');
+			const result = await verboseOps.replaceInFile(testFile, /foo/g, 'baz');
+			expect(result.changed).toBe(true);
+		});
+
+		it('replaceInFile verbose dry-run logs the diff', async () => {
+			await fs.writeFile(testFile, 'foo bar');
+			const result = await verboseDryRun.replaceInFile(testFile, /foo/g, 'baz');
+			expect(result.changed).toBe(true);
+			const content = await fs.readFile(testFile, 'utf8');
+			expect(content).toBe('foo bar');
+		});
+
+		it('insertAtLine logs success when verbose', async () => {
+			await fs.writeFile(testFile, 'line1\nline3');
+			await verboseOps.insertAtLine(testFile, 2, 'line2');
+			const content = await fs.readFile(testFile, 'utf8');
+			expect(content).toContain('line2');
+		});
+
+		it('appendToFile logs success when verbose', async () => {
+			await fs.writeFile(testFile, 'first');
+			await verboseOps.appendToFile(testFile, 'last');
+			const content = await fs.readFile(testFile, 'utf8');
+			expect(content).toContain('last');
+		});
+
+		it('deleteLines logs success when verbose', async () => {
+			await fs.writeFile(testFile, 'keep\nremove\nkeep');
+			const result = await verboseOps.deleteLines(testFile, /remove/);
+			expect(result.deletedLines).toBe(1);
+		});
+
+		it('deleteLines verbose dry-run returns deleted count', async () => {
+			await fs.writeFile(testFile, 'keep\nremove\nkeep');
+			const result = await verboseDryRun.deleteLines(testFile, /remove/);
+			expect(result.deletedLines).toBe(1);
+			const content = await fs.readFile(testFile, 'utf8');
+			expect(content).toContain('remove');
+		});
+
+		it('replaceLineRange logs success when verbose', async () => {
+			await fs.writeFile(testFile, 'line1\nline2\nline3');
+			await verboseOps.replaceLineRange(testFile, 2, 2, 'replaced');
+			const content = await fs.readFile(testFile, 'utf8');
+			expect(content).toContain('replaced');
+		});
+
+		it('applyTransform logs success when verbose', async () => {
+			await fs.writeFile(testFile, 'hello');
+			const result = await verboseOps.applyTransform(testFile, (c) => c.toUpperCase());
+			expect(result.applied).toBe(true);
+		});
+
+		it('applyTransform verbose dry-run logs diff', async () => {
+			await fs.writeFile(testFile, 'hello');
+			const result = await verboseDryRun.applyTransform(testFile, (c) => c.toUpperCase());
+			expect(result.applied).toBe(false);
+			const content = await fs.readFile(testFile, 'utf8');
+			expect(content).toBe('hello');
+		});
+	});
+});
+
+// ============================================================================
+// generateDiff — context lines
+// ============================================================================
+
+describe('Pure Functions - generateDiff with context lines', () => {
+	it('includes surrounding unchanged lines when context > 0', () => {
+		const oldText = 'a\nb\nc\nd\ne';
+		const newText = 'a\nb\nX\nd\ne';
+		const diff = generateDiff(oldText, newText, { context: 1 });
+
+		expect(diff.totalChanges).toBe(1);
+		const types = diff.changes.map((c) => c.type);
+		expect(types).toContain('modified');
+		expect(types).toContain('context');
+	});
+
+	it('context lines do not affect change counts', () => {
+		const diff = generateDiff('a\nb\nc', 'a\nX\nc', { context: 1 });
+		expect(diff.totalChanges).toBe(1);
+		expect(diff.linesModified).toBe(1);
+		expect(diff.linesAdded).toBe(0);
+		expect(diff.linesDeleted).toBe(0);
+	});
+
+	it('context lines are sorted by line number', () => {
+		const diff = generateDiff('a\nb\nc\nd\ne', 'a\nb\nX\nd\ne', { context: 2 });
+		const lineNumbers = diff.changes.map((c) => c.line);
+		expect(lineNumbers).toEqual([...lineNumbers].sort((a, b) => a - b));
+	});
+
+	it('does not include context beyond file boundaries', () => {
+		const diff = generateDiff('only\none\nline', 'only\none\nX', { context: 5 });
+		expect(diff.changes.every((c) => c.line >= 1)).toBe(true);
+	});
+
+	it('context = 0 (default) produces no context lines', () => {
+		const diff = generateDiff('a\nb\nc', 'a\nX\nc');
+		expect(diff.changes.every((c) => c.type !== 'context')).toBe(true);
+	});
+
+	it('context lines have matching oldContent and newContent', () => {
+		const diff = generateDiff('a\nb\nc', 'a\nX\nc', { context: 1 });
+		const contextLines = diff.changes.filter((c) => c.type === 'context');
+		for (const cl of contextLines) {
+			expect(cl.oldContent).toBe(cl.newContent);
+		}
+	});
+});
+
+describe('Pure Functions - formatDiff with context lines', () => {
+	it('renders context lines with leading spaces', () => {
+		const diff = generateDiff('a\nb\nc', 'a\nX\nc', { context: 1 });
+		const formatted = formatDiff(diff);
+		expect(formatted).toContain('  Line');
 	});
 });

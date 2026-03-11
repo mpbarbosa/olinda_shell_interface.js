@@ -3,19 +3,34 @@
  * @module index
  */
 
-export { execute, executeStream, executeSudo } from './core/executor.js';
-export type { ExecuteOptions, StreamOptions, ExecuteResult } from './core/executor.js';
+export { execute, executeStream, executeSudo } from "./core/executor.js";
+export type {
+	ExecuteOptions,
+	StreamOptions,
+	ExecuteResult,
+} from "./core/executor.js";
 
-export { OS, PackageManager, detectOS, detectPackageManager, commandExists, getSystemInfo } from './core/system.js';
-export type { OsValue, PackageManagerValue, SystemInfo } from './core/system.js';
+export {
+	OS,
+	PackageManager,
+	detectOS,
+	detectPackageManager,
+	commandExists,
+	getSystemInfo,
+} from "./core/system.js";
+export type {
+	OsValue,
+	PackageManagerValue,
+	SystemInfo,
+} from "./core/system.js";
 
-export { ShellError, ExecutionError, SystemError } from './utils/errors.js';
+export { ShellError, ExecutionError, SystemError } from "./utils/errors.js";
 
-export { colors, supportsColor, colorize } from 'olinda_utils.js';
-export type { ColorName } from 'olinda_utils.js';
+export { colors, supportsColor, colorize } from "olinda_utils.js";
+export type { ColorName } from "olinda_utils.js";
 
-export { Logger, logger, LogLevel, stripAnsi } from 'olinda_utils.js';
-export type { LoggerOptions, LogLevelValue } from 'olinda_utils.js';
+export { Logger, logger, LogLevel, stripAnsi } from "olinda_utils.js";
+export type { LoggerOptions, LogLevelValue } from "olinda_utils.js";
 
 export {
 	camelCase,
@@ -44,7 +59,7 @@ export {
 	hasProperty,
 	deepEqual,
 	isEmpty,
-} from 'olinda_utils.js';
+} from "olinda_utils.js";
 
 export {
 	parseVersion,
@@ -53,8 +68,8 @@ export {
 	isLessThan,
 	isEqual,
 	getLatestVersion,
-} from './core/version.js';
-export type { ParsedVersion } from './core/version.js';
+} from "./core/version.js";
+export type { ParsedVersion } from "./core/version.js";
 
 export {
 	JqExecutionError,
@@ -64,17 +79,17 @@ export {
 	validateArgjsonPairs,
 	buildJqCommand,
 	JqWrapper,
-} from './core/jq_wrapper.js';
+} from "./core/jq_wrapper.js";
 export type {
 	ArgjsonPair,
 	ParsedJqArguments,
 	ArgjsonValidationResult,
 	JqWrapperOptions,
 	JqExecuteOptions,
-} from './core/jq_wrapper.js';
+} from "./core/jq_wrapper.js";
 
-export { FileSystemError } from './utils/errors.js';
-export type { FileSystemErrorDetails } from './utils/errors.js';
+export { FileSystemError } from "./utils/errors.js";
+export type { FileSystemErrorDetails } from "./utils/errors.js";
 
 export {
 	validatePath,
@@ -84,7 +99,7 @@ export {
 	buildFileMetadata,
 	calculateRelativePath,
 	FileOperations,
-} from './core/file_operations.js';
+} from "./core/file_operations.js";
 export type {
 	PathValidation,
 	FileMetadata,
@@ -93,7 +108,7 @@ export type {
 	ListOptions,
 	GlobOptions,
 	FileOperationsOptions,
-} from './core/file_operations.js';
+} from "./core/file_operations.js";
 
 export {
 	findMatches,
@@ -109,14 +124,15 @@ export {
 	generateDiff,
 	formatDiff,
 	EditOperations,
-} from './core/edit_operations.js';
+} from "./core/edit_operations.js";
 export type {
 	Match,
 	DiffChange,
+	DiffOptions,
 	Diff,
 	ReplaceResult,
 	DeleteResult,
 	PreviewResult,
 	TransformResult,
 	EditOperationsOptions,
-} from './core/edit_operations.js';
+} from "./core/edit_operations.js";
