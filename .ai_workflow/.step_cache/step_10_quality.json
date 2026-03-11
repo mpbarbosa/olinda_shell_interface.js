@@ -39,7 +39,7 @@
     "src/utils/errors.ts": {
       "score": 100,
       "issueCount": 0,
-      "lastAnalyzed": "2026-03-05T15:03:52.145Z"
+      "lastAnalyzed": "2026-03-11T17:10:33.289Z"
     },
     "src/core/executor.ts": {
       "score": 100,
@@ -49,7 +49,7 @@
     "src/core/file_operations.ts": {
       "score": 100,
       "issueCount": 0,
-      "lastAnalyzed": "2026-03-05T17:24:31.984Z"
+      "lastAnalyzed": "2026-03-11T17:10:33.289Z"
     },
     "src/core/jq_wrapper.ts": {
       "score": 100,
@@ -59,12 +59,12 @@
     "src/core/system.ts": {
       "score": 100,
       "issueCount": 0,
-      "lastAnalyzed": "2026-03-05T17:24:31.984Z"
+      "lastAnalyzed": "2026-03-11T17:10:33.289Z"
     },
     "src/core/version.ts": {
       "score": 100,
       "issueCount": 0,
-      "lastAnalyzed": "2026-03-05T17:24:31.984Z"
+      "lastAnalyzed": "2026-03-11T17:10:33.289Z"
     },
     "package-lock.json": {
       "score": 100,
@@ -114,7 +114,7 @@
     ".ai_workflow/commit_history.json": {
       "score": 100,
       "issueCount": 0,
-      "lastAnalyzed": "2026-03-07T22:35:21.944Z"
+      "lastAnalyzed": "2026-03-11T17:10:33.289Z"
     },
     ".markdownlint.json": {
       "score": 100,
