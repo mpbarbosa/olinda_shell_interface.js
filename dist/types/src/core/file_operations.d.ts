@@ -8,7 +8,7 @@
  * - Async wrapper class: FileOperations for real file I/O
  * @since 0.5.4
  */
-import fs from 'fs/promises';
+import fs from "fs/promises";
 /** Result of {@link validatePath}. */
 export interface PathValidation {
     valid: boolean;

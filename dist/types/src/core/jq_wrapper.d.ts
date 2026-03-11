@@ -9,7 +9,7 @@
  * - Pure functions: JSON validation, sanitization, argument parsing
  * - Async wrapper class: JqWrapper for command execution and I/O
  */
-import { ShellError } from '../utils/errors.js';
+import { ShellError } from "../utils/errors.js";
 /**
  * Thrown when jq validation or execution fails.
  * Extends {@link ShellError} with a machine-readable `code` and caller `context`.

@@ -40,9 +40,9 @@ class JqExecutionError extends errors_js_1.ShellError {
         super(message);
         this.code = code;
         this.context = context;
-        this.name = 'JqExecutionError';
+        this.name = "JqExecutionError";
         Object.setPrototypeOf(this, new.target.prototype);
-        this.name = 'JqExecutionError';
+        this.name = "JqExecutionError";
     }
 }
 exports.JqExecutionError = JqExecutionError;
@@ -60,7 +60,7 @@ exports.JqExecutionError = JqExecutionError;
  * validateJson('')               // false
  */
 function validateJson(jsonString) {
-    if (typeof jsonString !== 'string' || jsonString.trim() === '') {
+    if (typeof jsonString !== "string" || jsonString.trim() === "") {
         return false;
     }
     try {
@@ -86,13 +86,13 @@ function validateJson(jsonString) {
  */
 /** @internal Coerce a trimmed string to a JSON-safe primitive. */
 function sanitizeStringValue(trimmed, defaultValue) {
-    if (trimmed === 'true')
+    if (trimmed === "true")
         return true;
-    if (trimmed === 'false')
+    if (trimmed === "false")
         return false;
-    if (trimmed === 'null')
+    if (trimmed === "null")
         return null;
-    if (trimmed === '')
+    if (trimmed === "")
         return defaultValue;
     const num = Number(trimmed);
     if (!isNaN(num) && isFinite(num))
@@ -109,16 +109,16 @@ function sanitizeArgjsonValue(value, defaultValue = 0) {
         return null;
     if (value === undefined)
         return defaultValue;
-    if (typeof value === 'boolean')
+    if (typeof value === "boolean")
         return value;
-    if (typeof value === 'number') {
+    if (typeof value === "number") {
         return isNaN(value) || !isFinite(value) ? defaultValue : value;
     }
-    if (typeof value === 'string') {
+    if (typeof value === "string") {
         return sanitizeStringValue(value.trim(), defaultValue);
     }
     // Handle objects/arrays - deep-clone and validate
-    if (typeof value === 'object') {
+    if (typeof value === "object") {
         try {
             return JSON.parse(JSON.stringify(value));
         }
@@ -143,7 +143,7 @@ function parseJqArguments(args) {
     let i = 0;
     while (i < args.length) {
         const arg = args[i];
-        if (arg === '--argjson') {
+        if (arg === "--argjson") {
             const name = args[i + 1];
             const value = args[i + 2];
             if (name !== undefined && value !== undefined) {
@@ -177,7 +177,7 @@ function parseJqArguments(args) {
 function validateArgjsonPairs(argjsonPairs) {
     const errors = [];
     for (const { name, value } of argjsonPairs) {
-        if (value === '' || value === null || value === undefined) {
+        if (value === "" || value === null || value === undefined) {
             errors.push(`--argjson variable "${name}" has empty value`);
             continue;
         }
@@ -200,13 +200,13 @@ function validateArgjsonPairs(argjsonPairs) {
  */
 function buildJqCommand(args) {
     const escapedArgs = args.map((arg) => {
-        let s = typeof arg !== 'string' ? String(arg) : arg;
+        let s = typeof arg !== "string" ? String(arg) : arg;
         if (/[\s'"$`\\]/.test(s)) {
             return `'${s.replace(/'/g, "'\\''")}'`;
         }
         return s;
     });
-    return `jq ${escapedArgs.join(' ')}`;
+    return `jq ${escapedArgs.join(" ")}`;
 }
 /**
  * Safe jq command execution with validation and logging.
@@ -223,7 +223,7 @@ function buildJqCommand(args) {
 class JqWrapper {
     constructor(options = {}) {
         this.debug = options.debug ?? false;
-        this.callerContext = options.callerContext ?? 'unknown';
+        this.callerContext = options.callerContext ?? "unknown";
     }
     /**
      * Execute a jq command with `--argjson` validation.
@@ -238,18 +238,18 @@ class JqWrapper {
         const throwOnError = options.throwOnError !== false;
         if (this.debug) {
             olinda_utils_js_1.logger.debug(`jq_safe called from: ${this.callerContext}`);
-            olinda_utils_js_1.logger.debug(`Arguments: ${args.join(' ')}`);
+            olinda_utils_js_1.logger.debug(`Arguments: ${args.join(" ")}`);
         }
         // Validate --argjson arguments
         const { argjsonPairs } = parseJqArguments(args);
         const validation = validateArgjsonPairs(argjsonPairs);
         if (!validation.valid) {
-            const errorMsg = `jq_safe validation failed in ${this.callerContext}:\n${validation.errors.map((e) => `  - ${e}`).join('\n')}`;
+            const errorMsg = `jq_safe validation failed in ${this.callerContext}:\n${validation.errors.map((e) => `  - ${e}`).join("\n")}`;
             olinda_utils_js_1.logger.error(errorMsg);
             if (throwOnError) {
-                throw new JqExecutionError(errorMsg, 'JQ_VALIDATION_ERROR', this.callerContext);
+                throw new JqExecutionError(errorMsg, "JQ_VALIDATION_ERROR", this.callerContext);
             }
-            return '';
+            return "";
         }
         // Build and execute command
         const command = buildJqCommand(args);
@@ -264,9 +264,9 @@ class JqWrapper {
             const errorMsg = `jq_safe failed in ${this.callerContext}: ${err instanceof Error ? err.message : String(err)}`;
             olinda_utils_js_1.logger.error(errorMsg);
             if (throwOnError) {
-                throw new JqExecutionError(errorMsg, 'JQ_EXECUTION_ERROR', this.callerContext);
+                throw new JqExecutionError(errorMsg, "JQ_EXECUTION_ERROR", this.callerContext);
             }
-            return '';
+            return "";
         }
     }
     /**
@@ -287,7 +287,7 @@ class JqWrapper {
         catch (parseError) {
             const errorMsg = `Failed to parse jq output as JSON: ${parseError instanceof Error ? parseError.message : String(parseError)}`;
             olinda_utils_js_1.logger.error(errorMsg);
-            throw new JqExecutionError(errorMsg, 'JQ_PARSE_ERROR', this.callerContext);
+            throw new JqExecutionError(errorMsg, "JQ_PARSE_ERROR", this.callerContext);
         }
     }
     /**
@@ -299,8 +299,12 @@ class JqWrapper {
      * await wrapper.validateJsonWithJq('{invalid}')      // false
      */
     async validateJsonWithJq(jsonString) {
+        // Use single-quote wrapping with proper escaping to prevent shell injection.
+        // JSON.stringify does not escape shell metacharacters ($, `, !), so passing
+        // arbitrary JSON via echo inside double quotes is unsafe.
+        const shellSafeJson = jsonString.replace(/'/g, "'\\''");
         try {
-            await (0, executor_js_1.execute)(`echo ${JSON.stringify(jsonString)} | jq -e . >/dev/null`);
+            await (0, executor_js_1.execute)(`printf '%s\n' '${shellSafeJson}' | jq -e . >/dev/null`);
             return true;
         }
         catch {

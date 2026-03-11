@@ -17,7 +17,7 @@ export interface ExecuteOptions {
     maxBuffer?: number;
 }
 /** Options for {@link executeStream}. */
-export interface StreamOptions extends Omit<ExecuteOptions, 'timeout' | 'shell'> {
+export interface StreamOptions extends Omit<ExecuteOptions, "timeout" | "shell"> {
     /** Called with each chunk of stdout. If omitted, pipes to `process.stdout`. */
     onStdout?: (chunk: string) => void;
     /** Called with each chunk of stderr. If omitted, pipes to `process.stderr`. */

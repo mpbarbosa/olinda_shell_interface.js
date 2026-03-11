@@ -27,14 +27,14 @@ const olinda_utils_js_1 = require("olinda_utils.js");
 const errors_js_1 = require("../utils/errors.js");
 // Directories never traversed by default (override with options.allowAll)
 const NEVER_TRAVERSE_DIRS = new Set([
-    'node_modules',
-    '.git',
-    '.svn',
-    '.hg',
-    '__pycache__',
-    '.pytest_cache',
-    '.tox',
-    '.mypy_cache',
+    "node_modules",
+    ".git",
+    ".svn",
+    ".hg",
+    "__pycache__",
+    ".pytest_cache",
+    ".tox",
+    ".mypy_cache",
 ]);
 // ============================================================================
 // PURE FUNCTIONS
@@ -50,15 +50,15 @@ const NEVER_TRAVERSE_DIRS = new Set([
  * validatePath('/home/user/../etc/passwd')   // { valid: false, error: 'Directory traversal not allowed' }
  */
 function validatePath(filePath) {
-    if (!filePath || typeof filePath !== 'string') {
-        return { valid: false, error: 'Path must be a non-empty string' };
+    if (!filePath || typeof filePath !== "string") {
+        return { valid: false, error: "Path must be a non-empty string" };
     }
     if (!path_1.default.isAbsolute(filePath)) {
-        return { valid: false, error: 'Only absolute paths are allowed' };
+        return { valid: false, error: "Only absolute paths are allowed" };
     }
     const normalized = path_1.default.normalize(filePath);
-    if (filePath.includes('..') || normalized.includes('..')) {
-        return { valid: false, error: 'Directory traversal not allowed' };
+    if (filePath.includes("..") || normalized.includes("..")) {
+        return { valid: false, error: "Directory traversal not allowed" };
     }
     return { valid: true };
 }
@@ -75,7 +75,7 @@ function filterByExtension(files, extensions) {
     if (!Array.isArray(files) || !Array.isArray(extensions)) {
         return [];
     }
-    const normalizedExts = extensions.map((ext) => ext.startsWith('.') ? ext : `.${ext}`);
+    const normalizedExts = extensions.map((ext) => ext.startsWith(".") ? ext : `.${ext}`);
     return files.filter((file) => normalizedExts.includes(path_1.default.extname(file)));
 }
 /**
@@ -169,7 +169,7 @@ class FileOperations {
      * @returns File contents as a string.
      * @throws {@link FileSystemError} on invalid path or read failure.
      */
-    async readFile(filePath, encoding = 'utf8') {
+    async readFile(filePath, encoding = "utf8") {
         const validation = validatePath(filePath);
         if (!validation.valid) {
             throw new errors_js_1.FileSystemError(validation.error, { path: filePath });
@@ -332,7 +332,10 @@ class FileOperations {
         }
         catch (error) {
             const msg = error instanceof Error ? error.message : String(error);
-            throw new errors_js_1.FileSystemError(`Failed to list directory recursively: ${msg}`, { path: dirPath, originalError: error instanceof Error ? error : undefined });
+            throw new errors_js_1.FileSystemError(`Failed to list directory recursively: ${msg}`, {
+                path: dirPath,
+                originalError: error instanceof Error ? error : undefined,
+            });
         }
     }
     /**
@@ -455,7 +458,8 @@ class FileOperations {
                 olinda_utils_js_1.logger.success(`Directory created: ${dirPath}`);
         }
         catch (error) {
-            if (!(error instanceof Error) || ('code' in error && error.code === 'EEXIST'))
+            if (!(error instanceof Error) ||
+                ("code" in error && error.code === "EEXIST"))
                 return;
             throw new errors_js_1.FileSystemError(`Failed to create directory: ${error.message}`, {
                 path: dirPath,

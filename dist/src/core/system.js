@@ -19,21 +19,21 @@ const child_process_1 = require("child_process");
 const errors_js_1 = require("../utils/errors.js");
 /** Operating system type constants. */
 exports.OS = {
-    LINUX: 'linux',
-    MACOS: 'darwin',
-    WINDOWS: 'win32',
-    UNKNOWN: 'unknown',
+    LINUX: "linux",
+    MACOS: "darwin",
+    WINDOWS: "win32",
+    UNKNOWN: "unknown",
 };
 /** Package manager type constants. */
 exports.PackageManager = {
-    APT: 'apt',
-    PACMAN: 'pacman',
-    DNF: 'dnf',
-    ZYPPER: 'zypper',
-    BREW: 'brew',
-    CHOCOLATEY: 'choco',
-    WINGET: 'winget',
-    UNKNOWN: 'unknown',
+    APT: "apt",
+    PACMAN: "pacman",
+    DNF: "dnf",
+    ZYPPER: "zypper",
+    BREW: "brew",
+    CHOCOLATEY: "choco",
+    WINGET: "winget",
+    UNKNOWN: "unknown",
 };
 /**
  * Detect the current operating system.
@@ -45,11 +45,11 @@ exports.PackageManager = {
  */
 function detectOS() {
     const platform = os_1.default.platform();
-    if (platform === 'darwin')
+    if (platform === "darwin")
         return exports.OS.MACOS;
-    if (platform === 'win32')
+    if (platform === "win32")
         return exports.OS.WINDOWS;
-    if (platform === 'linux')
+    if (platform === "linux")
         return exports.OS.LINUX;
     return exports.OS.UNKNOWN;
 }
@@ -63,8 +63,8 @@ function detectOS() {
  */
 function commandExists(command) {
     try {
-        const checkCmd = os_1.default.platform() === 'win32' ? `where ${command}` : `command -v ${command}`;
-        (0, child_process_1.execSync)(checkCmd, { stdio: 'ignore' });
+        const checkCmd = os_1.default.platform() === "win32" ? `where ${command}` : `command -v ${command}`;
+        (0, child_process_1.execSync)(checkCmd, { stdio: "ignore" });
         return true;
     }
     catch {
@@ -72,20 +72,20 @@ function commandExists(command) {
     }
 }
 function detectLinuxPackageManager() {
-    if (commandExists('apt-get'))
+    if (commandExists("apt-get"))
         return exports.PackageManager.APT;
-    if (commandExists('pacman'))
+    if (commandExists("pacman"))
         return exports.PackageManager.PACMAN;
-    if (commandExists('dnf'))
+    if (commandExists("dnf"))
         return exports.PackageManager.DNF;
-    if (commandExists('zypper'))
+    if (commandExists("zypper"))
         return exports.PackageManager.ZYPPER;
     return exports.PackageManager.UNKNOWN;
 }
 function detectWindowsPackageManager() {
-    if (commandExists('winget'))
+    if (commandExists("winget"))
         return exports.PackageManager.WINGET;
-    if (commandExists('choco'))
+    if (commandExists("choco"))
         return exports.PackageManager.CHOCOLATEY;
     return exports.PackageManager.UNKNOWN;
 }
@@ -102,10 +102,16 @@ function detectPackageManager() {
     const osType = detectOS();
     try {
         switch (osType) {
-            case exports.OS.LINUX: return detectLinuxPackageManager();
-            case exports.OS.MACOS: return commandExists('brew') ? exports.PackageManager.BREW : exports.PackageManager.UNKNOWN;
-            case exports.OS.WINDOWS: return detectWindowsPackageManager();
-            default: return exports.PackageManager.UNKNOWN;
+            case exports.OS.LINUX:
+                return detectLinuxPackageManager();
+            case exports.OS.MACOS:
+                return commandExists("brew")
+                    ? exports.PackageManager.BREW
+                    : exports.PackageManager.UNKNOWN;
+            case exports.OS.WINDOWS:
+                return detectWindowsPackageManager();
+            default:
+                return exports.PackageManager.UNKNOWN;
         }
     }
     catch (error) {

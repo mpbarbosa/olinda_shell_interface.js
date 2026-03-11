@@ -24,19 +24,19 @@ exports.getLatestVersion = getLatestVersion;
  */
 function parseVersion(version) {
     if (!version) {
-        return { major: 0, minor: 0, patch: 0, prerelease: '', build: '' };
+        return { major: 0, minor: 0, patch: 0, prerelease: "", build: "" };
     }
-    const cleanVersion = version.replace(/^v/, '');
+    const cleanVersion = version.replace(/^v/, "");
     const match = cleanVersion.match(/^(\d+)(?:\.(\d+))?(?:\.(\d+))?(?:-([0-9A-Za-z-.]+))?(?:\+([0-9A-Za-z-.]+))?$/);
     if (!match) {
         throw new Error(`Invalid version format: ${version}`);
     }
     return {
-        major: parseInt(match[1] ?? '0', 10),
-        minor: parseInt(match[2] ?? '0', 10),
-        patch: parseInt(match[3] ?? '0', 10),
-        prerelease: match[4] ?? '',
-        build: match[5] ?? '',
+        major: parseInt(match[1] ?? "0", 10),
+        minor: parseInt(match[2] ?? "0", 10),
+        patch: parseInt(match[3] ?? "0", 10),
+        prerelease: match[4] ?? "",
+        build: match[5] ?? "",
     };
 }
 /**

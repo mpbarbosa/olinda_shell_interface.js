@@ -5,7 +5,7 @@
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.isEqual = exports.isLessThan = exports.isGreaterThan = exports.compareVersions = exports.parseVersion = exports.isEmpty = exports.deepEqual = exports.hasProperty = exports.setProperty = exports.getProperty = exports.omit = exports.pick = exports.deepMerge = exports.deepClone = exports.partition = exports.difference = exports.intersection = exports.sortBy = exports.groupBy = exports.flatten = exports.chunk = exports.dedupe = exports.escapeRegex = exports.cleanWhitespace = exports.sanitize = exports.truncate = exports.capitalize = exports.pascalCase = exports.snakeCase = exports.kebabCase = exports.camelCase = exports.stripAnsi = exports.LogLevel = exports.logger = exports.Logger = exports.colorize = exports.supportsColor = exports.colors = exports.SystemError = exports.ExecutionError = exports.ShellError = exports.getSystemInfo = exports.commandExists = exports.detectPackageManager = exports.detectOS = exports.PackageManager = exports.OS = exports.executeSudo = exports.executeStream = exports.execute = void 0;
-exports.FileOperations = exports.calculateRelativePath = exports.buildFileMetadata = exports.sortByModificationTime = exports.filterByPattern = exports.filterByExtension = exports.validatePath = exports.FileSystemError = exports.JqWrapper = exports.buildJqCommand = exports.validateArgjsonPairs = exports.parseJqArguments = exports.sanitizeArgjsonValue = exports.validateJson = exports.JqExecutionError = exports.getLatestVersion = void 0;
+exports.EditOperations = exports.formatDiff = exports.generateDiff = exports.replaceLineRange = exports.getLineRange = exports.extractLines = exports.deleteLines = exports.prependText = exports.appendText = exports.insertAtLine = exports.replaceFirst = exports.replaceAll = exports.findMatches = exports.FileOperations = exports.calculateRelativePath = exports.buildFileMetadata = exports.sortByModificationTime = exports.filterByPattern = exports.filterByExtension = exports.validatePath = exports.FileSystemError = exports.JqWrapper = exports.buildJqCommand = exports.validateArgjsonPairs = exports.parseJqArguments = exports.sanitizeArgjsonValue = exports.validateJson = exports.JqExecutionError = exports.getLatestVersion = void 0;
 var executor_js_1 = require("./core/executor.js");
 Object.defineProperty(exports, "execute", { enumerable: true, get: function () { return executor_js_1.execute; } });
 Object.defineProperty(exports, "executeStream", { enumerable: true, get: function () { return executor_js_1.executeStream; } });
@@ -82,3 +82,17 @@ Object.defineProperty(exports, "sortByModificationTime", { enumerable: true, get
 Object.defineProperty(exports, "buildFileMetadata", { enumerable: true, get: function () { return file_operations_js_1.buildFileMetadata; } });
 Object.defineProperty(exports, "calculateRelativePath", { enumerable: true, get: function () { return file_operations_js_1.calculateRelativePath; } });
 Object.defineProperty(exports, "FileOperations", { enumerable: true, get: function () { return file_operations_js_1.FileOperations; } });
+var edit_operations_js_1 = require("./core/edit_operations.js");
+Object.defineProperty(exports, "findMatches", { enumerable: true, get: function () { return edit_operations_js_1.findMatches; } });
+Object.defineProperty(exports, "replaceAll", { enumerable: true, get: function () { return edit_operations_js_1.replaceAll; } });
+Object.defineProperty(exports, "replaceFirst", { enumerable: true, get: function () { return edit_operations_js_1.replaceFirst; } });
+Object.defineProperty(exports, "insertAtLine", { enumerable: true, get: function () { return edit_operations_js_1.insertAtLine; } });
+Object.defineProperty(exports, "appendText", { enumerable: true, get: function () { return edit_operations_js_1.appendText; } });
+Object.defineProperty(exports, "prependText", { enumerable: true, get: function () { return edit_operations_js_1.prependText; } });
+Object.defineProperty(exports, "deleteLines", { enumerable: true, get: function () { return edit_operations_js_1.deleteLines; } });
+Object.defineProperty(exports, "extractLines", { enumerable: true, get: function () { return edit_operations_js_1.extractLines; } });
+Object.defineProperty(exports, "getLineRange", { enumerable: true, get: function () { return edit_operations_js_1.getLineRange; } });
+Object.defineProperty(exports, "replaceLineRange", { enumerable: true, get: function () { return edit_operations_js_1.replaceLineRange; } });
+Object.defineProperty(exports, "generateDiff", { enumerable: true, get: function () { return edit_operations_js_1.generateDiff; } });
+Object.defineProperty(exports, "formatDiff", { enumerable: true, get: function () { return edit_operations_js_1.formatDiff; } });
+Object.defineProperty(exports, "EditOperations", { enumerable: true, get: function () { return edit_operations_js_1.EditOperations; } });

@@ -19,9 +19,9 @@ class ShellError extends Error {
     constructor(message) {
         super(message);
         /** @readonly */
-        this.name = 'ShellError';
+        this.name = "ShellError";
         Object.setPrototypeOf(this, new.target.prototype);
-        this.name = 'ShellError';
+        this.name = "ShellError";
     }
 }
 exports.ShellError = ShellError;
@@ -40,7 +40,7 @@ class ExecutionError extends ShellError {
      * @param signal   - OS signal that terminated the process (e.g. `'SIGTERM'`), or `null`.
      * @param killed   - Whether the process was killed by the timeout mechanism.
      */
-    constructor(message, exitCode = 1, stdout = '', stderr = '', signal = null, killed = false) {
+    constructor(message, exitCode = 1, stdout = "", stderr = "", signal = null, killed = false) {
         super(message);
         this.exitCode = exitCode;
         this.stdout = stdout;
@@ -48,9 +48,9 @@ class ExecutionError extends ShellError {
         this.signal = signal;
         this.killed = killed;
         /** @readonly */
-        this.name = 'ExecutionError';
+        this.name = "ExecutionError";
         Object.setPrototypeOf(this, new.target.prototype);
-        this.name = 'ExecutionError';
+        this.name = "ExecutionError";
     }
 }
 exports.ExecutionError = ExecutionError;
@@ -67,9 +67,9 @@ class SystemError extends ShellError {
     constructor(message) {
         super(message);
         /** @readonly */
-        this.name = 'SystemError';
+        this.name = "SystemError";
         Object.setPrototypeOf(this, new.target.prototype);
-        this.name = 'SystemError';
+        this.name = "SystemError";
     }
 }
 exports.SystemError = SystemError;
@@ -87,9 +87,9 @@ class FileSystemError extends ShellError {
     constructor(message, details = {}) {
         super(message);
         /** @readonly */
-        this.name = 'FileSystemError';
+        this.name = "FileSystemError";
         Object.setPrototypeOf(this, new.target.prototype);
-        this.name = 'FileSystemError';
+        this.name = "FileSystemError";
         this.path = details.path ?? null;
         this.destination = details.destination ?? null;
         this.originalError = details.originalError ?? null;

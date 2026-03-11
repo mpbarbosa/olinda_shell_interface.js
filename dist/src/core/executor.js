@@ -23,9 +23,9 @@ const execAsync = (0, util_1.promisify)(child_process_1.exec);
  * const { stdout } = await execute('ls -la');
  */
 async function execute(command, options = {}) {
-    const { cwd = process.cwd(), env = process.env, timeout = 300000, shell = '/bin/sh', maxBuffer = 10 * 1024 * 1024, } = options;
+    const { cwd = process.cwd(), env = process.env, timeout = 300000, shell = "/bin/sh", maxBuffer = 10 * 1024 * 1024, } = options;
     // `exec()` only accepts `string | undefined` for `shell`; normalize boolean values.
-    const execShell = shell === true ? '/bin/sh' : shell === false ? undefined : shell;
+    const execShell = shell === true ? "/bin/sh" : shell === false ? undefined : shell;
     try {
         const { stdout, stderr } = await execAsync(command, {
             cwd,
@@ -39,10 +39,12 @@ async function execute(command, options = {}) {
     catch (err) {
         // Narrow the caught value to ExecException before accessing its properties.
         // exec() rejects with ExecException on non-zero exit; plain Error otherwise.
-        const execErr = typeof err === 'object' && err !== null && 'code' in err ? err : null;
-        const exitCode = typeof execErr?.code === 'number' ? execErr.code : 1;
-        const stdout = typeof execErr?.stdout === 'string' ? execErr.stdout.trim() : '';
-        const stderr = typeof execErr?.stderr === 'string' ? execErr.stderr.trim() : '';
+        const execErr = typeof err === "object" && err !== null && "code" in err
+            ? err
+            : null;
+        const exitCode = typeof execErr?.code === "number" ? execErr.code : 1;
+        const stdout = typeof execErr?.stdout === "string" ? execErr.stdout.trim() : "";
+        const stderr = typeof execErr?.stderr === "string" ? execErr.stderr.trim() : "";
         const signal = execErr?.signal ?? null;
         const killed = execErr?.killed ?? false;
         throw new errors_js_1.ExecutionError(`ExecutionError: ${command}`, exitCode, stdout, stderr, signal, killed);
@@ -60,36 +62,43 @@ async function execute(command, options = {}) {
  */
 function executeStream(command, options = {}) {
     return new Promise((resolve, reject) => {
-        const { cwd = process.cwd(), env = process.env, onStdout, onStderr } = options;
+        const { cwd = process.cwd(), env = process.env, onStdout, onStderr, } = options;
         // Pass the full command string to the shell rather than splitting on spaces,
         // which would break quoted arguments and paths containing spaces.
-        const child = (0, child_process_1.spawn)(command, [], { cwd, env, stdio: ['inherit', 'pipe', 'pipe'], shell: true });
+        const child = (0, child_process_1.spawn)(command, [], {
+            cwd,
+            env,
+            stdio: ["inherit", "pipe", "pipe"],
+            shell: true,
+        });
         if (onStdout) {
-            child.stdout.on('data', (data) => onStdout(data.toString()));
+            child.stdout.on("data", (data) => onStdout(data.toString()));
         }
         else {
             child.stdout.pipe(process.stdout);
         }
         if (onStderr) {
-            child.stderr.on('data', (data) => onStderr(data.toString()));
+            child.stderr.on("data", (data) => onStderr(data.toString()));
         }
         else {
             child.stderr.pipe(process.stderr);
         }
         let settled = false;
-        child.on('close', (code) => {
+        child.on("close", (code, signal) => {
             if (settled)
                 return;
             settled = true;
             const exitCode = code ?? 1;
-            if (exitCode === 0) {
+            if (code === 0) {
                 resolve(exitCode);
             }
             else {
-                reject(new errors_js_1.ExecutionError(`ExecutionError: command exited with code ${exitCode}`, exitCode));
+                reject(new errors_js_1.ExecutionError(signal
+                    ? `ExecutionError: command killed by signal ${signal}`
+                    : `ExecutionError: command exited with code ${exitCode}`, exitCode, "", "", signal));
             }
         });
-        child.on('error', (error) => {
+        child.on("error", (error) => {
             if (settled)
                 return;
             settled = true;
@@ -108,8 +117,8 @@ function executeStream(command, options = {}) {
  * const result = await executeSudo('systemctl restart nginx');
  */
 async function executeSudo(command, options = {}) {
-    const needsSudo = process.platform !== 'win32' &&
-        typeof process.getuid === 'function' &&
+    const needsSudo = process.platform !== "win32" &&
+        typeof process.getuid === "function" &&
         process.getuid() !== 0;
     return execute(needsSudo ? `sudo ${command}` : command, options);
 }
