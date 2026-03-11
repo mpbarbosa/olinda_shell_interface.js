@@ -38,18 +38,20 @@ olinda_shell_interface.js/
 │   ├── file_operations.md    # File operations reference
 │   ├── jq_wrapper.md         # jq wrapper reference
 │   ├── logger.md             # Logger module usage guide (colors/logging patterns)
-│   └── system.md             # System module reference
+│   ├── system.md             # System module reference
+│   └── utils.md              # Utility functions reference (string, array, object)
 ├── dist/
 │   ├── src/                  # CJS compiled output (tracked for CDN)
 │   └── types/                # TypeScript declaration files
 ├── scripts/
 │   ├── colors.sh             # ANSI colour helpers
 │   └── deploy.sh             # Build → tag → push → CDN URL generation
-├── .github/
+├── .github/                  # GitHub automation (see .github/README.md)
 │   ├── workflows/
 │   │   └── ci.yml            # GitHub Actions CI (lint, build, test on every push/PR)
 │   ├── copilot-instructions.md  # Copilot coding-agent project instructions
-│   └── dependabot.yml        # Dependabot: weekly npm and Actions updates
+│   ├── dependabot.yml        # Dependabot: weekly npm and Actions updates
+│   └── README.md             # .github directory documentation
 ├── .ai_workflow/             # ai_workflow.js runtime artifacts
 ├── cdn-delivery.sh           # Generates cdn-urls.txt
 ├── .workflow-config.yaml     # ai_workflow.js project configuration
