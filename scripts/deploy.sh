@@ -43,6 +43,7 @@ echo ""
 # ── 1. Build ──────────────────────────────────────────────────────────────────
 info "Step 1/4 — Building TypeScript …"
 npm run build
+npm run build:vite
 success "Build complete"
 echo ""
 
