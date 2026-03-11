@@ -94,3 +94,29 @@ export type {
 	GlobOptions,
 	FileOperationsOptions,
 } from './core/file_operations.js';
+
+export {
+	findMatches,
+	replaceAll,
+	replaceFirst,
+	insertAtLine,
+	appendText,
+	prependText,
+	deleteLines,
+	extractLines,
+	getLineRange,
+	replaceLineRange,
+	generateDiff,
+	formatDiff,
+	EditOperations,
+} from './core/edit_operations.js';
+export type {
+	Match,
+	DiffChange,
+	Diff,
+	ReplaceResult,
+	DeleteResult,
+	PreviewResult,
+	TransformResult,
+	EditOperationsOptions,
+} from './core/edit_operations.js';
