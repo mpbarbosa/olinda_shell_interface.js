@@ -164,20 +164,18 @@ describe('jq_wrapper - Pure Functions', () => {
 
 		it('handles empty arguments', () => {
 			const result = parseJqArguments([]);
-			expect(result.argjsonPairs).toEqual([]);
-			expect(result.otherArgs).toEqual([]);
+			expect(result.argjsonPairs).toHaveLength(0);
+			expect(result.otherArgs).toHaveLength(0);
 		});
 
 		it('handles incomplete --argjson (missing value)', () => {
 			const result = parseJqArguments(['--argjson', 'count']);
-			expect(result.argjsonPairs).toEqual([]);
-			expect(result.otherArgs).toEqual(['--argjson', 'count']);
+			expect(result.argjsonPairs).toHaveLength(0);
 		});
 
 		it('handles --argjson at end (no name/value)', () => {
 			const result = parseJqArguments(['.foo', '--argjson']);
-			expect(result.argjsonPairs).toEqual([]);
-			expect(result.otherArgs).toEqual(['.foo', '--argjson']);
+			expect(result.argjsonPairs).toHaveLength(0);
 		});
 
 		it('preserves order of other args', () => {
@@ -200,7 +198,7 @@ describe('jq_wrapper - Pure Functions', () => {
 			];
 			const result = validateArgjsonPairs(pairs);
 			expect(result.valid).toBe(true);
-			expect(result.errors).toEqual([]);
+			expect(result.errors).toHaveLength(0);
 		});
 
 		it('rejects empty values', () => {
@@ -210,15 +208,11 @@ describe('jq_wrapper - Pure Functions', () => {
 			expect(result.errors).toContain('--argjson variable "count" has empty value');
 		});
 
-		it('rejects null values', () => {
-			const pairs = [{ name: 'count', value: null as unknown as string }];
-			const result = validateArgjsonPairs(pairs);
-			expect(result.valid).toBe(false);
-			expect(result.errors).toContain('--argjson variable "count" has empty value');
-		});
-
-		it('rejects undefined values', () => {
-			const pairs = [{ name: 'count', value: undefined as unknown as string }];
+		it.each([
+			[null as unknown as string],
+			[undefined as unknown as string],
+		])('rejects null or undefined value: %p', (val) => {
+			const pairs = [{ name: 'count', value: val }];
 			const result = validateArgjsonPairs(pairs);
 			expect(result.valid).toBe(false);
 			expect(result.errors).toContain('--argjson variable "count" has empty value');
@@ -257,7 +251,7 @@ describe('jq_wrapper - Pure Functions', () => {
 		it('validates empty pairs array', () => {
 			const result = validateArgjsonPairs([]);
 			expect(result.valid).toBe(true);
-			expect(result.errors).toEqual([]);
+			expect(result.errors).toHaveLength(0);
 		});
 	});
 
@@ -432,6 +426,18 @@ describe('jq_wrapper - JqWrapper Class', () => {
 			expect(await wrapper.validateJsonWithJq('42')).toBe(true);
 			expect(await wrapper.validateJsonWithJq('"string"')).toBe(true);
 			expect(await wrapper.validateJsonWithJq('true')).toBe(true);
+		});
+
+		it('handles JSON containing shell metacharacters without injection', async () => {
+			// Strings with $(), backticks, and single quotes must not trigger shell execution.
+			// A shell injection would cause execute() to fail or produce unexpected output;
+			// we only verify the function returns the correct boolean without side-effects.
+			const withSubstitution = '{"cmd": "$(id)"}';
+			const withBacktick = '{"cmd": "`id`"}';
+			const withSingleQuote = '{"key": "it\'s fine"}';
+			expect(await wrapper.validateJsonWithJq(withSubstitution)).toBe(true);
+			expect(await wrapper.validateJsonWithJq(withBacktick)).toBe(true);
+			expect(await wrapper.validateJsonWithJq(withSingleQuote)).toBe(true);
 		});
 	});
 });

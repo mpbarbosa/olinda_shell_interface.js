@@ -4,9 +4,9 @@
  * @description Execute Linux shell commands with output capture and streaming support.
  */
 
-import { exec, spawn, type ExecException } from 'child_process';
-import { promisify } from 'util';
-import { ExecutionError } from '../utils/errors.js';
+import { exec, spawn, type ExecException } from "child_process";
+import { promisify } from "util";
+import { ExecutionError } from "../utils/errors.js";
 
 const execAsync = promisify(exec);
 
@@ -25,7 +25,10 @@ export interface ExecuteOptions {
 }
 
 /** Options for {@link executeStream}. */
-export interface StreamOptions extends Omit<ExecuteOptions, 'timeout' | 'shell'> {
+export interface StreamOptions extends Omit<
+	ExecuteOptions,
+	"timeout" | "shell"
+> {
 	/** Called with each chunk of stdout. If omitted, pipes to `process.stdout`. */
 	onStdout?: (chunk: string) => void;
 	/** Called with each chunk of stderr. If omitted, pipes to `process.stderr`. */
@@ -49,17 +52,21 @@ export interface ExecuteResult {
  * @example
  * const { stdout } = await execute('ls -la');
  */
-export async function execute(command: string, options: ExecuteOptions = {}): Promise<ExecuteResult> {
+export async function execute(
+	command: string,
+	options: ExecuteOptions = {},
+): Promise<ExecuteResult> {
 	const {
 		cwd = process.cwd(),
 		env = process.env,
 		timeout = 300_000,
-		shell = '/bin/sh',
+		shell = "/bin/sh",
 		maxBuffer = 10 * 1024 * 1024,
 	} = options;
 
 	// `exec()` only accepts `string | undefined` for `shell`; normalize boolean values.
-	const execShell: string | undefined = shell === true ? '/bin/sh' : shell === false ? undefined : shell;
+	const execShell: string | undefined =
+		shell === true ? "/bin/sh" : shell === false ? undefined : shell;
 
 	try {
 		const { stdout, stderr } = await execAsync(command, {
@@ -75,13 +82,24 @@ export async function execute(command: string, options: ExecuteOptions = {}): Pr
 		// Narrow the caught value to ExecException before accessing its properties.
 		// exec() rejects with ExecException on non-zero exit; plain Error otherwise.
 		const execErr =
-			typeof err === 'object' && err !== null && 'code' in err ? (err as ExecException) : null;
-		const exitCode = typeof execErr?.code === 'number' ? execErr.code : 1;
-		const stdout = typeof execErr?.stdout === 'string' ? execErr.stdout.trim() : '';
-		const stderr = typeof execErr?.stderr === 'string' ? execErr.stderr.trim() : '';
+			typeof err === "object" && err !== null && "code" in err
+				? (err as ExecException)
+				: null;
+		const exitCode = typeof execErr?.code === "number" ? execErr.code : 1;
+		const stdout =
+			typeof execErr?.stdout === "string" ? execErr.stdout.trim() : "";
+		const stderr =
+			typeof execErr?.stderr === "string" ? execErr.stderr.trim() : "";
 		const signal = execErr?.signal ?? null;
 		const killed = execErr?.killed ?? false;
-		throw new ExecutionError(`ExecutionError: ${command}`, exitCode, stdout, stderr, signal, killed);
+		throw new ExecutionError(
+			`ExecutionError: ${command}`,
+			exitCode,
+			stdout,
+			stderr,
+			signal,
+			killed,
+		);
 	}
 }
 
@@ -95,43 +113,70 @@ export async function execute(command: string, options: ExecuteOptions = {}): Pr
  * @example
  * await executeStream('ping -c 3 localhost', { onStdout: console.log });
  */
-export function executeStream(command: string, options: StreamOptions = {}): Promise<number> {
+export function executeStream(
+	command: string,
+	options: StreamOptions = {},
+): Promise<number> {
 	return new Promise((resolve, reject) => {
-		const { cwd = process.cwd(), env = process.env, onStdout, onStderr } = options;
+		const {
+			cwd = process.cwd(),
+			env = process.env,
+			onStdout,
+			onStderr,
+		} = options;
 
 		// Pass the full command string to the shell rather than splitting on spaces,
 		// which would break quoted arguments and paths containing spaces.
-		const child = spawn(command, [], { cwd, env, stdio: ['inherit', 'pipe', 'pipe'], shell: true });
+		const child = spawn(command, [], {
+			cwd,
+			env,
+			stdio: ["inherit", "pipe", "pipe"],
+			shell: true,
+		});
 
 		if (onStdout) {
-			child.stdout.on('data', (data: Buffer) => onStdout(data.toString()));
+			child.stdout.on("data", (data: Buffer) => onStdout(data.toString()));
 		} else {
 			child.stdout.pipe(process.stdout);
 		}
 
 		if (onStderr) {
-			child.stderr.on('data', (data: Buffer) => onStderr(data.toString()));
+			child.stderr.on("data", (data: Buffer) => onStderr(data.toString()));
 		} else {
 			child.stderr.pipe(process.stderr);
 		}
 
 		let settled = false;
 
-		child.on('close', (code: number | null) => {
+		child.on("close", (code: number | null, signal: NodeJS.Signals | null) => {
 			if (settled) return;
 			settled = true;
 			const exitCode = code ?? 1;
-			if (exitCode === 0) {
+			if (code === 0) {
 				resolve(exitCode);
 			} else {
-				reject(new ExecutionError(`ExecutionError: command exited with code ${exitCode}`, exitCode));
+				reject(
+					new ExecutionError(
+						signal
+							? `ExecutionError: command killed by signal ${signal}`
+							: `ExecutionError: command exited with code ${exitCode}`,
+						exitCode,
+						"",
+						"",
+						signal,
+					),
+				);
 			}
 		});
 
-		child.on('error', (error: Error) => {
+		child.on("error", (error: Error) => {
 			if (settled) return;
 			settled = true;
-			reject(new ExecutionError(`ExecutionError: failed to spawn — ${error.message}`));
+			reject(
+				new ExecutionError(
+					`ExecutionError: failed to spawn — ${error.message}`,
+				),
+			);
 		});
 	});
 }
@@ -146,10 +191,13 @@ export function executeStream(command: string, options: StreamOptions = {}): Pro
  * @example
  * const result = await executeSudo('systemctl restart nginx');
  */
-export async function executeSudo(command: string, options: ExecuteOptions = {}): Promise<ExecuteResult> {
+export async function executeSudo(
+	command: string,
+	options: ExecuteOptions = {},
+): Promise<ExecuteResult> {
 	const needsSudo =
-		process.platform !== 'win32' &&
-		typeof process.getuid === 'function' &&
+		process.platform !== "win32" &&
+		typeof process.getuid === "function" &&
 		process.getuid() !== 0;
 	return execute(needsSudo ? `sudo ${command}` : command, options);
 }

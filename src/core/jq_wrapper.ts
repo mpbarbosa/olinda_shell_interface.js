@@ -10,9 +10,9 @@
  * - Async wrapper class: JqWrapper for command execution and I/O
  */
 
-import { logger } from 'olinda_utils.js';
-import { ShellError } from '../utils/errors.js';
-import { execute } from './executor.js';
+import { logger } from "olinda_utils.js";
+import { ShellError } from "../utils/errors.js";
+import { execute } from "./executor.js";
 
 // ============================================================================
 // CUSTOM ERROR CLASS
@@ -26,7 +26,7 @@ import { execute } from './executor.js';
  * throw new JqExecutionError('validation failed', 'JQ_VALIDATION_ERROR', 'my-script');
  */
 export class JqExecutionError extends ShellError {
-	readonly name = 'JqExecutionError';
+	readonly name = "JqExecutionError";
 
 	/**
 	 * @param message - Human-readable description.
@@ -40,7 +40,7 @@ export class JqExecutionError extends ShellError {
 	) {
 		super(message);
 		Object.setPrototypeOf(this, new.target.prototype);
-		this.name = 'JqExecutionError';
+		this.name = "JqExecutionError";
 	}
 }
 
@@ -59,7 +59,7 @@ export class JqExecutionError extends ShellError {
  * validateJson('')               // false
  */
 export function validateJson(jsonString: string): boolean {
-	if (typeof jsonString !== 'string' || jsonString.trim() === '') {
+	if (typeof jsonString !== "string" || jsonString.trim() === "") {
 		return false;
 	}
 
@@ -86,10 +86,10 @@ export function validateJson(jsonString: string): boolean {
  */
 /** @internal Coerce a trimmed string to a JSON-safe primitive. */
 function sanitizeStringValue(trimmed: string, defaultValue: unknown): unknown {
-	if (trimmed === 'true') return true;
-	if (trimmed === 'false') return false;
-	if (trimmed === 'null') return null;
-	if (trimmed === '') return defaultValue;
+	if (trimmed === "true") return true;
+	if (trimmed === "false") return false;
+	if (trimmed === "null") return null;
+	if (trimmed === "") return defaultValue;
 
 	const num = Number(trimmed);
 	if (!isNaN(num) && isFinite(num)) return num;
@@ -101,21 +101,24 @@ function sanitizeStringValue(trimmed: string, defaultValue: unknown): unknown {
 	}
 }
 
-export function sanitizeArgjsonValue(value: unknown, defaultValue: unknown = 0): unknown {
+export function sanitizeArgjsonValue(
+	value: unknown,
+	defaultValue: unknown = 0,
+): unknown {
 	if (value === null) return null;
 	if (value === undefined) return defaultValue;
-	if (typeof value === 'boolean') return value;
+	if (typeof value === "boolean") return value;
 
-	if (typeof value === 'number') {
+	if (typeof value === "number") {
 		return isNaN(value) || !isFinite(value) ? defaultValue : value;
 	}
 
-	if (typeof value === 'string') {
+	if (typeof value === "string") {
 		return sanitizeStringValue(value.trim(), defaultValue);
 	}
 
 	// Handle objects/arrays - deep-clone and validate
-	if (typeof value === 'object') {
+	if (typeof value === "object") {
 		try {
 			return JSON.parse(JSON.stringify(value));
 		} catch {
@@ -155,7 +158,7 @@ export function parseJqArguments(args: string[]): ParsedJqArguments {
 	while (i < args.length) {
 		const arg = args[i];
 
-		if (arg === '--argjson') {
+		if (arg === "--argjson") {
 			const name = args[i + 1];
 			const value = args[i + 2];
 
@@ -193,20 +196,25 @@ export interface ArgjsonValidationResult {
  * validateArgjsonPairs([{name: 'count', value: ''}])
  * // { valid: false, errors: ['--argjson variable "count" has empty value'] }
  */
-export function validateArgjsonPairs(argjsonPairs: ArgjsonPair[]): ArgjsonValidationResult {
+export function validateArgjsonPairs(
+	argjsonPairs: ArgjsonPair[],
+): ArgjsonValidationResult {
 	const errors: string[] = [];
 
 	for (const { name, value } of argjsonPairs) {
-		if (value === '' || value === null || value === undefined) {
+		if (value === "" || value === null || value === undefined) {
 			errors.push(`--argjson variable "${name}" has empty value`);
 			continue;
 		}
 
 		const trimmedValue = String(value).trim();
-		const jsonPrimitivePattern = /^(-?\d+\.?\d*|".*"|true|false|null|\{.*\}|\[.*\])$/;
+		const jsonPrimitivePattern =
+			/^(-?\d+\.?\d*|".*"|true|false|null|\{.*\}|\[.*\])$/;
 
 		if (!jsonPrimitivePattern.test(trimmedValue)) {
-			errors.push(`--argjson variable "${name}" value "${value}" may not be valid JSON`);
+			errors.push(
+				`--argjson variable "${name}" value "${value}" may not be valid JSON`,
+			);
 		}
 	}
 
@@ -224,7 +232,7 @@ export function validateArgjsonPairs(argjsonPairs: ArgjsonPair[]): ArgjsonValida
  */
 export function buildJqCommand(args: unknown[]): string {
 	const escapedArgs = args.map((arg) => {
-		let s = typeof arg !== 'string' ? String(arg) : arg;
+		let s = typeof arg !== "string" ? String(arg) : arg;
 
 		if (/[\s'"$`\\]/.test(s)) {
 			return `'${s.replace(/'/g, "'\\''")}'`;
@@ -232,7 +240,7 @@ export function buildJqCommand(args: unknown[]): string {
 		return s;
 	});
 
-	return `jq ${escapedArgs.join(' ')}`;
+	return `jq ${escapedArgs.join(" ")}`;
 }
 
 // ============================================================================
@@ -271,7 +279,7 @@ export class JqWrapper {
 
 	constructor(options: JqWrapperOptions = {}) {
 		this.debug = options.debug ?? false;
-		this.callerContext = options.callerContext ?? 'unknown';
+		this.callerContext = options.callerContext ?? "unknown";
 	}
 
 	/**
@@ -283,12 +291,15 @@ export class JqWrapper {
 	 * @example
 	 * const result = await wrapper.execute(['-n', '--argjson', 'count', '5', '{count: $count}']);
 	 */
-	async execute(args: string[], options: JqExecuteOptions = {}): Promise<string> {
+	async execute(
+		args: string[],
+		options: JqExecuteOptions = {},
+	): Promise<string> {
 		const throwOnError = options.throwOnError !== false;
 
 		if (this.debug) {
 			logger.debug(`jq_safe called from: ${this.callerContext}`);
-			logger.debug(`Arguments: ${args.join(' ')}`);
+			logger.debug(`Arguments: ${args.join(" ")}`);
 		}
 
 		// Validate --argjson arguments
@@ -296,14 +307,18 @@ export class JqWrapper {
 		const validation = validateArgjsonPairs(argjsonPairs);
 
 		if (!validation.valid) {
-			const errorMsg = `jq_safe validation failed in ${this.callerContext}:\n${validation.errors.map((e) => `  - ${e}`).join('\n')}`;
+			const errorMsg = `jq_safe validation failed in ${this.callerContext}:\n${validation.errors.map((e) => `  - ${e}`).join("\n")}`;
 			logger.error(errorMsg);
 
 			if (throwOnError) {
-				throw new JqExecutionError(errorMsg, 'JQ_VALIDATION_ERROR', this.callerContext);
+				throw new JqExecutionError(
+					errorMsg,
+					"JQ_VALIDATION_ERROR",
+					this.callerContext,
+				);
 			}
 
-			return '';
+			return "";
 		}
 
 		// Build and execute command
@@ -322,10 +337,14 @@ export class JqWrapper {
 			logger.error(errorMsg);
 
 			if (throwOnError) {
-				throw new JqExecutionError(errorMsg, 'JQ_EXECUTION_ERROR', this.callerContext);
+				throw new JqExecutionError(
+					errorMsg,
+					"JQ_EXECUTION_ERROR",
+					this.callerContext,
+				);
 			}
 
-			return '';
+			return "";
 		}
 	}
 
@@ -339,7 +358,10 @@ export class JqWrapper {
 	 * const obj = await wrapper.executeAndParse(['-n', '{foo: "bar"}']);
 	 * // { foo: 'bar' }
 	 */
-	async executeAndParse<T = unknown>(args: string[], options: JqExecuteOptions = {}): Promise<T> {
+	async executeAndParse<T = unknown>(
+		args: string[],
+		options: JqExecuteOptions = {},
+	): Promise<T> {
 		const result = await this.execute(args, options);
 
 		try {
@@ -347,7 +369,11 @@ export class JqWrapper {
 		} catch (parseError) {
 			const errorMsg = `Failed to parse jq output as JSON: ${parseError instanceof Error ? parseError.message : String(parseError)}`;
 			logger.error(errorMsg);
-			throw new JqExecutionError(errorMsg, 'JQ_PARSE_ERROR', this.callerContext);
+			throw new JqExecutionError(
+				errorMsg,
+				"JQ_PARSE_ERROR",
+				this.callerContext,
+			);
 		}
 	}
 
@@ -360,8 +386,12 @@ export class JqWrapper {
 	 * await wrapper.validateJsonWithJq('{invalid}')      // false
 	 */
 	async validateJsonWithJq(jsonString: string): Promise<boolean> {
+		// Use single-quote wrapping with proper escaping to prevent shell injection.
+		// JSON.stringify does not escape shell metacharacters ($, `, !), so passing
+		// arbitrary JSON via echo inside double quotes is unsafe.
+		const shellSafeJson = jsonString.replace(/'/g, "'\\''");
 		try {
-			await execute(`echo ${JSON.stringify(jsonString)} | jq -e . >/dev/null`);
+			await execute(`printf '%s\n' '${shellSafeJson}' | jq -e . >/dev/null`);
 			return true;
 		} catch {
 			return false;

@@ -203,6 +203,18 @@ describe('executeStream', () => {
 				executeStream('exit 2', { onStdout: () => {} }),
 			).rejects.toBeInstanceOf(ExecutionError);
 		});
+
+		it('carries signal name when process is killed by SIGTERM', async () => {
+			// The command kills its own shell process with SIGTERM.
+			// This reliably exercises the close-handler signal branch without needing
+			// external process management or access to child.pid.
+			const err = await executeStream(
+				'bash -c "kill -SIGTERM $$"',
+				{ onStdout: () => {} },
+			).catch((e: unknown) => e);
+			expect(err).toBeInstanceOf(ExecutionError);
+			expect((err as ExecutionError).signal).toBe('SIGTERM');
+		});
 	});
 
 	describe('pipe fallback (no callbacks)', () => {
