@@ -11,6 +11,14 @@ Versioning follows [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [0.5.9] — 2026-03-11
+
+### Changed
+
+- Upgraded `olinda_utils.js` dependency from `v0.3.14` to `v0.3.15`.
+
+---
+
 ## [0.5.8] — 2026-03-10
 
 ### Added
