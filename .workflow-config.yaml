@@ -2,7 +2,7 @@ project:
   name: olinda_shell_interface.js
   type: nodejs-library
   kind: nodejs_automation  # shell command execution library for Linux
-  version: '0.2.0'  # keep in sync with package.json
+  version: '0.5.5'  # keep in sync with package.json
   description: Public TypeScript library for interfacing with Linux shell commands
 
 tech_stack:
@@ -20,6 +20,9 @@ structure:
     - test
   docs_dirs:
     - docs
+  exclude_paths:
+    - .ai_workflow/logs
+    - .ai_workflow/summaries
 
 workflow:
   stages:
