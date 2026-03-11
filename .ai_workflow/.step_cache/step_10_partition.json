@@ -2,9 +2,9 @@
   "version": 1,
   "partitionIndex": 0,
   "totalPartitions": 1,
-  "filesHash": "9b66c4b0",
+  "filesHash": "7f4efdb0",
   "partitionLabels": [
-    ".ai_workflow/metrics"
+    "src/core, src, .ai_workflow/metrics, package.json"
   ],
-  "updatedAt": "2026-03-11T01:17:03.336Z"
+  "updatedAt": "2026-03-11T13:24:00.904Z"
 }

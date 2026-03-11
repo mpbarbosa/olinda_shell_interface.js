@@ -1,7 +1,7 @@
 # Utils — General Utility Functions
 
 **Re-exported from:** [`olinda_utils.js`](https://github.com/mpbarbosa/olinda_utils.js)
-**Available since:** `olinda_shell_interface.js` v0.5.6
+**Available since:** `olinda_shell_interface.js` v0.5.7
 **Type:** Pure Functions Only
 
 ## Overview
