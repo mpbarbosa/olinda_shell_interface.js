@@ -37,12 +37,14 @@ async function execute(command, options = {}) {
         return { stdout: stdout.trim(), stderr: stderr.trim(), exitCode: 0 };
     }
     catch (err) {
-        const error = err;
-        const exitCode = typeof error.code === 'number' ? error.code : 1;
-        const stdout = typeof error.stdout === 'string' ? error.stdout.trim() : '';
-        const stderr = typeof error.stderr === 'string' ? error.stderr.trim() : '';
-        const signal = error.signal ?? null;
-        const killed = error.killed ?? false;
+        // Narrow the caught value to ExecException before accessing its properties.
+        // exec() rejects with ExecException on non-zero exit; plain Error otherwise.
+        const execErr = typeof err === 'object' && err !== null && 'code' in err ? err : null;
+        const exitCode = typeof execErr?.code === 'number' ? execErr.code : 1;
+        const stdout = typeof execErr?.stdout === 'string' ? execErr.stdout.trim() : '';
+        const stderr = typeof execErr?.stderr === 'string' ? execErr.stderr.trim() : '';
+        const signal = execErr?.signal ?? null;
+        const killed = execErr?.killed ?? false;
         throw new errors_js_1.ExecutionError(`ExecutionError: ${command}`, exitCode, stdout, stderr, signal, killed);
     }
 }

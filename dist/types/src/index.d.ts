@@ -11,6 +11,7 @@ export { colors, supportsColor, colorize } from 'olinda_utils.js';
 export type { ColorName } from 'olinda_utils.js';
 export { Logger, logger, LogLevel, stripAnsi } from 'olinda_utils.js';
 export type { LoggerOptions, LogLevelValue } from 'olinda_utils.js';
+export { camelCase, kebabCase, snakeCase, pascalCase, capitalize, truncate, sanitize, cleanWhitespace, escapeRegex, dedupe, chunk, flatten, groupBy, sortBy, intersection, difference, partition, deepClone, deepMerge, pick, omit, getProperty, setProperty, hasProperty, deepEqual, isEmpty, } from 'olinda_utils.js';
 export { parseVersion, compareVersions, isGreaterThan, isLessThan, isEqual, getLatestVersion, } from './core/version.js';
 export type { ParsedVersion } from './core/version.js';
 export { JqExecutionError, validateJson, sanitizeArgjsonValue, parseJqArguments, validateArgjsonPairs, buildJqCommand, JqWrapper, } from './core/jq_wrapper.js';

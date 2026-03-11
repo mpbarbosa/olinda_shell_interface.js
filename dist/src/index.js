@@ -4,7 +4,8 @@
  * @module index
  */
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.FileOperations = exports.calculateRelativePath = exports.buildFileMetadata = exports.sortByModificationTime = exports.filterByPattern = exports.filterByExtension = exports.validatePath = exports.FileSystemError = exports.JqWrapper = exports.buildJqCommand = exports.validateArgjsonPairs = exports.parseJqArguments = exports.sanitizeArgjsonValue = exports.validateJson = exports.JqExecutionError = exports.getLatestVersion = exports.isEqual = exports.isLessThan = exports.isGreaterThan = exports.compareVersions = exports.parseVersion = exports.stripAnsi = exports.LogLevel = exports.logger = exports.Logger = exports.colorize = exports.supportsColor = exports.colors = exports.SystemError = exports.ExecutionError = exports.ShellError = exports.getSystemInfo = exports.commandExists = exports.detectPackageManager = exports.detectOS = exports.PackageManager = exports.OS = exports.executeSudo = exports.executeStream = exports.execute = void 0;
+exports.isEqual = exports.isLessThan = exports.isGreaterThan = exports.compareVersions = exports.parseVersion = exports.isEmpty = exports.deepEqual = exports.hasProperty = exports.setProperty = exports.getProperty = exports.omit = exports.pick = exports.deepMerge = exports.deepClone = exports.partition = exports.difference = exports.intersection = exports.sortBy = exports.groupBy = exports.flatten = exports.chunk = exports.dedupe = exports.escapeRegex = exports.cleanWhitespace = exports.sanitize = exports.truncate = exports.capitalize = exports.pascalCase = exports.snakeCase = exports.kebabCase = exports.camelCase = exports.stripAnsi = exports.LogLevel = exports.logger = exports.Logger = exports.colorize = exports.supportsColor = exports.colors = exports.SystemError = exports.ExecutionError = exports.ShellError = exports.getSystemInfo = exports.commandExists = exports.detectPackageManager = exports.detectOS = exports.PackageManager = exports.OS = exports.executeSudo = exports.executeStream = exports.execute = void 0;
+exports.FileOperations = exports.calculateRelativePath = exports.buildFileMetadata = exports.sortByModificationTime = exports.filterByPattern = exports.filterByExtension = exports.validatePath = exports.FileSystemError = exports.JqWrapper = exports.buildJqCommand = exports.validateArgjsonPairs = exports.parseJqArguments = exports.sanitizeArgjsonValue = exports.validateJson = exports.JqExecutionError = exports.getLatestVersion = void 0;
 var executor_js_1 = require("./core/executor.js");
 Object.defineProperty(exports, "execute", { enumerable: true, get: function () { return executor_js_1.execute; } });
 Object.defineProperty(exports, "executeStream", { enumerable: true, get: function () { return executor_js_1.executeStream; } });
@@ -29,6 +30,33 @@ Object.defineProperty(exports, "Logger", { enumerable: true, get: function () { 
 Object.defineProperty(exports, "logger", { enumerable: true, get: function () { return olinda_utils_js_2.logger; } });
 Object.defineProperty(exports, "LogLevel", { enumerable: true, get: function () { return olinda_utils_js_2.LogLevel; } });
 Object.defineProperty(exports, "stripAnsi", { enumerable: true, get: function () { return olinda_utils_js_2.stripAnsi; } });
+var olinda_utils_js_3 = require("olinda_utils.js");
+Object.defineProperty(exports, "camelCase", { enumerable: true, get: function () { return olinda_utils_js_3.camelCase; } });
+Object.defineProperty(exports, "kebabCase", { enumerable: true, get: function () { return olinda_utils_js_3.kebabCase; } });
+Object.defineProperty(exports, "snakeCase", { enumerable: true, get: function () { return olinda_utils_js_3.snakeCase; } });
+Object.defineProperty(exports, "pascalCase", { enumerable: true, get: function () { return olinda_utils_js_3.pascalCase; } });
+Object.defineProperty(exports, "capitalize", { enumerable: true, get: function () { return olinda_utils_js_3.capitalize; } });
+Object.defineProperty(exports, "truncate", { enumerable: true, get: function () { return olinda_utils_js_3.truncate; } });
+Object.defineProperty(exports, "sanitize", { enumerable: true, get: function () { return olinda_utils_js_3.sanitize; } });
+Object.defineProperty(exports, "cleanWhitespace", { enumerable: true, get: function () { return olinda_utils_js_3.cleanWhitespace; } });
+Object.defineProperty(exports, "escapeRegex", { enumerable: true, get: function () { return olinda_utils_js_3.escapeRegex; } });
+Object.defineProperty(exports, "dedupe", { enumerable: true, get: function () { return olinda_utils_js_3.dedupe; } });
+Object.defineProperty(exports, "chunk", { enumerable: true, get: function () { return olinda_utils_js_3.chunk; } });
+Object.defineProperty(exports, "flatten", { enumerable: true, get: function () { return olinda_utils_js_3.flatten; } });
+Object.defineProperty(exports, "groupBy", { enumerable: true, get: function () { return olinda_utils_js_3.groupBy; } });
+Object.defineProperty(exports, "sortBy", { enumerable: true, get: function () { return olinda_utils_js_3.sortBy; } });
+Object.defineProperty(exports, "intersection", { enumerable: true, get: function () { return olinda_utils_js_3.intersection; } });
+Object.defineProperty(exports, "difference", { enumerable: true, get: function () { return olinda_utils_js_3.difference; } });
+Object.defineProperty(exports, "partition", { enumerable: true, get: function () { return olinda_utils_js_3.partition; } });
+Object.defineProperty(exports, "deepClone", { enumerable: true, get: function () { return olinda_utils_js_3.deepClone; } });
+Object.defineProperty(exports, "deepMerge", { enumerable: true, get: function () { return olinda_utils_js_3.deepMerge; } });
+Object.defineProperty(exports, "pick", { enumerable: true, get: function () { return olinda_utils_js_3.pick; } });
+Object.defineProperty(exports, "omit", { enumerable: true, get: function () { return olinda_utils_js_3.omit; } });
+Object.defineProperty(exports, "getProperty", { enumerable: true, get: function () { return olinda_utils_js_3.getProperty; } });
+Object.defineProperty(exports, "setProperty", { enumerable: true, get: function () { return olinda_utils_js_3.setProperty; } });
+Object.defineProperty(exports, "hasProperty", { enumerable: true, get: function () { return olinda_utils_js_3.hasProperty; } });
+Object.defineProperty(exports, "deepEqual", { enumerable: true, get: function () { return olinda_utils_js_3.deepEqual; } });
+Object.defineProperty(exports, "isEmpty", { enumerable: true, get: function () { return olinda_utils_js_3.isEmpty; } });
 var version_js_1 = require("./core/version.js");
 Object.defineProperty(exports, "parseVersion", { enumerable: true, get: function () { return version_js_1.parseVersion; } });
 Object.defineProperty(exports, "compareVersions", { enumerable: true, get: function () { return version_js_1.compareVersions; } });
