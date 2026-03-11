@@ -6,7 +6,7 @@
  * Architecture: Pure functions + async wrapper class
  * - Pure functions: text search, replace, line manipulation, diff generation
  * - Async wrapper class: EditOperations for real file I/O
- * @since 0.5.8
+ * @since 0.5.9
  */
 import { FileOperations } from "./file_operations.js";
 /** A single pattern match returned by {@link findMatches}. */

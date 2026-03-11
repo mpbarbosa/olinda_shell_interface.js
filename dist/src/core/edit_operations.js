@@ -7,7 +7,7 @@
  * Architecture: Pure functions + async wrapper class
  * - Pure functions: text search, replace, line manipulation, diff generation
  * - Async wrapper class: EditOperations for real file I/O
- * @since 0.5.8
+ * @since 0.5.9
  */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.EditOperations = void 0;
