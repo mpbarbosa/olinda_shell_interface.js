@@ -1,4 +1,5 @@
 import os from 'os';
+import childProcess from 'child_process';
 import { jest } from '@jest/globals';
 import {
 	OS,
@@ -66,6 +67,8 @@ describe('detectOS', () => {
 // ─── commandExists ────────────────────────────────────────────────────────────
 
 describe('commandExists', () => {
+	afterEach(() => jest.restoreAllMocks());
+
 	it('returns true for a known command (node)', () => {
 		expect(commandExists('node')).toBe(true);
 	});
@@ -76,6 +79,12 @@ describe('commandExists', () => {
 
 	it('returns a boolean indicating command existence', () => {
 		expect(typeof commandExists('node')).toBe('boolean');
+	});
+
+	it('uses "where" command on Windows platform', () => {
+		jest.spyOn(os, 'platform').mockReturnValue('win32');
+		// On Linux CI "where" is unavailable so the call throws → false, but the win32 branch is exercised
+		expect(commandExists('__no_such_cmd__')).toBe(false);
 	});
 });
 
@@ -129,6 +138,90 @@ describe('getSystemInfo', () => {
 	it('has memory.free >= 0', () => expect(info.memory.free).toBeGreaterThanOrEqual(0));
 	it('has a known packageManager constant', () => {
 		expect(Object.values(PackageManager)).toContain(info.packageManager);
+	});
+});
+
+// ─── detectPackageManager — Windows ──────────────────────────────────────────
+
+describe('detectPackageManager on Windows', () => {
+	afterEach(() => jest.restoreAllMocks());
+
+	it('returns WINGET when winget exists', () => {
+		jest.spyOn(os, 'platform').mockReturnValue('win32');
+		jest.spyOn(childProcess, 'execSync').mockReturnValue(Buffer.from(''));
+		expect(detectPackageManager()).toBe(PackageManager.WINGET);
+	});
+
+	it('returns CHOCOLATEY when choco exists but winget does not', () => {
+		jest.spyOn(os, 'platform').mockReturnValue('win32');
+		jest.spyOn(childProcess, 'execSync').mockImplementation((cmd) => {
+			if (String(cmd).includes('winget')) throw new Error('not found');
+			return Buffer.from('');
+		});
+		expect(detectPackageManager()).toBe(PackageManager.CHOCOLATEY);
+	});
+
+	it('returns UNKNOWN when neither winget nor choco exists', () => {
+		jest.spyOn(os, 'platform').mockReturnValue('win32');
+		jest.spyOn(childProcess, 'execSync').mockImplementation(() => { throw new Error('not found'); });
+		expect(detectPackageManager()).toBe(PackageManager.UNKNOWN);
+	});
+});
+
+// ─── detectPackageManager — macOS ────────────────────────────────────────────
+
+describe('detectPackageManager on macOS', () => {
+	afterEach(() => jest.restoreAllMocks());
+
+	it('returns BREW when brew exists', () => {
+		jest.spyOn(os, 'platform').mockReturnValue('darwin');
+		jest.spyOn(childProcess, 'execSync').mockReturnValue(Buffer.from('/usr/local/bin/brew'));
+		expect(detectPackageManager()).toBe(PackageManager.BREW);
+	});
+
+	it('returns UNKNOWN when brew is not found', () => {
+		jest.spyOn(os, 'platform').mockReturnValue('darwin');
+		jest.spyOn(childProcess, 'execSync').mockImplementation(() => { throw new Error('not found'); });
+		expect(detectPackageManager()).toBe(PackageManager.UNKNOWN);
+	});
+});
+
+// ─── detectPackageManager — Linux alternative package managers ────────────────
+
+describe('detectPackageManager on Linux (alternative managers)', () => {
+	afterEach(() => jest.restoreAllMocks());
+
+	it('returns PACMAN when apt-get is missing but pacman exists', () => {
+		jest.spyOn(os, 'platform').mockReturnValue('linux');
+		jest.spyOn(childProcess, 'execSync').mockImplementation((cmd) => {
+			if (String(cmd).includes('apt-get')) throw new Error('not found');
+			return Buffer.from('');
+		});
+		expect(detectPackageManager()).toBe(PackageManager.PACMAN);
+	});
+
+	it('returns DNF when apt-get and pacman are missing but dnf exists', () => {
+		jest.spyOn(os, 'platform').mockReturnValue('linux');
+		jest.spyOn(childProcess, 'execSync').mockImplementation((cmd) => {
+			if (String(cmd).includes('apt-get') || String(cmd).includes('pacman')) throw new Error('not found');
+			return Buffer.from('');
+		});
+		expect(detectPackageManager()).toBe(PackageManager.DNF);
+	});
+
+	it('returns ZYPPER when apt-get, pacman, and dnf are missing but zypper exists', () => {
+		jest.spyOn(os, 'platform').mockReturnValue('linux');
+		jest.spyOn(childProcess, 'execSync').mockImplementation((cmd) => {
+			if (!String(cmd).includes('zypper')) throw new Error('not found');
+			return Buffer.from('');
+		});
+		expect(detectPackageManager()).toBe(PackageManager.ZYPPER);
+	});
+
+	it('returns UNKNOWN when no supported Linux package manager is found', () => {
+		jest.spyOn(os, 'platform').mockReturnValue('linux');
+		jest.spyOn(childProcess, 'execSync').mockImplementation(() => { throw new Error('not found'); });
+		expect(detectPackageManager()).toBe(PackageManager.UNKNOWN);
 	});
 });
 

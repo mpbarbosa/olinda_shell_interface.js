@@ -42,11 +42,8 @@ describe('Pure Functions - validatePath', () => {
 		expect(result.error).toContain('traversal');
 	});
 
-	it('rejects empty or invalid paths', () => {
-		expect(validatePath('').valid).toBe(false);
-		expect(validatePath(null).valid).toBe(false);
-		expect(validatePath(undefined).valid).toBe(false);
-		expect(validatePath(123).valid).toBe(false);
+	it.each(['', null, undefined, 123])('rejects invalid path: %p', (input) => {
+		expect(validatePath(input).valid).toBe(false);
 	});
 
 	it('normalizes paths before validation', () => {
@@ -82,15 +79,15 @@ describe('Pure Functions - filterByExtension', () => {
 		expect(result).toContain('/path/to/file5.md');
 	});
 
-	it('returns empty array for invalid input', () => {
-		expect(filterByExtension(null, ['.js'])).toEqual([]);
-		expect(filterByExtension(files, null)).toEqual([]);
-		expect(filterByExtension('not-array', ['.js'])).toEqual([]);
+	it('returns empty array for null files, null extensions, or non-array input', () => {
+		expect(filterByExtension(null, ['.js'])).toHaveLength(0);
+		expect(filterByExtension(files, null)).toHaveLength(0);
+		expect(filterByExtension('not-array', ['.js'])).toHaveLength(0);
 	});
 
 	it('returns empty array when no files match', () => {
 		const result = filterByExtension(files, ['.py']);
-		expect(result).toEqual([]);
+		expect(result).toHaveLength(0);
 	});
 });
 
@@ -115,9 +112,9 @@ describe('Pure Functions - filterByPattern', () => {
 		expect(result).toEqual(['/path/to/main.js']);
 	});
 
-	it('returns empty array for invalid input', () => {
-		expect(filterByPattern(null, /test/)).toEqual([]);
-		expect(filterByPattern('not-array', /test/)).toEqual([]);
+	it('returns empty array for null or non-array input', () => {
+		expect(filterByPattern(null, /test/)).toHaveLength(0);
+		expect(filterByPattern('not-array', /test/)).toHaveLength(0);
 	});
 
 	it('returns all files if pattern matches all', () => {
@@ -531,6 +528,73 @@ describe('FileOperations Integration Tests', () => {
 			await dryRunOps.deleteDirectory(dirPath);
 
 			expect(await fileOps.exists(dirPath)).toBe(true);
+		});
+	});
+
+	describe('verbose mode', () => {
+		let verboseOps: FileOperations;
+
+		beforeEach(() => {
+			verboseOps = new FileOperations({ verbose: true });
+		});
+
+		it('readFile executes successfully with verbose enabled', async () => {
+			const filePath = path.join(tempDir, 'verbose-read.txt');
+			await fs.writeFile(filePath, 'verbose hello');
+			const content = await verboseOps.readFile(filePath);
+			expect(content).toBe('verbose hello');
+		});
+
+		it('writeFile executes successfully with verbose enabled', async () => {
+			const filePath = path.join(tempDir, 'verbose-write.txt');
+			await verboseOps.writeFile(filePath, 'verbose content');
+			const saved = await fs.readFile(filePath, 'utf8');
+			expect(saved).toBe('verbose content');
+		});
+
+		it('listDirectory executes successfully with verbose enabled', async () => {
+			await fs.writeFile(path.join(tempDir, 'item.txt'), '');
+			const entries = await verboseOps.listDirectory(tempDir);
+			expect(entries.length).toBeGreaterThan(0);
+		});
+
+		it('copyFile executes successfully with verbose enabled', async () => {
+			const src = path.join(tempDir, 'verbose-src.txt');
+			const dest = path.join(tempDir, 'verbose-dest.txt');
+			await fs.writeFile(src, 'copy me');
+			await verboseOps.copyFile(src, dest);
+			const saved = await fs.readFile(dest, 'utf8');
+			expect(saved).toBe('copy me');
+		});
+
+		it('moveFile executes successfully with verbose enabled', async () => {
+			const src = path.join(tempDir, 'verbose-move-src.txt');
+			const dest = path.join(tempDir, 'verbose-move-dest.txt');
+			await fs.writeFile(src, 'move me');
+			await verboseOps.moveFile(src, dest);
+			const saved = await fs.readFile(dest, 'utf8');
+			expect(saved).toBe('move me');
+		});
+
+		it('deleteFile executes successfully with verbose enabled', async () => {
+			const filePath = path.join(tempDir, 'verbose-delete.txt');
+			await fs.writeFile(filePath, 'delete me');
+			await verboseOps.deleteFile(filePath);
+			await expect(fs.access(filePath)).rejects.toThrow();
+		});
+
+		it('createDirectory executes successfully with verbose enabled', async () => {
+			const dirPath = path.join(tempDir, 'verbose-dir');
+			await verboseOps.createDirectory(dirPath);
+			const stat = await fs.stat(dirPath);
+			expect(stat.isDirectory()).toBe(true);
+		});
+
+		it('deleteDirectory executes successfully with verbose enabled', async () => {
+			const dirPath = path.join(tempDir, 'verbose-del-dir');
+			await fs.mkdir(dirPath);
+			await verboseOps.deleteDirectory(dirPath);
+			await expect(fs.access(dirPath)).rejects.toThrow();
 		});
 	});
 
