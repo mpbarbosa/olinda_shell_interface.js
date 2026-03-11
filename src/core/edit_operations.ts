@@ -6,7 +6,7 @@
  * Architecture: Pure functions + async wrapper class
  * - Pure functions: text search, replace, line manipulation, diff generation
  * - Async wrapper class: EditOperations for real file I/O
- * @since 0.5.7
+ * @since 0.5.8
  */
 
 import { logger } from "olinda_utils.js";

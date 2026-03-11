@@ -9,22 +9,22 @@
  * @since 0.5.4
  */
 
-import fs from 'fs/promises';
-import { minimatch } from 'minimatch';
-import path from 'path';
-import { logger } from 'olinda_utils.js';
-import { FileSystemError } from '../utils/errors.js';
+import fs from "fs/promises";
+import { minimatch } from "minimatch";
+import path from "path";
+import { logger } from "olinda_utils.js";
+import { FileSystemError } from "../utils/errors.js";
 
 // Directories never traversed by default (override with options.allowAll)
 const NEVER_TRAVERSE_DIRS = new Set([
-	'node_modules',
-	'.git',
-	'.svn',
-	'.hg',
-	'__pycache__',
-	'.pytest_cache',
-	'.tox',
-	'.mypy_cache',
+	"node_modules",
+	".git",
+	".svn",
+	".hg",
+	"__pycache__",
+	".pytest_cache",
+	".tox",
+	".mypy_cache",
 ]);
 
 // ============================================================================
@@ -113,17 +113,17 @@ export interface FileOperationsOptions {
  * validatePath('/home/user/../etc/passwd')   // { valid: false, error: 'Directory traversal not allowed' }
  */
 export function validatePath(filePath: unknown): PathValidation {
-	if (!filePath || typeof filePath !== 'string') {
-		return { valid: false, error: 'Path must be a non-empty string' };
+	if (!filePath || typeof filePath !== "string") {
+		return { valid: false, error: "Path must be a non-empty string" };
 	}
 
 	if (!path.isAbsolute(filePath)) {
-		return { valid: false, error: 'Only absolute paths are allowed' };
+		return { valid: false, error: "Only absolute paths are allowed" };
 	}
 
 	const normalized = path.normalize(filePath);
-	if (filePath.includes('..') || normalized.includes('..')) {
-		return { valid: false, error: 'Directory traversal not allowed' };
+	if (filePath.includes("..") || normalized.includes("..")) {
+		return { valid: false, error: "Directory traversal not allowed" };
 	}
 
 	return { valid: true };
@@ -138,16 +138,21 @@ export function validatePath(filePath: unknown): PathValidation {
  * @example
  * filterByExtension(['/a.js', '/b.txt'], ['.js'])  // ['/a.js']
  */
-export function filterByExtension(files: unknown, extensions: unknown): string[] {
+export function filterByExtension(
+	files: unknown,
+	extensions: unknown,
+): string[] {
 	if (!Array.isArray(files) || !Array.isArray(extensions)) {
 		return [];
 	}
 
 	const normalizedExts = (extensions as string[]).map((ext) =>
-		ext.startsWith('.') ? ext : `.${ext}`,
+		ext.startsWith(".") ? ext : `.${ext}`,
 	);
 
-	return (files as string[]).filter((file) => normalizedExts.includes(path.extname(file)));
+	return (files as string[]).filter((file) =>
+		normalizedExts.includes(path.extname(file)),
+	);
 }
 
 /**
@@ -159,7 +164,10 @@ export function filterByExtension(files: unknown, extensions: unknown): string[]
  * @example
  * filterByPattern(['/test_a.js', '/main.js'], /test_/)  // ['/test_a.js']
  */
-export function filterByPattern(files: unknown, pattern: RegExp | string): string[] {
+export function filterByPattern(
+	files: unknown,
+	pattern: RegExp | string,
+): string[] {
 	if (!Array.isArray(files)) {
 		return [];
 	}
@@ -175,7 +183,10 @@ export function filterByPattern(files: unknown, pattern: RegExp | string): strin
  * @param ascending - `true` = oldest first (default). `false` = newest first.
  * @returns New sorted array (original is not mutated).
  */
-export function sortByModificationTime(files: unknown, ascending = true): FileEntry[] {
+export function sortByModificationTime(
+	files: unknown,
+	ascending = true,
+): FileEntry[] {
 	if (!Array.isArray(files)) {
 		return [];
 	}
@@ -196,7 +207,10 @@ export function sortByModificationTime(files: unknown, ascending = true): FileEn
  * @param stats    - Stat-like object (e.g. from `fs.stat()`).
  * @returns Structured metadata.
  */
-export function buildFileMetadata(filePath: string, stats: StatLike): FileMetadata {
+export function buildFileMetadata(
+	filePath: string,
+	stats: StatLike,
+): FileMetadata {
 	return {
 		path: filePath,
 		size: stats.size,
@@ -253,7 +267,10 @@ export class FileOperations {
 	 * @returns File contents as a string.
 	 * @throws {@link FileSystemError} on invalid path or read failure.
 	 */
-	async readFile(filePath: string, encoding: BufferEncoding = 'utf8'): Promise<string> {
+	async readFile(
+		filePath: string,
+		encoding: BufferEncoding = "utf8",
+	): Promise<string> {
 		const validation = validatePath(filePath);
 		if (!validation.valid) {
 			throw new FileSystemError(validation.error!, { path: filePath });
@@ -289,7 +306,9 @@ export class FileOperations {
 		}
 
 		if (this.dryRun) {
-			logger.info(`[DRY RUN] Would write to file: ${filePath} (${content.length} bytes)`);
+			logger.info(
+				`[DRY RUN] Would write to file: ${filePath} (${content.length} bytes)`,
+			);
 			return;
 		}
 
@@ -354,7 +373,10 @@ export class FileOperations {
 	 * @returns Absolute paths of directory entries.
 	 * @throws {@link FileSystemError} on invalid path or read failure.
 	 */
-	async listDirectory(dirPath: string, options: ListOptions = {}): Promise<string[]> {
+	async listDirectory(
+		dirPath: string,
+		options: ListOptions = {},
+	): Promise<string[]> {
 		const validation = validatePath(dirPath);
 		if (!validation.valid) {
 			throw new FileSystemError(validation.error!, { path: dirPath });
@@ -363,9 +385,12 @@ export class FileOperations {
 		try {
 			if (this.verbose) logger.debug(`Listing directory: ${dirPath}`);
 
-			let entries = (await fs.readdir(dirPath)).map((entry) => path.join(dirPath, entry));
+			let entries = (await fs.readdir(dirPath)).map((entry) =>
+				path.join(dirPath, entry),
+			);
 
-			if (options.extensions) entries = filterByExtension(entries, options.extensions);
+			if (options.extensions)
+				entries = filterByExtension(entries, options.extensions);
 			if (options.pattern) entries = filterByPattern(entries, options.pattern);
 
 			return entries;
@@ -385,7 +410,10 @@ export class FileOperations {
 	 * @returns Absolute paths of all matching files (and optionally directories).
 	 * @throws {@link FileSystemError} on invalid path or traversal failure.
 	 */
-	async listDirectoryRecursive(dirPath: string, options: ListOptions = {}): Promise<string[]> {
+	async listDirectoryRecursive(
+		dirPath: string,
+		options: ListOptions = {},
+	): Promise<string[]> {
 		const validation = validatePath(dirPath);
 		if (!validation.valid) {
 			throw new FileSystemError(validation.error!, { path: dirPath });
@@ -417,15 +445,20 @@ export class FileOperations {
 			await traverse(dirPath);
 
 			let filtered = results;
-			if (options.extensions) filtered = filterByExtension(filtered, options.extensions);
-			if (options.pattern) filtered = filterByPattern(filtered, options.pattern);
+			if (options.extensions)
+				filtered = filterByExtension(filtered, options.extensions);
+			if (options.pattern)
+				filtered = filterByPattern(filtered, options.pattern);
 
 			return filtered;
 		} catch (error) {
 			const msg = error instanceof Error ? error.message : String(error);
 			throw new FileSystemError(
 				`Failed to list directory recursively: ${msg}`,
-				{ path: dirPath, originalError: error instanceof Error ? error : undefined },
+				{
+					path: dirPath,
+					originalError: error instanceof Error ? error : undefined,
+				},
 			);
 		}
 	}
@@ -448,7 +481,8 @@ export class FileOperations {
 		}
 
 		try {
-			if (this.verbose) logger.debug(`Copying file: ${sourcePath} → ${destPath}`);
+			if (this.verbose)
+				logger.debug(`Copying file: ${sourcePath} → ${destPath}`);
 			await fs.mkdir(path.dirname(destPath), { recursive: true });
 			await fs.copyFile(sourcePath, destPath);
 			if (this.verbose) logger.success(`File copied: ${destPath}`);
@@ -480,7 +514,8 @@ export class FileOperations {
 		}
 
 		try {
-			if (this.verbose) logger.debug(`Moving file: ${sourcePath} → ${destPath}`);
+			if (this.verbose)
+				logger.debug(`Moving file: ${sourcePath} → ${destPath}`);
 			await fs.mkdir(path.dirname(destPath), { recursive: true });
 			await fs.rename(sourcePath, destPath);
 			if (this.verbose) logger.success(`File moved: ${destPath}`);
@@ -548,11 +583,18 @@ export class FileOperations {
 			await fs.mkdir(dirPath, options);
 			if (this.verbose) logger.success(`Directory created: ${dirPath}`);
 		} catch (error) {
-			if (!(error instanceof Error) || ('code' in error && (error as NodeJS.ErrnoException).code === 'EEXIST')) return;
-			throw new FileSystemError(`Failed to create directory: ${error.message}`, {
-				path: dirPath,
-				originalError: error,
-			});
+			if (
+				!(error instanceof Error) ||
+				("code" in error && (error as NodeJS.ErrnoException).code === "EEXIST")
+			)
+				return;
+			throw new FileSystemError(
+				`Failed to create directory: ${error.message}`,
+				{
+					path: dirPath,
+					originalError: error,
+				},
+			);
 		}
 	}
 
