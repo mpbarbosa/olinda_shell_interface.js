@@ -2,7 +2,7 @@ project:
   name: olinda_shell_interface.js
   type: nodejs-library
   kind: nodejs_automation  # shell command execution library for Linux
-  version: '0.5.9'  # keep in sync with package.json
+  version: '0.5.10'  # keep in sync with package.json
   description: Public TypeScript library for interfacing with Linux shell commands
 
 tech_stack:
@@ -24,37 +24,319 @@ structure:
     - .ai_workflow/logs
     - .ai_workflow/summaries
 
+# ============================================================================
+# AI PERSONAS
+# ============================================================================
+# Personas selected for this project (TypeScript library for Linux shell
+# command execution — CJS + ESM output).
+#
+# ENABLED — matched to this project's stack and characteristics:
+#   typescript_reviewer        — TypeScript, ts-jest, strict mode; step_19
+#   async_performance_engineer — async spawn/exec patterns, streaming buffers; step_20
+#   test_engineer              — jest/ts-jest test review and generation; steps 06-08
+#   code_quality_analyst       — ESLint, TypeScript quality; step_10
+#   architecture_reviewer      — library API surface design; steps 00, 05
+#   documentation_expert       — project docs and API reference; steps 01, 02, 02_5
+#   technical_writer           — markdown quality; step_13
+#   git_specialist             — conventional commits, git finalization; step_12
+#   devops_engineer            — npm scripts, deploy.sh, bench script; steps 03, 04
+#   dependency_analyst         — runtime deps audit; step_09
+#   performance_engineer       — shell execution latency, bench coverage; step_23
+#
+# DISABLED — not applicable:
+#   prompt_engineer         — shell execution library, no prompt engineering
+#   ux_analyst              — no UI layer
+#   accessibility_expert    — no HTML/CSS layer
+#   aws_serverless_engineer — no AWS infrastructure
+#   api_designer            — library, not REST API
+#   security_expert         — no auth/secrets management in scope
+
+ai_personas:
+  enabled:
+    - typescript_reviewer
+    - async_performance_engineer
+    - test_engineer
+    - code_quality_analyst
+    - architecture_reviewer
+    - documentation_expert
+    - technical_writer
+    - git_specialist
+    - devops_engineer
+    - dependency_analyst
+    - performance_engineer
+  disabled:
+    - prompt_engineer
+    - ux_analyst
+    - accessibility_expert
+    - aws_serverless_engineer
+    - api_designer
+    - security_expert
+
+
 workflow:
+  settings:
+    auto_mode: false
+    parallel_execution: true
+    smart_execution: true
+    ml_optimize: false
+    multi_stage: false
+    auto_commit: false
+
+  # Legacy stage shortcuts (kept for backwards compatibility)
   stages:
     quick:
       enabled: true
-      steps:
-        - step_00  # pre-analysis / environment scan
-        - step_01  # documentation analysis
-        - step_02  # consistency analysis
+      steps: [step_00, step_01, step_02]
     medium:
       enabled: true
-      steps:
-        - step_00  # pre-analysis / environment scan
-        - step_01  # documentation analysis
-        - step_02  # consistency analysis
-        - step_03  # script reference analysis
-        - step_04  # config validation
-        - step_05  # directory structure validation
+      steps: [step_00, step_01, step_02, step_03, step_04, step_05]
     full:
       enabled: true
-      steps:
-        - step_00  # pre-analysis / environment scan
-        - step_01  # documentation analysis
-        - step_02  # consistency analysis
-        - step_03  # script reference analysis
-        - step_04  # config validation
-        - step_05  # directory structure validation
-        - step_06  # integration tests
-        - step_07  # coverage report generation
-        - step_08  # release readiness check
-        - step_0f  # artifact commit: versions and commits all workflow outputs to the repo
+      steps: [step_00, step_0b, step_01, step_02, step_02_5, step_03, step_04, step_05, step_06, step_07, step_08, step_09, step_10, step_13, step_19, step_20, step_11, step_16, step_17, step_0f, step_12]
 
+  steps:
+
+    # PRE-PROCESSING
+    - id: step_00
+      name: "Pre-Analysis"
+      file: "step_00.js"
+      description: "Analyze TypeScript library structure, detect changes to shell command execution modules and test suite"
+      phase: 1
+      enabled: true
+      can_parallelize: false
+      dependencies: []
+      ai_persona: architecture_reviewer
+
+    # BOOTSTRAP DOCUMENTATION
+    - id: step_0b
+      name: "Bootstrap Documentation"
+      file: "step_0b.js"
+      description: "Generate initial documentation for undocumented or poorly documented modules"
+      phase: 1
+      enabled: true
+      can_parallelize: false
+      dependencies: [step_00]
+      ai_persona: technical_writer
+
+    # DOCUMENTATION & ANALYSIS
+    - id: step_01
+      name: "Documentation Updates"
+      file: "step_01.js"
+      description: "Review and update README, API docs, and inline JSDoc for changed TypeScript modules"
+      phase: 1
+      enabled: true
+      can_parallelize: true
+      dependencies: [step_00]
+      ai_persona: documentation_expert
+
+    - id: step_02
+      name: "Consistency Analysis"
+      file: "step_02.js"
+      description: "Check cross-reference consistency between docs, type definitions, and source"
+      phase: 1
+      enabled: true
+      can_parallelize: true
+      dependencies: [step_01]
+      ai_persona: documentation_expert
+
+    - id: step_02_5
+      name: "Documentation Optimization"
+      file: "step_02_5.js"
+      description: "Optimize and consolidate documentation structure and API reference"
+      phase: 1
+      enabled: true
+      can_parallelize: true
+      dependencies: [step_02]
+      ai_persona: technical_writer
+
+    - id: step_03
+      name: "Script References"
+      file: "step_03.js"
+      description: "Validate npm scripts, deploy.sh, bench script, and docs:generate references"
+      phase: 1
+      enabled: true
+      can_parallelize: true
+      dependencies: [step_02]
+      ai_persona: devops_engineer
+
+    # STRUCTURE & CONFIG VALIDATION
+    - id: step_04
+      name: "Config Validation"
+      file: "step_04.js"
+      description: "Validate tsconfig.json, package.json exports, and jest/ts-jest configuration"
+      phase: 1
+      enabled: true
+      can_parallelize: true
+      dependencies: [step_00]
+      ai_persona: devops_engineer
+
+    - id: step_05
+      name: "Directory Structure"
+      file: "step_05.js"
+      description: "Validate src/, test/, dist/ structure and CJS/ESM output organization"
+      phase: 1
+      enabled: true
+      can_parallelize: false
+      dependencies: [step_04]
+      ai_persona: architecture_reviewer
+
+    # TESTING PHASE
+    - id: step_06
+      name: "Test Review"
+      file: "step_06.js"
+      description: "Review jest/ts-jest test coverage for shell command execution functions"
+      phase: 2
+      enabled: true
+      can_parallelize: false
+      dependencies: [step_05]
+      ai_persona: test_engineer
+
+    - id: step_07
+      name: "Test Generation"
+      file: "step_07.js"
+      description: "Generate missing unit and integration tests for shell execution scenarios"
+      phase: 2
+      enabled: true
+      can_parallelize: false
+      dependencies: [step_06]
+      ai_persona: test_engineer
+
+    - id: step_08
+      name: "Test Execution"
+      file: "step_08.js"
+      description: "Execute full test suite and validate 80% coverage threshold"
+      phase: 2
+      enabled: true
+      can_parallelize: false
+      dependencies: [step_07]
+      ai_persona: test_engineer
+
+    # QUALITY PHASE
+    - id: step_09
+      name: "Dependency Analysis"
+      file: "step_09.js"
+      description: "Audit npm dependencies and validate olinda_utils.js integration compatibility"
+      phase: 2
+      enabled: true
+      can_parallelize: true
+      dependencies: [step_08]
+      ai_persona: dependency_analyst
+
+    - id: step_10
+      name: "Code Quality"
+      file: "step_10.js"
+      description: "Run ESLint, check TypeScript strict mode compliance, review code quality patterns"
+      phase: 2
+      enabled: true
+      can_parallelize: true
+      dependencies: [step_09]
+      ai_persona: code_quality_analyst
+
+    # SPECIALIZED ANALYSIS
+    - id: step_13
+      name: "Markdown Lint"
+      file: "step_13.js"
+      description: "Lint and fix markdown documentation files"
+      phase: 2
+      enabled: true
+      can_parallelize: true
+      dependencies: [step_10]
+      ai_persona: technical_writer
+
+    - id: step_19
+      name: "TypeScript Review"
+      file: "step_19.js"
+      description: "Review TypeScript patterns, generic types for shell options, and ts-jest compatibility"
+      phase: 2
+      enabled: true
+      can_parallelize: true
+      dependencies: [step_10]
+      ai_persona: typescript_reviewer
+
+    - id: step_20
+      name: "Async Performance Review"
+      file: "step_20.js"
+      description: "Review async spawn/exec patterns and streaming output handling in shell command execution"
+      phase: 2
+      enabled: true
+      can_parallelize: true
+      dependencies: [step_10]
+      ai_persona: async_performance_engineer
+
+    - id: step_22
+      name: "Accessibility Review"
+      file: "step_22.js"
+      description: "HTML/CSS accessibility review for web-facing components"
+      phase: 2
+      enabled: false
+      reason: "TypeScript shell execution library with no HTML/CSS layer"
+      can_parallelize: true
+      dependencies: [step_13]
+      ai_persona: accessibility_expert
+
+    - id: step_23
+      name: "Performance Review"
+      file: "step_23.js"
+      description: "Performance review: shell command execution latency, streaming output buffering, async spawn/exec patterns, bench script coverage; olinda_utils.js integration performance"
+      phase: 2
+      enabled: true
+      can_parallelize: true
+      dependencies: [step_13]
+      ai_persona: performance_engineer
+
+    # CONTEXT ANALYSIS
+    - id: step_11
+      name: "Context Analysis"
+      file: "step_11.js"
+      description: "Analyze project context, cross-module relationships, and library API surface"
+      phase: 2
+      enabled: true
+      can_parallelize: false
+      dependencies: [step_10]
+      ai_persona: architecture_reviewer
+
+    # FINALIZATION
+    - id: step_16
+      name: "Version Update"
+      file: "step_16.js"
+      description: "Update version in package.json and CHANGELOG.md"
+      phase: 2
+      enabled: true
+      can_parallelize: false
+      dependencies: [step_11]
+      ai_persona: devops_engineer
+
+    - id: step_17
+      name: "Workflow Summary"
+      file: "step_17.js"
+      description: "Generate workflow execution summary and metrics report"
+      phase: 2
+      enabled: true
+      can_parallelize: false
+      dependencies: [step_16]
+      ai_persona: technical_writer
+
+    # GIT FINALIZATION
+    - id: step_0f
+      name: "Commit Artifacts"
+      file: "step_0f.js"
+      description: "Commit workflow artifacts, docs, and generated files"
+      phase: 3
+      enabled: true
+      can_parallelize: false
+      dependencies: [step_17]
+      ai_persona: git_specialist
+
+    # Git Finalization MUST BE LAST
+    - id: step_12
+      name: "Git Finalization"
+      file: "step_12.js"
+      description: "Stage, commit, and push with conventional commit message"
+      phase: 3
+      enabled: true
+      can_parallelize: false
+      dependencies: [step_0f]
+      ai_persona: git_specialist
 validation:
   documentation:
     required: true

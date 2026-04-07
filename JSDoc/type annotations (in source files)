@@ -1,0 +1,1 @@
+(Not a standalone file — ensure every public function, class, and interface in the TypeScript source files has complete JSDoc comments and type annotations.)
