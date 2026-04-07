@@ -150,6 +150,16 @@
       "score": 100,
       "issueCount": 0,
       "lastAnalyzed": "2026-03-11T13:24:00.903Z"
+    },
+    "vite.config.ts": {
+      "score": 100,
+      "issueCount": 0,
+      "lastAnalyzed": "2026-04-07T01:24:04.747Z"
+    },
+    "scripts/run-tests-docker.sh": {
+      "score": 100,
+      "issueCount": 0,
+      "lastAnalyzed": "2026-04-07T01:24:04.747Z"
     }
   }
 }
