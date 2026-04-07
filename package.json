@@ -98,6 +98,7 @@
     "test:watch": "jest --watch --testPathPattern='test/(core|integration|utils|index)'",
     "test:coverage": "jest --coverage --testPathPattern='test/(core|integration|utils|index)'",
     "test:verbose": "jest --verbose --testPathPattern='test/(core|integration|utils|index)'",
+    "test:docker": "bash scripts/run-tests-docker.sh",
     "test:flaky": "for i in 1 2 3; do npm test -- --forceExit --randomize || exit 1; done",
     "test:all": "npm run test:coverage && npm run bench",
     "bench": "jest --testPathPattern='test/benchmarks' --verbose --passWithNoTests",
@@ -138,11 +139,6 @@
     "src/",
     "README.md"
   ],
-  "overrides": {
-    "markdownlint-cli": {
-      "minimatch": "^10.2.3"
-    }
-  },
   "devDependencies": {
     "@types/jest": "^29.5.0",
     "@types/node": "^20.0.0",
@@ -159,7 +155,7 @@
     "vite-plugin-dts": "^4.5.4"
   },
   "dependencies": {
-    "olinda_utils.js": "github:mpbarbosa/olinda_utils.js#v0.3.15"
+    "olinda_utils.js": "git+https://github.com/mpbarbosa/olinda_utils.js.git#v0.3.16"
   },
   "private": true
 }
